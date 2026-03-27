@@ -406,13 +406,51 @@
     .calendly-block-sub { font-size: 13px; font-weight: 300; color: var(--gris-texto); margin-bottom: 22px; }
 
     /* FOOTER */
-    footer { background: var(--oscuro); padding: 36px 40px; border-top: 1px solid rgba(184,154,106,0.12); }
-    .footer-inner { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-    .footer-logo { height: 22px; opacity: 0.6; }
-    .footer-text { font-size: 12px; color: rgba(24,55,66,0.25); letter-spacing: 0.04em; }
-    .footer-links { display: flex; gap: 20px; }
-    .footer-links a { font-size: 12px; color: rgba(245,240,232,0.3); transition: color 0.2s ease; }
+    footer {
+      background: #0d1e28;
+      padding: 0 40px;
+      border-top: 1px solid rgba(184,154,106,0.15);
+    }
+    .footer-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .footer-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 36px 0 32px; gap: 20px; flex-wrap: wrap;
+      border-bottom: 1px solid rgba(184,154,106,0.08);
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 8px; }
+    .footer-logo { height: 28px; opacity: 0.85; filter: brightness(0) invert(1); }
+    .footer-tagline {
+      font-size: 11px; font-weight: 300; letter-spacing: 0.08em;
+      color: rgba(245,240,232,0.25);
+    }
+    .footer-links {
+      display: flex; gap: 24px; flex-wrap: wrap; align-items: center;
+    }
+    .footer-links a {
+      font-size: 11px; font-weight: 300; letter-spacing: 0.08em;
+      color: rgba(245,240,232,0.4); transition: color 0.2s ease;
+    }
     .footer-links a:hover { color: var(--dorado); }
+    .footer-links .footer-link-sep {
+      width: 1px; height: 12px; background: rgba(184,154,106,0.15);
+    }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 0; gap: 14px; flex-wrap: wrap;
+    }
+    .footer-text {
+      font-size: 11px; font-weight: 300;
+      color: rgba(245,240,232,0.2); letter-spacing: 0.04em;
+    }
+    .footer-hecho {
+      font-size: 11px; font-weight: 300; letter-spacing: 0.06em;
+      color: rgba(245,240,232,0.2);
+      display: flex; align-items: center; gap: 5px;
+    }
+    .footer-hecho svg { width: 11px; height: 11px; fill: var(--dorado); opacity: 0.7; }
 
     /* PROPIEDADES */
     .props-section { background: var(--fondo); padding: 96px 40px; }
@@ -866,7 +904,10 @@
       nav.main-nav { display: none; }
       .hamb { display: flex; }
       .section, .services-section, .team-section, .contact-section, .props-section { padding: 68px 22px; }
-      footer { padding: 28px 22px; }
+      footer { padding: 0 22px; }
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .footer-links { gap: 14px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
       .contact-grid { grid-template-columns: 1fr; gap: 28px; }
     }
 
@@ -879,7 +920,7 @@
       .contact-btns { flex-direction: column; }
       .contact-form-wrap { padding: 24px 18px; }
       .calendly-block { padding: 22px 14px; }
-      .footer-inner { flex-direction: column; align-items: flex-start; }
+      
       .float-wa { right: 14px; bottom: 76px; }
       .sticky-cta {
         display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 150;
@@ -1223,14 +1264,29 @@
 
   <footer>
     <div class="footer-inner">
-      <img src="logo-terralex.png" alt="TerraLex" class="footer-logo">
-      <span class="footer-text">© <span id="y"></span> TerraLex — Estudio Jurídico & Inmobiliario · Córdoba</span>
-      <div class="footer-links">
-        <a href="https://www.instagram.com/terralex.cba" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://wa.me/543513422063" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener">Portal</a>
-        <a href="#" onclick="document.getElementById('modalPrivacidad').classList.add('open');return false;">Política de Privacidad</a>
-        <a href="#" onclick="document.getElementById('modalTerminos').classList.add('open');return false;">Términos y Condiciones</a>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="logo-terralex.png" alt="TerraLex" class="footer-logo">
+          <span class="footer-tagline">Estudio Jurídico &amp; Inmobiliario — Córdoba</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.instagram.com/terralex.cba" target="_blank" rel="noopener">Instagram</a>
+          <div class="footer-link-sep"></div>
+          <a href="https://wa.me/543513422063" target="_blank" rel="noopener">WhatsApp</a>
+          <div class="footer-link-sep"></div>
+          <a href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener">Portal</a>
+          <div class="footer-link-sep"></div>
+          <a href="#" onclick="document.getElementById('modalPrivacidad').classList.add('open');return false;">Política de Privacidad</a>
+          <div class="footer-link-sep"></div>
+          <a href="#" onclick="document.getElementById('modalTerminos').classList.add('open');return false;">Términos y Condiciones</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-text">© <span id="y"></span> Medah · Maurino · Chesta — Todos los derechos reservados</span>
+        <span class="footer-hecho">
+          Hecho en Córdoba
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </span>
       </div>
     </div>
   </footer>
