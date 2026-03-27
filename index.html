@@ -405,6 +405,71 @@
     .calendly-block-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--negro); margin-bottom: 5px; }
     .calendly-block-sub { font-size: 13px; font-weight: 300; color: var(--gris-texto); margin-bottom: 22px; }
 
+    /* CHAT IA */
+    .chat-bubble {
+      position: fixed; right: 22px; bottom: 86px; z-index: 300;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--negro); border: 1.5px solid rgba(184,154,106,0.4);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.25s ease;
+      box-shadow: 0 6px 24px rgba(13,35,48,0.35);
+    }
+    .chat-bubble:hover { transform: translateY(-2px); border-color: var(--dorado); }
+    .chat-bubble svg { width: 22px; height: 22px; stroke: var(--dorado); fill: none; stroke-width: 1.8; }
+    .chat-badge {
+      position: absolute; top: -3px; right: -3px; width: 14px; height: 14px;
+      background: var(--dorado); border-radius: 50%; border: 2px solid var(--fondo);
+      display: none;
+    }
+    .chat-badge.visible { display: block; }
+    .chat-panel {
+      position: fixed; right: 22px; bottom: 154px; z-index: 300;
+      width: 340px; max-height: 520px;
+      background: var(--fondo); border-radius: 4px;
+      box-shadow: 0 20px 60px rgba(13,35,48,0.3), 0 0 0 1px rgba(184,154,106,0.15);
+      display: none; flex-direction: column; overflow: hidden;
+      animation: chatIn 0.25s ease;
+    }
+    .chat-panel.open { display: flex; }
+    @keyframes chatIn { from{opacity:0;transform:translateY(12px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+    .chat-header {
+      background: var(--negro); padding: 16px 18px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid rgba(184,154,106,0.12);
+    }
+    .chat-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(145,120,96,0.15); border: 1px solid rgba(184,154,106,0.3);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .chat-avatar svg { width: 16px; height: 16px; stroke: var(--dorado); fill: none; stroke-width: 1.8; }
+    .chat-header-name { font-size: 13px; font-weight: 500; color: #f8f7f4; }
+    .chat-header-status { font-size: 10px; color: rgba(245,240,232,0.35); }
+    .chat-close { background: none; border: none; color: rgba(245,240,232,0.4); font-size: 20px; cursor: pointer; transition: color 0.2s; margin-left: auto; }
+    .chat-close:hover { color: var(--dorado); }
+    .chat-messages { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 200px; max-height: 320px; }
+    .chat-msg { display: flex; }
+    .chat-msg.user { justify-content: flex-end; }
+    .chat-msg-bubble { max-width: 78%; padding: 10px 13px; border-radius: 12px; font-size: 13px; font-weight: 300; line-height: 1.55; }
+    .chat-msg.bot .chat-msg-bubble { background: white; color: var(--negro); border: 1px solid rgba(184,154,106,0.15); border-bottom-left-radius: 3px; }
+    .chat-msg.user .chat-msg-bubble { background: var(--negro); color: #f8f7f4; border-bottom-right-radius: 3px; }
+    .chat-typing { display: flex; gap: 4px; padding: 10px 13px; }
+    .chat-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--dorado); opacity: 0.4; animation: typingDot 1.2s ease infinite; }
+    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingDot { 0%,60%,100%{opacity:.2;transform:scale(1)} 30%{opacity:1;transform:scale(1.2)} }
+    .chat-input-area { padding: 12px 14px; border-top: 1px solid var(--borde); display: flex; gap: 8px; align-items: center; background: white; }
+    .chat-input { flex: 1; border: 1px solid rgba(184,154,106,0.2); border-radius: 20px; padding: 9px 14px; font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 300; color: var(--negro); outline: none; transition: border-color 0.2s; background: var(--fondo-alt); }
+    .chat-input:focus { border-color: var(--dorado); }
+    .chat-send { width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; background: var(--dorado); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    .chat-send:hover { background: var(--dorado-claro); }
+    .chat-send svg { width: 14px; height: 14px; stroke: var(--negro); fill: none; stroke-width: 2.5; }
+    .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+    @media (max-width: 640px) {
+      .chat-panel { right: 10px; width: calc(100vw - 20px); bottom: 140px; }
+      .chat-bubble { right: 14px; }
+    }
+
     /* FOOTER */
     footer {
       background: #0d1e28;
@@ -1262,6 +1327,31 @@
   </section>
 
 
+
+  <!-- CHAT IA -->
+  <div class="chat-bubble" id="chatBubble" onclick="chatPanel.toggle()">
+    <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div class="chat-badge" id="chatBadge"></div>
+  </div>
+  <div class="chat-panel" id="chatPanelEl">
+    <div class="chat-header">
+      <div class="chat-avatar">
+        <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div>
+        <div class="chat-header-name">TerraLex Asistente</div>
+        <div class="chat-header-status">Responde al instante</div>
+      </div>
+      <button class="chat-close" onclick="chatPanel.close()">×</button>
+    </div>
+    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Escribi tu consulta..." onkeydown="if(event.key==='Enter')chatPanel.send()">
+      <button class="chat-send" id="chatSendBtn" onclick="chatPanel.send()">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-inner">
@@ -2171,6 +2261,69 @@
 
   loadProps();
 
+  /* ===== CHAT IA ===== */
+  var chatHistory = [];
+  var chatOpen = false;
+  var chatPanel = {
+    toggle: function() { chatOpen ? this.close() : this.open(); },
+    open: function() {
+      chatOpen = true;
+      document.getElementById('chatPanelEl').classList.add('open');
+      document.getElementById('chatBadge').classList.remove('visible');
+      if (!chatHistory.length) {
+        this.addMsg('bot', 'Hola! Soy el asistente de TerraLex. Puedo ayudarte con consultas sobre alquileres, compraventa de propiedades, servicios legales y mas. En que te puedo ayudar?');
+      }
+      setTimeout(function(){ document.getElementById('chatInput').focus(); }, 100);
+    },
+    close: function() {
+      chatOpen = false;
+      document.getElementById('chatPanelEl').classList.remove('open');
+    },
+    addMsg: function(role, text) {
+      var msgs = document.getElementById('chatMessages');
+      var div = document.createElement('div');
+      div.className = 'chat-msg ' + role;
+      div.innerHTML = '<div class="chat-msg-bubble">' + text.replace(/\n/g, '<br>') + '</div>';
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+      chatHistory.push({ role: role === 'user' ? 'user' : 'assistant', content: text });
+    },
+    showTyping: function() {
+      var msgs = document.getElementById('chatMessages');
+      var div = document.createElement('div');
+      div.className = 'chat-msg bot'; div.id = 'chatTyping';
+      div.innerHTML = '<div class="chat-msg-bubble chat-typing"><span></span><span></span><span></span></div>';
+      msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+    },
+    hideTyping: function() { var t = document.getElementById('chatTyping'); if (t) t.remove(); },
+    send: async function() {
+      var input = document.getElementById('chatInput');
+      var text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      document.getElementById('chatSendBtn').disabled = true;
+      this.addMsg('user', text);
+      this.showTyping();
+      var msgs = chatHistory.slice(-9);
+      try {
+        var res = await fetch('/.netlify/functions/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: msgs })
+        });
+        var data = await res.json();
+        this.hideTyping();
+        var reply = (data.content && data.content[0]) ? data.content[0].text : 'Disculpa, hubo un error. Contactanos por WhatsApp al 351-3422063.';
+        this.addMsg('bot', reply);
+      } catch(e) {
+        this.hideTyping();
+        this.addMsg('bot', 'Disculpa, hubo un problema. Contactanos directamente por WhatsApp al 351-3422063.');
+      }
+      document.getElementById('chatSendBtn').disabled = false;
+      document.getElementById('chatInput').focus();
+    }
+  };
+  setTimeout(function() { if (!chatOpen) document.getElementById('chatBadge').classList.add('visible'); }, 8000);
+
   </script>
-</body>
 </html>
