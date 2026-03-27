@@ -5,6 +5,16 @@ exports.handler = async function(event) {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
+  var apiKey = process.env.ANTHROPIC_API_KEY;
+  
+  if (!apiKey) {
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify({ content: [{ type: 'text', text: 'ERROR: API key no encontrada en variables de entorno.' }] })
+    };
+  }
+
   try {
     var body = JSON.parse(event.body);
     var messages = (body.messages || []).slice(-8);
@@ -12,7 +22,7 @@ exports.handler = async function(event) {
     var payload = JSON.stringify({
       model: 'claude-haiku-4-5-20251001',
       max_tokens: 400,
-      system: 'Sos el asistente virtual de TerraLex, un estudio juridico e inmobiliario en Cordoba, Argentina. Tu rol es responder consultas de manera amable, clara y profesional. Informacion clave: Direccion: Tucuman 335, Planta Alta, Cordoba Capital. Telefono/WhatsApp: 351-3422063. Horarios: Lunes a Viernes 9 a 17hs. Servicios: contratos, alquileres, compraventa de inmuebles, derecho de familia, laboral, sucesiones, defensa del consumidor, tasaciones, administracion de propiedades. Si no podes responder con certeza, invita a contactar al equipo por WhatsApp. Responde en castellano rioplatense, de forma concisa (maximo 3 oraciones). No uses emojis.',
+      system: 'Sos el asistente virtual de TerraLex, un estudio juridico e inmobiliario en Cordoba, Argentina. Responde en castellano rioplatense, conciso (max 3 oraciones). No uses emojis.',
       messages: messages
     });
 
@@ -23,7 +33,7 @@ exports.handler = async function(event) {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': process.env.ANTHROPIC_API_KEY,
+          'x-api-key': apiKey,
           'anthropic-version': '2023-06-01',
           'Content-Length': Buffer.byteLength(payload)
         }
@@ -32,27 +42,33 @@ exports.handler = async function(event) {
       var req = https.request(options, function(res) {
         var data = '';
         res.on('data', function(chunk) { data += chunk; });
-        res.on('end', function() { resolve(data); });
+        res.on('end', function() { resolve({ status: res.statusCode, body: data }); });
       });
 
-      req.on('error', reject);
+      req.on('error', function(e) { reject(e); });
       req.write(payload);
       req.end();
     });
 
+    if (result.status !== 200) {
+      return {
+        statusCode: 200,
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+        body: JSON.stringify({ content: [{ type: 'text', text: 'ERROR Anthropic ' + result.status + ': ' + result.body }] })
+      };
+    }
+
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: result
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      body: result.body
     };
 
   } catch(e) {
     return {
-      statusCode: 500,
-      body: JSON.stringify({ error: e.message })
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify({ content: [{ type: 'text', text: 'ERROR excepcion: ' + e.message }] })
     };
   }
 };
