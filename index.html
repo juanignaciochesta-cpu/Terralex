@@ -422,6 +422,34 @@
       display: none;
     }
     .chat-badge.visible { display: block; }
+    /* Burbuja de presentacion */
+    .chat-popup {
+      position: fixed; right: 84px; bottom: 86px; z-index: 300;
+      background: white; border-radius: 12px 12px 0 12px;
+      padding: 12px 16px; max-width: 220px;
+      box-shadow: 0 8px 32px rgba(13,35,48,0.18), 0 0 0 1px rgba(184,154,106,0.15);
+      font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 300;
+      color: var(--negro); line-height: 1.5;
+      display: none; cursor: pointer;
+      animation: popupIn 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    }
+    .chat-popup.visible { display: block; }
+    .chat-popup strong { font-weight: 500; display: block; margin-bottom: 3px; color: var(--negro); font-size: 12px; }
+    .chat-popup::after {
+      content: ''; position: absolute; bottom: 10px; right: -7px;
+      border: 7px solid transparent;
+      border-left-color: white; border-right: none;
+    }
+    .chat-popup-close {
+      position: absolute; top: 6px; right: 8px;
+      font-size: 14px; color: rgba(24,55,66,0.3); cursor: pointer; line-height: 1;
+      background: none; border: none; padding: 0;
+    }
+    .chat-popup-close:hover { color: var(--negro); }
+    @keyframes popupIn {
+      from { opacity: 0; transform: scale(0.85) translateY(8px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
     .chat-panel {
       position: fixed; right: 22px; bottom: 154px; z-index: 300;
       width: 340px; max-height: 520px;
@@ -1329,6 +1357,11 @@
 
 
   <!-- CHAT IA -->
+  <div class="chat-popup" id="chatPopup" onclick="chatPanel.openFromPopup()">
+    <button class="chat-popup-close" onclick="event.stopPropagation();chatPanel.closePopup()">×</button>
+    <strong>Terri — Asistente TerraLex</strong>
+    Hola! Soy Terri, el asistente virtual con IA de TerraLex. En que puedo ayudarte?
+  </div>
   <div class="chat-bubble" id="chatBubble" onclick="chatPanel.toggle()">
     <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     <div class="chat-badge" id="chatBadge"></div>
@@ -1339,7 +1372,7 @@
         <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </div>
       <div>
-        <div class="chat-header-name">TerraLex Asistente</div>
+        <div class="chat-header-name">Terri — Asistente TerraLex</div>
         <div class="chat-header-status">Responde al instante</div>
       </div>
       <button class="chat-close" onclick="chatPanel.close()">×</button>
@@ -2265,13 +2298,21 @@
   var chatHistory = [];
   var chatOpen = false;
   var chatPanel = {
+    closePopup: function() {
+      document.getElementById('chatPopup').classList.remove('visible');
+    },
+    openFromPopup: function() {
+      this.closePopup();
+      this.open();
+    },
     toggle: function() { chatOpen ? this.close() : this.open(); },
     open: function() {
       chatOpen = true;
+      this.closePopup();
       document.getElementById('chatPanelEl').classList.add('open');
       document.getElementById('chatBadge').classList.remove('visible');
       if (!chatHistory.length) {
-        this.addMsg('bot', 'Hola! Soy el asistente de TerraLex. Puedo ayudarte con consultas sobre alquileres, compraventa de propiedades, servicios legales y mas. En que te puedo ayudar?');
+        this.addMsg('bot', 'Hola! Soy Terri, el asistente virtual con IA de TerraLex. En que puedo ayudarte?');
       }
       setTimeout(function(){ document.getElementById('chatInput').focus(); }, 100);
     },
@@ -2324,6 +2365,7 @@
     }
   };
   setTimeout(function() { if (!chatOpen) document.getElementById('chatBadge').classList.add('visible'); }, 8000);
+  setTimeout(function() { if (!chatOpen) document.getElementById('chatPopup').classList.add('visible'); }, 3000);
 
   </script>
 </html>
