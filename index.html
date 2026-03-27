@@ -3,9 +3,64 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TerraLex | Estudio Jurídico & Inmobiliario — Córdoba</title>
-  <meta name="description" content="Profesionalismo, responsabilidad y rigor técnico. Asesoramiento jurídico e inmobiliario integral en Córdoba." />
-  <meta property="og:image" content="/images/og.jpg" />
+
+  <!-- SEO primario -->
+  <title>TerraLex — Inmobiliaria y Estudio Jurídico en Córdoba | Compra, Venta y Alquiler</title>
+  <meta name="description" content="TerraLex: estudio jurídico e inmobiliario en Córdoba. Compra, venta y alquiler de propiedades. Contratos, sucesiones, derecho laboral y familiar. Profesionales con más de 10 años de experiencia." />
+  <meta name="keywords" content="inmobiliaria Córdoba, estudio jurídico Córdoba, compra venta inmuebles Córdoba, alquiler propiedades Córdoba, abogados Córdoba, TerraLex" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://terralex.com.ar/" />
+
+  <!-- Open Graph / redes sociales -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://terralex.com.ar/" />
+  <meta property="og:title" content="TerraLex — Inmobiliaria y Estudio Jurídico en Córdoba" />
+  <meta property="og:description" content="Compra, venta y alquiler de propiedades en Córdoba. Asesoramiento jurídico integral. Profesionalismo, responsabilidad y rigor técnico." />
+  <meta property="og:image" content="https://terralex.com.ar/og.jpg" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="TerraLex" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TerraLex — Inmobiliaria y Estudio Jurídico en Córdoba" />
+  <meta name="twitter:description" content="Compra, venta y alquiler de propiedades en Córdoba. Asesoramiento jurídico integral." />
+  <meta name="twitter:image" content="https://terralex.com.ar/og.jpg" />
+
+  <!-- Schema.org — RealEstateAgent -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "TerraLex",
+    "description": "Estudio Jurídico e Inmobiliario en Córdoba. Compra, venta y alquiler de propiedades. Asesoramiento jurídico integral.",
+    "url": "https://terralex.com.ar",
+    "logo": "https://terralex.com.ar/logo-terralex.png",
+    "image": "https://terralex.com.ar/og.jpg",
+    "telephone": "+543513422063",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Tucumán 335, Planta Alta",
+      "addressLocality": "Córdoba",
+      "addressRegion": "Córdoba",
+      "addressCountry": "AR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -31.4135,
+      "longitude": -64.1811
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    },
+    "sameAs": [
+      "https://www.instagram.com/terralex.cba"
+    ]
+  }
+  </script>
+
   <meta name="theme-color" content="#0d2330" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1174,9 +1229,53 @@
         <a href="https://www.instagram.com/terralex.cba" target="_blank" rel="noopener">Instagram</a>
         <a href="https://wa.me/543513422063" target="_blank" rel="noopener">WhatsApp</a>
         <a href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener">Portal</a>
+        <a href="#" onclick="document.getElementById('modalPrivacidad').classList.add('open');return false;">Política de Privacidad</a>
+        <a href="#" onclick="document.getElementById('modalTerminos').classList.add('open');return false;">Términos y Condiciones</a>
       </div>
     </div>
   </footer>
+
+  <!-- MODAL POLÍTICA DE PRIVACIDAD -->
+  <div id="modalPrivacidad" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(13,35,48,0.92);overflow-y:auto;" onclick="if(event.target===this)this.classList.remove('open')">
+    <style>#modalPrivacidad.open{display:block!important}</style>
+    <div style="max-width:720px;margin:60px auto;background:var(--fondo);border-radius:2px;padding:48px;position:relative;">
+      <button onclick="document.getElementById('modalPrivacidad').classList.remove('open')" style="position:absolute;top:20px;right:20px;background:none;border:none;font-size:24px;cursor:pointer;color:var(--gris-texto)">×</button>
+      <p style="font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--dorado);margin-bottom:16px">Legal</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--negro);margin-bottom:32px">Política de Privacidad</h2>
+      <div style="font-size:14px;font-weight:300;color:var(--negro);line-height:1.85;display:flex;flex-direction:column;gap:20px;">
+        <p><strong>1. Responsable del tratamiento</strong><br>TerraLex — Estudio Jurídico &amp; Inmobiliario, con domicilio en Tucumán 335, Planta Alta, Córdoba Capital, Argentina. Contacto: <a href="https://wa.me/543513422063" style="color:var(--dorado)">351-3422063</a>.</p>
+        <p><strong>2. Datos que recopilamos</strong><br>Recopilamos únicamente los datos que usted nos proporciona voluntariamente a través de nuestro formulario de contacto: nombre completo, dirección de correo electrónico y mensaje de consulta. No recopilamos datos sensibles según el artículo 2 de la Ley 25.326.</p>
+        <p><strong>3. Finalidad del tratamiento</strong><br>Los datos son utilizados exclusivamente para responder consultas, brindar asesoramiento solicitado y gestionar la relación comercial o profesional con el usuario. No utilizamos los datos para fines publicitarios de terceros.</p>
+        <p><strong>4. Almacenamiento y seguridad</strong><br>Los datos son procesados a través de Netlify Forms y almacenados con las medidas de seguridad técnicas y organizativas adecuadas para prevenir accesos no autorizados, pérdida o alteración.</p>
+        <p><strong>5. Derechos del titular</strong><br>En cumplimiento de la Ley N° 25.326 de Protección de Datos Personales, usted tiene derecho a acceder, rectificar, actualizar y suprimir sus datos personales. Para ejercer estos derechos, contáctenos a través de WhatsApp o en nuestras oficinas. La Dirección Nacional de Protección de Datos Personales tiene la atribución de atender las denuncias y reclamos que se interpongan con relación al incumplimiento de las normas sobre protección de datos personales.</p>
+        <p><strong>6. Plazo de conservación</strong><br>Los datos se conservan durante el tiempo necesario para cumplir con la finalidad para la que fueron recabados y, en todo caso, durante los plazos legalmente establecidos.</p>
+        <p><strong>7. Cookies</strong><br>Este sitio web no utiliza cookies de seguimiento ni de terceros con fines publicitarios.</p>
+        <p><strong>8. Modificaciones</strong><br>TerraLex se reserva el derecho de modificar esta política. Las modificaciones serán publicadas en este sitio web.</p>
+        <p style="font-size:12px;color:var(--gris-texto)">Última actualización: marzo 2025.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL TÉRMINOS Y CONDICIONES -->
+  <div id="modalTerminos" style="display:none;position:fixed;inset:0;z-index:600;background:rgba(13,35,48,0.92);overflow-y:auto;" onclick="if(event.target===this)this.classList.remove('open')">
+    <style>#modalTerminos.open{display:block!important}</style>
+    <div style="max-width:720px;margin:60px auto;background:var(--fondo);border-radius:2px;padding:48px;position:relative;">
+      <button onclick="document.getElementById('modalTerminos').classList.remove('open')" style="position:absolute;top:20px;right:20px;background:none;border:none;font-size:24px;cursor:pointer;color:var(--gris-texto)">×</button>
+      <p style="font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--dorado);margin-bottom:16px">Legal</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--negro);margin-bottom:32px">Términos y Condiciones</h2>
+      <div style="font-size:14px;font-weight:300;color:var(--negro);line-height:1.85;display:flex;flex-direction:column;gap:20px;">
+        <p><strong>1. Aceptación</strong><br>El acceso y uso de este sitio web implica la aceptación de los presentes términos y condiciones. Si no está de acuerdo con los mismos, le rogamos que no utilice este sitio.</p>
+        <p><strong>2. Objeto</strong><br>TerraLex es un estudio jurídico e inmobiliario radicado en Córdoba, Argentina. Este sitio web tiene como finalidad informar sobre los servicios ofrecidos y facilitar el contacto con potenciales clientes.</p>
+        <p><strong>3. Naturaleza informativa</strong><br>La información publicada en este sitio tiene carácter meramente informativo y no constituye asesoramiento jurídico ni inmobiliario. Toda consulta particular requiere un análisis específico por parte de los profesionales de TerraLex.</p>
+        <p><strong>4. Propiedades publicadas</strong><br>Las propiedades publicadas en este sitio son ofrecidas de buena fe con la información disponible al momento de la publicación. Los precios, disponibilidad y características pueden modificarse sin previo aviso. TerraLex no se responsabiliza por errores u omisiones en la información publicada.</p>
+        <p><strong>5. Propiedad intelectual</strong><br>Todos los contenidos de este sitio (textos, imágenes, logotipos, diseño) son propiedad de TerraLex o han sido licenciados para su uso. Queda prohibida su reproducción total o parcial sin autorización expresa.</p>
+        <p><strong>6. Limitación de responsabilidad</strong><br>TerraLex no será responsable por daños directos o indirectos derivados del uso de este sitio o de la información aquí contenida.</p>
+        <p><strong>7. Jurisdicción</strong><br>Cualquier controversia derivada del uso de este sitio web se someterá a la jurisdicción de los tribunales ordinarios de la ciudad de Córdoba, Argentina, con renuncia expresa a cualquier otro fuero.</p>
+        <p><strong>8. Legislación aplicable</strong><br>Estos términos se rigen por la legislación vigente de la República Argentina, en particular el Código Civil y Comercial de la Nación, la Ley 24.240 de Defensa del Consumidor y la Ley 25.326 de Protección de Datos Personales.</p>
+        <p style="font-size:12px;color:var(--gris-texto)">Última actualización: marzo 2025.</p>
+      </div>
+    </div>
+  </div>
 
   <div class="float-wa">
     <a href="https://wa.me/543513422063?text=Hola%20equipo%20de%20TerraLex%2C%20necesito%20asesoramiento" target="_blank" rel="noopener" aria-label="WhatsApp TerraLex">
