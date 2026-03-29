@@ -84,6 +84,64 @@
       --borde: rgba(184,154,106,0.2);
     }
 
+    /* MODO NOCHE */
+    body.dark-mode {
+      --negro: #e8e0d4;
+      --oscuro: #1a1a1a;
+      --medio: #242424;
+      --dorado: #b89a7a;
+      --dorado-claro: #d4b896;
+      --fondo: #121212;
+      --fondo-alt: #1c1c1c;
+      --gris-texto: #8a8580;
+      --blanco: #1c1c1c;
+      --borde: rgba(184,154,106,0.15);
+    }
+    body.dark-mode { background: var(--fondo); color: var(--negro); }
+    body.dark-mode header { background: rgba(18,18,18,0.97); border-bottom-color: rgba(184,154,106,0.12); }
+    body.dark-mode .mobile-menu { background: #0a0a0a; }
+    body.dark-mode .prop-card { background: #1c1c1c; }
+    body.dark-mode .prop-wa-btn { background: #1a9e50; }
+    body.dark-mode .contact-form-wrap { background: #1c1c1c; }
+    body.dark-mode .form-field input,
+    body.dark-mode .form-field textarea { background: #242424; border-color: rgba(184,154,106,0.15); color: var(--negro); }
+    body.dark-mode .form-field input::placeholder,
+    body.dark-mode .form-field textarea::placeholder { color: rgba(232,224,212,0.25); }
+    body.dark-mode .calendly-block { background: #1c1c1c; border-color: rgba(184,154,106,0.1); }
+    body.dark-mode .team-card { background: #1c1c1c; border-color: rgba(184,154,106,0.1); }
+    body.dark-mode .team-card:hover { background: #242424; }
+    body.dark-mode .gallery-modal-inner { background: #1c1c1c; }
+    body.dark-mode .gallery-info { border-top-color: rgba(184,154,106,0.1); }
+    body.dark-mode .gallery-wa-btn { background: #1a9e50; }
+    body.dark-mode .chat-panel { background: #1c1c1c; }
+    body.dark-mode .chat-input-area { background: #242424; border-top-color: rgba(184,154,106,0.1); }
+    body.dark-mode .chat-input { background: #1a1a1a; border-color: rgba(184,154,106,0.15); color: var(--negro); }
+    body.dark-mode .chat-msg.bot .chat-msg-bubble { background: #242424; color: var(--negro); border-color: rgba(184,154,106,0.1); }
+    body.dark-mode .chat-popup { background: #1c1c1c; color: var(--negro); }
+    body.dark-mode .chat-popup::after { border-left-color: #1c1c1c; }
+    body.dark-mode .login-box { background: #1c1c1c; }
+    body.dark-mode .login-body { background: #1c1c1c; }
+    body.dark-mode .login-field input { background: #242424; border-color: rgba(184,154,106,0.15); color: var(--negro); }
+    body.dark-mode .admin-body { background: #1a1a1a; }
+    body.dark-mode .admin-field input,
+    body.dark-mode .admin-field textarea,
+    body.dark-mode .admin-field select { background: #242424; border-color: rgba(184,154,106,0.15); color: var(--negro); }
+    body.dark-mode .admin-prop-item { background: #1c1c1c; }
+    body.dark-mode .img-upload-area { background: #242424; }
+    body.dark-mode #modalPrivacidad > div,
+    body.dark-mode #modalTerminos > div { background: #1c1c1c; }
+
+    /* Botón toggle */
+    .dark-toggle {
+      background: none; border: 1px solid rgba(184,154,106,0.25);
+      border-radius: 2px; width: 34px; height: 34px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; color: rgba(24,55,66,0.55); flex-shrink: 0;
+    }
+    .dark-toggle:hover { border-color: var(--dorado); color: var(--dorado); }
+    body.dark-mode .dark-toggle { color: var(--dorado); border-color: rgba(184,154,106,0.3); }
+    .dark-toggle svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.8; transition: all 0.3s; }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--fondo); color: var(--negro); overflow-x: hidden; }
@@ -1050,6 +1108,9 @@
       <a href="#equipo">Equipo</a>
       <a href="#contacto">Contacto</a>
       <a href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener" class="nav-portal">Portal</a>
+      <button class="dark-toggle" id="darkToggle" onclick="toggleDark()" aria-label="Modo noche">
+        <svg id="darkIcon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
       <a href="#" class="nav-cta" onclick="return TLX_CAL();">Agendá un turno</a>
     </nav>
     <button class="hamb" id="hambBtn" aria-label="Menú" aria-expanded="false">
@@ -2376,6 +2437,24 @@
   };
   setTimeout(function() { if (!chatOpen) document.getElementById('chatBadge').classList.add('visible'); }, 8000);
   setTimeout(function() { if (!chatOpen) document.getElementById('chatPopup').classList.add('visible'); }, 3000);
+
+  /* ===== MODO NOCHE ===== */
+  var sunIcon = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+  var moonIcon = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+
+  function toggleDark() {
+    var isDark = document.body.classList.toggle('dark-mode');
+    document.getElementById('darkIcon').innerHTML = isDark ? sunIcon : moonIcon;
+    localStorage.setItem('tl_dark', isDark ? '1' : '0');
+  }
+
+  (function() {
+    if (localStorage.getItem('tl_dark') === '1') {
+      document.body.classList.add('dark-mode');
+      var icon = document.getElementById('darkIcon');
+      if (icon) icon.innerHTML = sunIcon;
+    }
+  })();
 
   </script>
 </html>
