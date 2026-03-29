@@ -2357,6 +2357,15 @@
         this.hideTyping();
         var reply = (data.content && data.content[0]) ? data.content[0].text : 'Disculpa, hubo un error. Contactanos por WhatsApp al 351-3422063.';
         this.addMsg('bot', reply);
+        // Si hay que escalar, mostrar boton de WhatsApp
+        if (data.escalar && data.waText) {
+          var msgs2 = document.getElementById('chatMessages');
+          var waDiv = document.createElement('div');
+          waDiv.className = 'chat-msg bot';
+          waDiv.innerHTML = '<a href="https://wa.me/543513422063?text=' + encodeURIComponent(data.waText) + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;background:#25d366;color:white;padding:10px 14px;border-radius:20px;font-size:12px;font-weight:500;letter-spacing:0.05em;text-decoration:none;margin-top:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.86 11.86 0 0012.07 0C5.51 0 .2 5.31.2 11.87c0 2.09.55 4.14 1.61 5.95L0 24l6.35-1.76c1.74.95 3.7 1.45 5.7 1.45h.01c6.56 0 11.87-5.31 11.87-11.87 0-3.17-1.24-6.16-3.41-8.34z"/></svg>Hablar con el equipo</a>';
+          msgs2.appendChild(waDiv);
+          msgs2.scrollTop = msgs2.scrollHeight;
+        }
       } catch(e) {
         this.hideTyping();
         this.addMsg('bot', 'Disculpa, hubo un problema. Contactanos directamente por WhatsApp al 351-3422063.');
