@@ -320,6 +320,12 @@
     /* EQUIPO */
     .team-section { background: var(--fondo-alt); padding: 96px 40px; }
 
+    .team-photo-wrap { margin-bottom: 52px; position: relative; display: flex; justify-content: center; }
+    .team-photo-wrap img {
+      width: 100%; max-width: 800px; height: auto; display: block;
+      border-radius: 2px; filter: grayscale(15%) contrast(1.04);
+    }
+
     .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 20px; max-width: 800px; margin: 0 auto; }
     .team-card {
       padding: 26px 22px; border: 1px solid var(--borde);
@@ -417,6 +423,7 @@
       display: none;
     }
     .chat-badge.visible { display: block; }
+    /* Burbuja de presentacion */
     .chat-popup {
       position: fixed; right: 84px; bottom: 86px; z-index: 300;
       background: white; border-radius: 12px 12px 0 12px;
@@ -620,7 +627,10 @@
     }
     .props-empty svg { display: block; margin: 0 auto 18px; opacity: 0.2; }
 
-    .prop-card.oculta { display: none; }
+    /* Cards ocultas */
+    .prop-card.oculta {
+      display: none;
+    }
     .prop-card.oculta.visible {
       display: block;
       animation: fadeUpCard 0.4s ease both;
@@ -630,7 +640,10 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .props-ver-mas-wrap { text-align: center; margin-top: 44px; }
+    /* Botón ver más */
+    .props-ver-mas-wrap {
+      text-align: center; margin-top: 44px;
+    }
     .props-ver-mas-btn {
       font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
       letter-spacing: 0.2em; text-transform: uppercase;
@@ -640,10 +653,20 @@
       cursor: pointer; transition: all 0.25s ease;
       display: inline-flex; align-items: center; gap: 10px;
     }
-    .props-ver-mas-btn:hover { border-color: var(--dorado); color: var(--dorado); transform: translateY(-1px); }
-    .props-ver-mas-btn svg { transition: transform 0.3s ease; }
-    .props-ver-mas-btn.expandido svg { transform: rotate(180deg); }
-    .props-contador { font-size: 12px; font-weight: 300; color: var(--gris-texto); text-align: center; margin-top: 14px; letter-spacing: 0.04em; }
+    .props-ver-mas-btn:hover {
+      border-color: var(--dorado); color: var(--dorado);
+      transform: translateY(-1px);
+    }
+    .props-ver-mas-btn svg {
+      transition: transform 0.3s ease;
+    }
+    .props-ver-mas-btn.expandido svg {
+      transform: rotate(180deg);
+    }
+    .props-contador {
+      font-size: 12px; font-weight: 300; color: var(--gris-texto);
+      text-align: center; margin-top: 14px; letter-spacing: 0.04em;
+    }
 
     /* MODAL GALERÍA / DETALLE */
     .gallery-modal {
@@ -663,7 +686,9 @@
       display: flex; align-items: center; justify-content: center;
       min-height: 200px;
     }
-    .gallery-modal-img { width: 100%; max-height: 50vh; object-fit: contain; display: block; }
+    .gallery-modal-img {
+      width: 100%; max-height: 50vh; object-fit: contain; display: block;
+    }
     .gallery-close {
       position: absolute; top: 10px; right: 10px; z-index: 10;
       background: rgba(13,35,48,0.75); border: none;
@@ -695,6 +720,7 @@
       pointer-events: auto; cursor: pointer;
     }
     .gallery-dot.active { background: var(--dorado); }
+    /* Info — sin height fijo, crece con el contenido */
     .gallery-info { padding: 24px 26px 28px; }
     .gallery-badge {
       font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
@@ -702,14 +728,33 @@
       border-radius: 2px; display: inline-block; margin-bottom: 14px;
     }
     .gallery-badge.alquiler { background: var(--dorado); color: var(--negro); }
-    .gallery-precio { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500; color: var(--negro); margin-bottom: 5px; }
-    .gallery-titulo { font-size: 16px; font-weight: 400; color: var(--negro); line-height: 1.4; margin-bottom: 6px; }
-    .gallery-barrio { font-size: 12px; font-weight: 300; color: var(--gris-texto); display: flex; align-items: center; gap: 5px; margin-bottom: 16px; }
+    .gallery-precio {
+      font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 500;
+      color: var(--negro); margin-bottom: 5px;
+    }
+    .gallery-titulo {
+      font-size: 16px; font-weight: 400; color: var(--negro);
+      line-height: 1.4; margin-bottom: 6px;
+    }
+    .gallery-barrio {
+      font-size: 12px; font-weight: 300; color: var(--gris-texto);
+      display: flex; align-items: center; gap: 5px; margin-bottom: 16px;
+    }
     .gallery-barrio svg { width: 11px; height: 11px; stroke: var(--dorado); fill: none; stroke-width: 2; }
-    .gallery-specs { display: flex; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde); padding: 12px 0; margin-bottom: 18px; }
-    .gallery-spec { font-size: 13px; font-weight: 300; color: var(--gris-texto); display: flex; align-items: center; gap: 6px; }
+    .gallery-specs {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      border-top: 1px solid var(--borde); border-bottom: 1px solid var(--borde);
+      padding: 12px 0; margin-bottom: 18px;
+    }
+    .gallery-spec {
+      font-size: 13px; font-weight: 300; color: var(--gris-texto);
+      display: flex; align-items: center; gap: 6px;
+    }
     .gallery-spec svg { width: 14px; height: 14px; stroke: var(--dorado); fill: none; stroke-width: 1.8; }
-    .gallery-desc { font-size: 14px; font-weight: 300; color: var(--negro); line-height: 1.8; margin-bottom: 22px; white-space: pre-wrap; }
+    .gallery-desc {
+      font-size: 14px; font-weight: 300; color: var(--negro);
+      line-height: 1.8; margin-bottom: 22px; white-space: pre-wrap;
+    }
     .gallery-wa-btn {
       display: flex; align-items: center; gap: 8px; justify-content: center;
       width: 100%; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
@@ -733,13 +778,18 @@
       background: rgba(13,35,48,0.92); overflow-y: auto;
     }
     .admin-panel.open { display: block; }
-    .admin-inner { max-width: 740px; margin: 40px auto; padding: 0 20px 80px; }
+    .admin-inner {
+      max-width: 740px; margin: 40px auto; padding: 0 20px 80px;
+    }
     .admin-header {
       display: flex; align-items: center; justify-content: space-between;
       padding: 28px 34px; background: var(--negro);
       border-bottom: 1px solid rgba(184,154,106,0.15); margin-bottom: 0;
     }
-    .admin-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: #f8f7f4; }
+    .admin-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400;
+      color: #f8f7f4;
+    }
     .admin-close-btn {
       background: none; border: 1px solid rgba(184,154,106,0.2); border-radius: 2px;
       color: rgba(255,255,255,0.5); font-size: 20px; width: 38px; height: 38px;
@@ -747,14 +797,20 @@
       cursor: pointer; transition: all 0.2s;
     }
     .admin-close-btn:hover { border-color: var(--dorado); color: var(--dorado); }
+
     .admin-body { background: var(--fondo); padding: 34px; }
+
     .admin-section-title {
       font-size: 10px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
       color: var(--dorado); margin-bottom: 22px; padding-bottom: 10px;
       border-bottom: 1px solid var(--borde);
     }
+
     .admin-field { margin-bottom: 18px; }
-    .admin-field label { display: block; font-size: 9px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(24,55,66,0.5); margin-bottom: 7px; }
+    .admin-field label {
+      display: block; font-size: 9px; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(24,55,66,0.5); margin-bottom: 7px;
+    }
     .admin-field input, .admin-field textarea, .admin-field select {
       width: 100%; background: white; border: 1px solid rgba(184,154,106,0.22);
       border-radius: 2px; padding: 11px 14px;
@@ -763,7 +819,9 @@
     }
     .admin-field input:focus, .admin-field textarea:focus, .admin-field select:focus { border-color: var(--dorado); }
     .admin-field textarea { resize: vertical; min-height: 90px; }
+
     .admin-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
     .img-upload-area {
       border: 1.5px dashed rgba(184,154,106,0.3); border-radius: 2px;
       padding: 28px; text-align: center; cursor: pointer; transition: all 0.2s;
@@ -774,8 +832,12 @@
     .img-upload-icon { font-size: 28px; margin-bottom: 8px; }
     .img-upload-label { font-size: 12px; color: var(--gris-texto); }
     .img-upload-label strong { color: var(--dorado); }
+
     .img-preview-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
-    .img-preview-item { position: relative; width: 80px; height: 80px; border-radius: 2px; overflow: hidden; border: 1px solid var(--borde); }
+    .img-preview-item {
+      position: relative; width: 80px; height: 80px; border-radius: 2px; overflow: hidden;
+      border: 1px solid var(--borde);
+    }
     .img-preview-item img { width: 100%; height: 100%; object-fit: cover; }
     .img-preview-remove {
       position: absolute; top: 2px; right: 2px;
@@ -783,6 +845,7 @@
       width: 18px; height: 18px; font-size: 11px; cursor: pointer; line-height: 1;
       display: flex; align-items: center; justify-content: center;
     }
+
     .admin-save-btn {
       width: 100%; font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
       letter-spacing: 0.2em; text-transform: uppercase;
@@ -791,6 +854,7 @@
       margin-top: 8px;
     }
     .admin-save-btn:hover { background: var(--dorado-claro); }
+
     .admin-list { margin-top: 28px; }
     .admin-list-title {
       font-size: 10px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
@@ -802,7 +866,10 @@
       padding: 12px 14px; background: white; border: 1px solid var(--borde);
       border-radius: 2px; margin-bottom: 8px;
     }
-    .admin-prop-thumb { width: 48px; height: 48px; border-radius: 2px; object-fit: cover; flex-shrink: 0; background: var(--fondo-alt); }
+    .admin-prop-thumb {
+      width: 48px; height: 48px; border-radius: 2px; object-fit: cover;
+      flex-shrink: 0; background: var(--fondo-alt);
+    }
     .admin-prop-info { flex: 1; min-width: 0; }
     .admin-prop-name { font-size: 14px; font-weight: 400; color: var(--negro); margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .admin-prop-meta { font-size: 11px; color: var(--gris-texto); }
@@ -823,11 +890,24 @@
       padding: 16px; background: rgba(24,55,66,0.04);
       border: 1px solid var(--borde); border-radius: 2px;
     }
-    .admin-backup-bar p { width: 100%; font-size: 11px; color: var(--gris-texto); margin-bottom: 4px; letter-spacing: 0.02em; }
-    .btn-backup { font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 9px 16px; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
-    .btn-export { background: var(--negro); color: var(--dorado); border: 1px solid rgba(145,120,96,0.3); }
+    .admin-backup-bar p {
+      width: 100%; font-size: 11px; color: var(--gris-texto);
+      margin-bottom: 4px; letter-spacing: 0.02em;
+    }
+    .btn-backup {
+      font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 9px 16px; border-radius: 2px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-export {
+      background: var(--negro); color: var(--dorado);
+      border: 1px solid rgba(145,120,96,0.3);
+    }
     .btn-export:hover { border-color: var(--dorado); }
-    .btn-import { background: transparent; color: var(--negro); border: 1px solid rgba(24,55,66,0.2); }
+    .btn-import {
+      background: transparent; color: var(--negro);
+      border: 1px solid rgba(24,55,66,0.2);
+    }
     .btn-import:hover { border-color: var(--dorado); color: var(--dorado); }
     .admin-section-subtitle {
       font-size: 11px; color: var(--dorado); font-weight: 500; letter-spacing: 0.1em;
@@ -850,12 +930,21 @@
       border-bottom: 1px solid rgba(184,154,106,0.15);
       display: flex; align-items: center; justify-content: space-between;
     }
-    .login-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: #f8f7f4; }
-    .login-close { background: none; border: none; color: rgba(255,255,255,0.4); font-size: 22px; cursor: pointer; line-height: 1; transition: color 0.2s; }
+    .login-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 20px;
+      font-weight: 400; color: #f8f7f4;
+    }
+    .login-close {
+      background: none; border: none; color: rgba(255,255,255,0.4);
+      font-size: 22px; cursor: pointer; line-height: 1; transition: color 0.2s;
+    }
     .login-close:hover { color: var(--dorado); }
     .login-body { padding: 32px; }
     .login-field { margin-bottom: 18px; }
-    .login-field label { display: block; font-size: 9px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(24,55,66,0.5); margin-bottom: 7px; }
+    .login-field label {
+      display: block; font-size: 9px; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(24,55,66,0.5); margin-bottom: 7px;
+    }
     .login-field input {
       width: 100%; background: white; border: 1px solid rgba(184,154,106,0.22);
       border-radius: 2px; padding: 11px 14px;
@@ -871,9 +960,13 @@
       margin-top: 4px;
     }
     .login-btn:hover { background: var(--dorado-claro); }
-    .login-error { font-size: 12px; color: #c0392b; text-align: center; margin-top: 12px; display: none; }
+    .login-error {
+      font-size: 12px; color: #c0392b; text-align: center;
+      margin-top: 12px; display: none;
+    }
     .login-error.visible { display: block; }
 
+    /* btn admin en nav */
     .btn-admin-trigger {
       font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
       background: rgba(184,154,106,0.1); color: var(--dorado);
@@ -897,6 +990,7 @@
     }
     .float-wa a:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,0.42); }
 
+    /* STICKY CTA mobile */
     .sticky-cta { display: none; }
 
     /* RESPONSIVE */
@@ -921,6 +1015,7 @@
       .contact-btns { flex-direction: column; }
       .contact-form-wrap { padding: 24px 18px; }
       .calendly-block { padding: 22px 14px; }
+      
       .float-wa { right: 14px; bottom: 76px; }
       .sticky-cta {
         display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 150;
@@ -1046,6 +1141,7 @@
   <!-- GALERÍA / DETALLE MODAL -->
   <div class="gallery-modal" id="galleryModal">
     <div class="gallery-modal-inner">
+      <!-- Foto -->
       <div class="gallery-foto-wrap" id="galleryFotoWrap">
         <button class="gallery-close" onclick="galleryModal.close()">×</button>
         <button class="gallery-nav gallery-prev" id="galleryPrev" onclick="galleryNav(-1)">‹</button>
@@ -1053,6 +1149,7 @@
         <button class="gallery-nav gallery-next" id="galleryNext" onclick="galleryNav(1)">›</button>
         <div class="gallery-dots" id="galleryDots"></div>
       </div>
+      <!-- Datos -->
       <div class="gallery-info" id="galleryInfo"></div>
     </div>
   </div>
@@ -1161,12 +1258,14 @@
     </div>
   </div>
 
-  <!-- EQUIPO -->
   <section id="equipo" class="team-section">
     <div class="container">
       <p class="section-label">Nuestro equipo</p>
       <h2 class="section-title">Profesionales con <em>vocación de servicio</em></h2>
       <p class="section-sub">Un equipo multidisciplinario que combina experiencia jurídica, inmobiliaria y notarial para brindar soluciones integrales.</p>
+      <div class="team-photo-wrap">
+        <img src="equipo-terralex.jpg" alt="Equipo TerraLex" loading="lazy">
+      </div>
       <div class="team-grid">
         <div class="team-card">
           <img class="team-avatar" src="foto-hernan.png" alt="Hernán Darío Medah">
@@ -1256,6 +1355,8 @@
       </div>
     </div>
   </section>
+
+
 
   <!-- CHAT IA -->
   <div class="chat-popup" id="chatPopup" onclick="chatPanel.openFromPopup()">
@@ -1416,6 +1517,7 @@
     function TLX_CAL() {
       try {
         if (window.Calendly && window.TLX_CALENDLY_URL) {
+          idget({ url: window.TLX_CALENDLY_URL, utm: {} });
           document.getElementById('turno').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       } catch(e) {}
@@ -1425,18 +1527,25 @@
 
   <script data-cfasync="false">
   /* ===== LOGIN ROBUSTO ===== */
+  // Hash SHA-256 de "usuario:contraseña" — generado offline, nunca en texto plano
+  // Para cambiar credenciales: reemplazá CRED_HASH con el valor de:
+  //   sha256("nuevouser:nuevapass")  ← calculalo en: https://emn178.github.io/online-tools/sha256.html
+  // Credenciales actuales: usuario = terralex | contraseña = TL2024$cba
   var CRED_HASH = '2418034a41cc12ef10d3ce067d96e5be5479dc9e7b3cb1b9052fa3ce16bb304e';
 
+  // Token de sesión: HMAC simulado con timestamp + secreto derivado
   var SESSION_KEY = 'tl_adm_sess';
   var SESSION_HOURS = 8;
   var MAX_ATTEMPTS = 5;
   var FAIL_DELAY = 1200;
 
+  // SHA-256 nativo via SubtleCrypto
   async function sha256(msg) {
     var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
     return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
   }
 
+  // Comparación de strings en tiempo constante (anti-timing)
   function safeEqual(a, b) {
     if (a.length !== b.length) return false;
     var r = 0;
@@ -1444,12 +1553,14 @@
     return r === 0;
   }
 
+  // Generar token de sesión: hash(secreto + timestamp_slot)
   async function generateToken() {
     var slot = Math.floor(Date.now() / (SESSION_HOURS * 3600000));
     var secret = 'tl_session_' + CRED_HASH.slice(0, 16) + '_' + slot;
     return await sha256(secret);
   }
 
+  // Verificar sesión activa
   async function checkSession() {
     try {
       var stored = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null');
@@ -1460,6 +1571,7 @@
     } catch(e) { return false; }
   }
 
+  // Guardar sesión
   async function saveSession() {
     var token = await generateToken();
     sessionStorage.setItem(SESSION_KEY, JSON.stringify({
@@ -1468,11 +1580,14 @@
     }));
   }
 
+  // Brute-force state — solo en memoria, NO persistido
+  // Cada visitante tiene su propio contador independiente
   var _bfState = { attempts: 0, lockedUntil: 0 };
   function getBFState() { return _bfState; }
   function saveBFState(s) { _bfState = s; }
   function resetBFState() { _bfState = { attempts: 0, lockedUntil: 0 }; }
 
+  // Tiempo de bloqueo exponencial: 30s, 2m, 10m, 30m, 2h…
   function lockoutSeconds(attempts) {
     var table = [0, 0, 0, 0, 0, 30, 120, 600, 1800, 7200];
     return (table[Math.min(attempts, table.length-1)] || 7200);
@@ -1526,6 +1641,7 @@
 
   var loginModal = {
     open: async function() {
+      // Limpiar bloqueo viejo que quedó en localStorage (versión anterior)
       localStorage.removeItem('tl_bf');
       if (await checkSession()) { adminPanel.open(); return; }
       document.getElementById('login-user').value = '';
@@ -1534,8 +1650,734 @@
       setLoginBusy(false);
       document.getElementById('loginModal').classList.add('open');
       document.body.style.overflow = 'hidden';
+      // Check lockout on open
       var bf = getBFState();
       if (bf.lockedUntil > Date.now()) {
         startLockCountdown(bf.lockedUntil);
       } else {
-        setTimeout
+        setTimeout(function(){ document.getElementById('login-user').focus(); }, 100);
+      }
+    },
+    close: function() {
+      document.getElementById('loginModal').classList.remove('open');
+      document.body.style.overflow = '';
+      if (_lockTimer) { clearInterval(_lockTimer); _lockTimer = null; }
+    },
+    submit: async function() {
+      var bf = getBFState();
+      // Check lockout
+      if (bf.lockedUntil > Date.now()) {
+        startLockCountdown(bf.lockedUntil);
+        return;
+      }
+      var u = document.getElementById('login-user').value.trim();
+      var p = document.getElementById('login-pass').value;
+      if (!u || !p) { showLoginError('Completá los dos campos.'); return; }
+
+      setLoginBusy(true);
+      clearLoginError();
+
+      // Delay fijo para evitar timing attacks
+      var t0 = Date.now();
+      var inputHash = await sha256(u + ':' + p);
+      var elapsed = Date.now() - t0;
+      var wait = Math.max(0, FAIL_DELAY - elapsed);
+
+      var ok = safeEqual(inputHash, CRED_HASH);
+
+      await new Promise(function(res){ setTimeout(res, ok ? 0 : wait); });
+
+      if (ok) {
+        resetBFState();
+        await saveSession();
+        setLoginBusy(false);
+        this.close();
+        adminPanel.open();
+      } else {
+        bf.attempts = (bf.attempts || 0) + 1;
+        var lockSecs = lockoutSeconds(bf.attempts);
+        if (lockSecs > 0) {
+          bf.lockedUntil = Date.now() + lockSecs * 1000;
+        }
+        saveBFState(bf);
+        setLoginBusy(false);
+        document.getElementById('login-pass').value = '';
+        if (bf.lockedUntil > Date.now()) {
+          startLockCountdown(bf.lockedUntil);
+        } else {
+          var remaining = MAX_ATTEMPTS - bf.attempts;
+          if (remaining > 0) {
+            showLoginError('Credenciales incorrectas. ' + remaining + ' intento' + (remaining === 1 ? '' : 's') + ' restante' + (remaining === 1 ? '.' : 's.'));
+          } else {
+            showLoginError('Credenciales incorrectas.');
+          }
+          document.getElementById('login-pass').focus();
+        }
+      }
+    }
+  };
+
+  // Inicializar: verificar sesión al cargar
+  (async function() {
+    if (await checkSession()) {
+      // sesión válida — botón admin disponible sin pedir pass de nuevo
+    }
+  })();
+
+  /* ===== SUPABASE CONFIG ===== */
+  var SB_URL  = 'https://smzwkilrkeyitaixvrhl.supabase.co';
+  var SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtendraWxya2V5aXRhaXh2cmhsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTY1MDcsImV4cCI6MjA5MDAzMjUwN30.IFUHzgd7lay7UHTkCObyb6QcEeJCO80qRjRL4LdcL44';
+  var SB_BUCKET = 'fotos-propiedades';
+
+  function sbHeaders(extra) {
+    var h = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
+    return Object.assign(h, extra || {});
+  }
+
+  // REST helper
+  async function sbFetch(path, opts) {
+    var r = await fetch(SB_URL + path, opts);
+    if (!r.ok) {
+      var txt = await r.text();
+      throw new Error(r.status + ': ' + txt);
+    }
+    var ct = r.headers.get('content-type') || '';
+    return ct.includes('application/json') ? r.json() : r;
+  }
+
+  // Subir archivo al Storage → devuelve URL pública
+  async function sbUpload(path, blob) {
+    var r = await fetch(SB_URL + '/storage/v1/object/' + SB_BUCKET + '/' + path, {
+      method: 'POST',
+      headers: sbHeaders({ 'x-upsert': 'true' }),
+      body: blob
+    });
+    if (!r.ok) throw new Error('Upload failed: ' + await r.text());
+    return SB_URL + '/storage/v1/object/public/' + SB_BUCKET + '/' + path;
+  }
+
+  async function sbDeleteFile(path) {
+    await fetch(SB_URL + '/storage/v1/object/' + SB_BUCKET + '/' + path, {
+      method: 'DELETE', headers: sbHeaders()
+    });
+  }
+
+  // dataUrl → Blob JPEG
+  function dataUrlToBlob(dataUrl) {
+    var arr = dataUrl.split(','), mime = arr[0].match(/:(.*?);/)[1];
+    var bstr = atob(arr[1]), n = bstr.length, u8 = new Uint8Array(n);
+    while (n--) u8[n] = bstr.charCodeAt(n);
+    return new Blob([u8], { type: mime });
+  }
+
+  /* ===== SISTEMA DE PROPIEDADES ===== */
+  var WA_NUM = '543513422063';
+  var propiedades = [];
+  var filtroActivo = 'todas';
+  var fotosActuales = [];   // { dataUrl, thumb } en memoria
+  var galCurrentIdx = 0;
+  var galCurrentImgs = [];
+
+  /* ── Compresión ── */
+  function comprimirImagen(dataUrl, maxW, maxH, quality) {
+    maxW = maxW || 1920; maxH = maxH || 1440; quality = quality || 0.92;
+    return new Promise(function(res) {
+      var img = new Image();
+      img.onload = function() {
+        var w = img.width, h = img.height;
+        if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+        if (h > maxH) { w = Math.round(w * maxH / h); h = maxH; }
+        var c = document.createElement('canvas');
+        c.width = w; c.height = h;
+        c.getContext('2d').drawImage(img, 0, 0, w, h);
+        res(c.toDataURL('image/jpeg', quality));
+      };
+      img.src = dataUrl;
+    });
+  }
+  function comprimirThumb(dataUrl) {
+    return comprimirImagen(dataUrl, 800, 600, 0.88);
+  }
+
+  /* ── Cargar propiedades desde Supabase ── */
+  async function loadProps() {
+    try {
+      var data = await sbFetch('/rest/v1/propiedades?select=*&order=creado_en.desc', {
+        headers: sbHeaders({ 'Accept': 'application/json' })
+      });
+      propiedades = data.map(function(r) {
+        return {
+          id: r.id, tipo: r.tipo, precio: r.precio,
+          titulo: r.titulo, barrio: r.barrio,
+          sup: r.sup, amb: r.amb, desc: r.descripcion,
+          wa: r.wa, thumb: r.thumb, fotoCount: r.foto_count,
+          _fotosBase: r.id
+        };
+      });
+    } catch(e) {
+      console.error('Error cargando propiedades:', e);
+      propiedades = [];
+    }
+    renderProps();
+    renderHeroCards();
+  }
+
+  function renderHeroCards() {
+    var strip = document.getElementById('heroCardsStrip');
+    if (!strip) return;
+    var lista = propiedades.slice(0, 3);
+    if (!lista.length) { strip.style.display = 'none'; return; }
+    strip.innerHTML = lista.map(function(p) {
+      var waMsg = p.wa || ('Hola TerraLex, me interesa: ' + p.titulo);
+      var imgHTML = p.thumb
+        ? '<img src="' + p.thumb + '" alt="' + p.titulo + '" loading="lazy">'
+        : '<div style="width:100%;height:100%;background:#1a3d4f;display:flex;align-items:center;justify-content:center;opacity:.4"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#917860" stroke-width="1"><path d="M3 11l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>';
+      return '<div class="hero-prop-card">'
+        + '<div class="hero-prop-img">' + imgHTML
+        + '<span class="hero-prop-badge' + (p.tipo === 'alquiler' ? ' alq' : '') + '">'
+        + (p.tipo === 'alquiler' ? 'Alquiler' : 'Venta') + '</span></div>'
+        + '<div class="hero-prop-body">'
+        + '<div class="hero-prop-price">' + (p.precio || '-') + '</div>'
+        + '<div class="hero-prop-title">' + p.titulo + '</div>'
+        + '<div class="hero-prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>' + p.barrio + '</div>'
+        + '<a class="hero-prop-wa" href="https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(waMsg) + '" target="_blank" rel="noopener">'
+        + '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.86 11.86 0 0012.07 0C5.51 0 .2 5.31.2 11.87c0 2.09.55 4.14 1.61 5.95L0 24l6.35-1.76c1.74.95 3.7 1.45 5.7 1.45h.01c6.56 0 11.87-5.31 11.87-11.87 0-3.17-1.24-6.16-3.41-8.34z"/></svg>'
+        + 'Consultar</a>'
+        + '</div></div>';
+    }).join('');
+  }
+
+  /* ── Filtros y render ── */
+  function filtrarProps(tab) {
+    filtroActivo = tab;
+    document.querySelectorAll('.props-tab').forEach(function(t) {
+      t.classList.toggle('active', t.dataset.tab === tab);
+    });
+    renderProps();
+  }
+
+  var PROPS_VISIBLES = 3; // cuántas se muestran sin expandir
+
+  function renderProps() {
+    var grid = document.getElementById('propsGrid');
+    if (!grid) return;
+    var lista = filtroActivo === 'todas' ? propiedades
+      : propiedades.filter(function(p) { return p.tipo === filtroActivo; });
+
+    if (!lista.length) {
+      grid.innerHTML = '<div class="props-empty">'
+        + '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">'
+        + '<path d="M3 11l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'
+        + '<polyline points="9 22 9 12 15 12 15 22"/></svg>'
+        + 'No hay propiedades ' + (filtroActivo === 'todas' ? 'disponibles' : 'en ' + filtroActivo) + ' por el momento.'
+        + '</div>';
+      document.getElementById('propsVerMasWrap').style.display = 'none';
+      return;
+    }
+
+    grid.innerHTML = lista.map(function(p, listaIdx) {
+      var realIdx = propiedades.indexOf(p);
+      var oculta = listaIdx >= PROPS_VISIBLES ? ' oculta' : '';
+      var imgHTML = p.thumb
+        ? '<img src="' + p.thumb + '" alt="' + p.titulo + '" loading="lazy">'
+        : '<div style="width:100%;height:100%;background:var(--fondo-alt);display:flex;align-items:center;justify-content:center;font-size:32px">&#127968;</div>';
+      var fotoCount = p.fotoCount > 1 ? '<span class="prop-img-count">&#128247; ' + p.fotoCount + '</span>' : '';
+      var waMsg = p.wa || ('Hola TerraLex, me interesa la propiedad: ' + p.titulo + ' (' + p.barrio + ')');
+      return '<div class="prop-card' + oculta + '" onclick="openGallery(' + realIdx + ')">'
+        + '<div class="prop-img-wrap">' + imgHTML
+        + '<span class="prop-badge ' + (p.tipo === 'alquiler' ? 'alquiler' : '') + '">'
+        + (p.tipo === 'alquiler' ? 'Alquiler' : 'Venta') + '</span>'
+        + fotoCount + '</div>'
+        + '<div class="prop-body">'
+        + '<div class="prop-price">' + (p.precio || '-') + '</div>'
+        + '<div class="prop-title">' + p.titulo + '</div>'
+        + '<div class="prop-location"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>' + p.barrio + '</div>'
+        + '<div class="prop-specs">'
+        + (p.sup ? '<span class="prop-spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>' + p.sup + '</span>' : '')
+        + (p.amb ? '<span class="prop-spec"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>' + p.amb + '</span>' : '')
+        + '</div>'
+        + (p.desc ? '<div class="prop-desc">' + p.desc.substring(0, 120) + (p.desc.length > 120 ? '...' : '') + '</div>' : '')
+        + '<a class="prop-wa-btn" href="https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(waMsg)
+        + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">'
+        + '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.86 11.86 0 0012.07 0C5.51 0 .2 5.31.2 11.87c0 2.09.55 4.14 1.61 5.95L0 24l6.35-1.76c1.74.95 3.7 1.45 5.7 1.45h.01c6.56 0 11.87-5.31 11.87-11.87 0-3.17-1.24-6.16-3.41-8.34z"/></svg>'
+        + 'Consultar por WhatsApp</a></div></div>';
+    }).join('');
+
+    // Mostrar botón solo si hay más de PROPS_VISIBLES
+    var wrap = document.getElementById('propsVerMasWrap');
+    var contador = document.getElementById('propsContador');
+    var btn = document.getElementById('propsVerMasBtn');
+    if (lista.length > PROPS_VISIBLES) {
+      wrap.style.display = 'block';
+      btn.classList.remove('expandido');
+      document.getElementById('propsVerMasLabel').textContent = 'Ver todas las propiedades';
+      contador.textContent = 'Mostrando ' + PROPS_VISIBLES + ' de ' + lista.length + ' propiedades';
+    } else {
+      wrap.style.display = 'none';
+    }
+  }
+
+  function toggleVerMas() {
+    var btn = document.getElementById('propsVerMasBtn');
+    var label = document.getElementById('propsVerMasLabel');
+    var contador = document.getElementById('propsContador');
+    var ocultas = document.querySelectorAll('.prop-card.oculta');
+    var expandido = btn.classList.contains('expandido');
+
+    if (!expandido) {
+      // Expandir — mostrar todas con animacion escalonada
+      ocultas.forEach(function(card, i) {
+        card.style.animationDelay = (i * 0.07) + 's';
+        card.classList.add('visible');
+      });
+      btn.classList.add('expandido');
+      label.textContent = 'Ver menos';
+      contador.textContent = 'Mostrando todas las propiedades';
+    } else {
+      // Colapsar — volver a ocultar
+      ocultas.forEach(function(card) {
+        card.classList.remove('visible');
+        card.style.animationDelay = '';
+      });
+      btn.classList.remove('expandido');
+      label.textContent = 'Ver todas las propiedades';
+      var lista = filtroActivo === 'todas' ? propiedades
+        : propiedades.filter(function(p) { return p.tipo === filtroActivo; });
+      contador.textContent = 'Mostrando ' + PROPS_VISIBLES + ' de ' + lista.length + ' propiedades';
+      // Scroll suave de vuelta a la seccion
+      document.getElementById('propiedades').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  /* ── Galería ── */
+  function openGallery(idx) {
+    var p = propiedades[idx];
+    if (!p) return;
+
+    var waMsg = p.wa || ('Hola TerraLex, me interesa la propiedad: ' + p.titulo + ' (' + p.barrio + ')');
+    document.getElementById('galleryInfo').innerHTML =
+      '<span class="gallery-badge ' + (p.tipo === 'alquiler' ? 'alquiler' : '') + '">'
+      + (p.tipo === 'alquiler' ? 'Alquiler' : 'Venta') + '</span>'
+      + '<div class="gallery-precio">' + (p.precio || '—') + '</div>'
+      + '<div class="gallery-titulo">' + p.titulo + '</div>'
+      + '<div class="gallery-barrio"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>' + p.barrio + '</div>'
+      + '<div class="gallery-specs">'
+      + (p.sup ? '<span class="gallery-spec"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/></svg>' + p.sup + '</span>' : '')
+      + (p.amb ? '<span class="gallery-spec"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>' + p.amb + '</span>' : '')
+      + '</div>'
+      + (p.desc ? '<div class="gallery-desc">' + p.desc.replace(/\n/g, '<br>') + '</div>' : '')
+      + '<a class="gallery-wa-btn" href="https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(waMsg)
+      + '" target="_blank" rel="noopener">'
+      + '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.86 11.86 0 0012.07 0C5.51 0 .2 5.31.2 11.87c0 2.09.55 4.14 1.61 5.95L0 24l6.35-1.76c1.74.95 3.7 1.45 5.7 1.45h.01c6.56 0 11.87-5.31 11.87-11.87 0-3.17-1.24-6.16-3.41-8.34z"/></svg>'
+      + 'Consultar por WhatsApp</a>';
+
+    if (!p.fotoCount) {
+      document.getElementById('galleryFotoWrap').style.display = 'none';
+      document.getElementById('galleryModal').classList.add('open');
+      return;
+    }
+    document.getElementById('galleryFotoWrap').style.display = '';
+
+    // Construir URLs desde Supabase Storage
+    galCurrentImgs = [];
+    for (var i = 0; i < p.fotoCount; i++) {
+      galCurrentImgs.push(SB_URL + '/storage/v1/object/public/' + SB_BUCKET + '/' + p.id + '/foto_' + i + '.jpg');
+    }
+    galCurrentIdx = 0;
+    setGalleryImg();
+    document.getElementById('galleryModal').classList.add('open');
+  }
+
+  function setGalleryImg() {
+    document.getElementById('galleryImg').src = galCurrentImgs[galCurrentIdx];
+    var dots = document.getElementById('galleryDots');
+    var total = galCurrentImgs.length;
+    if (total > 1) {
+      dots.innerHTML = galCurrentImgs.map(function(_, i) {
+        return '<div class="gallery-dot' + (i === galCurrentIdx ? ' active' : '')
+          + '" onclick="galleryNav(' + (i - galCurrentIdx) + ')"></div>';
+      }).join('');
+      document.getElementById('galleryPrev').classList.remove('hidden');
+      document.getElementById('galleryNext').classList.remove('hidden');
+    } else {
+      dots.innerHTML = '';
+      document.getElementById('galleryPrev').classList.add('hidden');
+      document.getElementById('galleryNext').classList.add('hidden');
+    }
+  }
+  function galleryNav(dir) {
+    if (!galCurrentImgs.length) return;
+    galCurrentIdx = (galCurrentIdx + dir + galCurrentImgs.length) % galCurrentImgs.length;
+    setGalleryImg();
+  }
+  var galleryModal = {
+    close: function() { document.getElementById('galleryModal').classList.remove('open'); }
+  };
+  document.addEventListener('keydown', function(e) {
+    // Atajo secreto admin: Ctrl + Shift + A
+    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+      e.preventDefault();
+      loginModal.open();
+      return;
+    }
+    if (document.getElementById('galleryModal').classList.contains('open')) {
+      if (e.key === 'ArrowLeft') galleryNav(-1);
+      if (e.key === 'ArrowRight') galleryNav(1);
+      if (e.key === 'Escape') galleryModal.close();
+    }
+    if (document.getElementById('adminPanelEl').classList.contains('open') && e.key === 'Escape') adminPanel.close();
+  });
+  document.getElementById('galleryModal').addEventListener('click', function(e) {
+    if (e.target === this) galleryModal.close();
+  });
+  var _touchStartX = 0;
+  document.getElementById('galleryModal').addEventListener('touchstart', function(e) {
+    _touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  document.getElementById('galleryModal').addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - _touchStartX;
+    if (Math.abs(dx) > 40) galleryNav(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* ── Carga de fotos con compresión ── */
+  var _uploadCancelled = false;
+
+  function setUploadStatus(msg, done) {
+    var area = document.querySelector('.img-upload-area');
+    var label = document.querySelector('.img-upload-label');
+    if (done) {
+      area.style.opacity = '';
+      area.style.pointerEvents = '';
+      label.innerHTML = 'Hacé clic para agregar más fotos<br><strong>o arrastrá las imágenes aquí</strong>';
+    } else {
+      area.style.opacity = '0.6';
+      area.style.pointerEvents = 'none';
+      label.innerHTML = msg;
+    }
+  }
+
+  var FORMATOS_ACEPTADOS = ['image/jpeg','image/jpg','image/png','image/webp','image/gif'];
+
+  function handleFotos(input) {
+    var files = Array.from(input.files);
+    input.value = '';
+    if (!files.length) return;
+    var rechazados = [];
+    var validos = files.filter(function(f) {
+      var tipo = f.type.toLowerCase(), nombre = f.name.toLowerCase();
+      if (nombre.endsWith('.heic') || nombre.endsWith('.heif') || tipo === 'image/heic' || tipo === 'image/heif') {
+        rechazados.push(f.name); return false;
+      }
+      if (!FORMATOS_ACEPTADOS.includes(tipo) && tipo !== '') { rechazados.push(f.name); return false; }
+      return true;
+    });
+    if (rechazados.length) {
+      alert('Formato no soportado: ' + rechazados.join(', ') + '. Usa JPG, PNG o WebP. Para iPhone: Ajustes - Camara - Formatos - Mas compatible.');
+    }
+    if (!validos.length) return;
+    _uploadCancelled = false;
+    var total = validos.length, procesados = 0;
+    setUploadStatus('⏳ Procesando 1 de ' + total + '…', false);
+
+    function procesarSiguiente(idx) {
+      if (_uploadCancelled) { setUploadStatus('', true); return; }
+      if (idx >= validos.length) { setUploadStatus('', true); return; }
+      var r = new FileReader();
+      r.onerror = function() {
+        procesados++;
+        if (!_uploadCancelled) setUploadStatus('⏳ Procesando ' + Math.min(procesados+1,total) + ' de ' + total + '…', false);
+        procesarSiguiente(idx + 1);
+      };
+      r.onload = function(ev) {
+        if (_uploadCancelled) { setUploadStatus('', true); return; }
+        Promise.all([comprimirImagen(ev.target.result), comprimirThumb(ev.target.result)])
+          .then(function(results) {
+            if (_uploadCancelled) { setUploadStatus('', true); return; }
+            fotosActuales.push({ dataUrl: results[0], thumb: results[1] });
+            procesados++;
+            renderPreview();
+            if (procesados < total) setUploadStatus('⏳ Procesando ' + (procesados+1) + ' de ' + total + '…', false);
+            else setUploadStatus('', true);
+            procesarSiguiente(idx + 1);
+          }).catch(function() {
+            if (_uploadCancelled) { setUploadStatus('', true); return; }
+            procesados++;
+            procesarSiguiente(idx + 1);
+          });
+      };
+      r.readAsDataURL(validos[idx]);
+    }
+    procesarSiguiente(0);
+  }
+
+  function renderPreview() {
+    var el = document.getElementById('af-preview');
+    el.innerHTML = fotosActuales.map(function(f, i) {
+      return '<div class="img-preview-item"><img src="' + f.thumb + '" alt="">'
+        + '<button class="img-preview-remove" onclick="removeFoto(' + i + ')">×</button></div>';
+    }).join('');
+  }
+  function removeFoto(i) { fotosActuales.splice(i, 1); renderPreview(); }
+
+  /* ── Panel Admin ── */
+  var adminPanel = {
+    _editIdx: null,
+
+    open: function() {
+      document.getElementById('adminPanelEl').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      this.renderList();
+    },
+    close: function() {
+      _uploadCancelled = true;
+      setUploadStatus('', true);
+      fotosActuales = [];
+      renderPreview();
+      document.getElementById('adminPanelEl').classList.remove('open');
+      document.body.style.overflow = '';
+    },
+
+    guardar: async function() {
+      var titulo = document.getElementById('af-titulo').value.trim();
+      var barrio = document.getElementById('af-barrio').value.trim();
+      if (!titulo || !barrio) { alert('Completá al menos el título y el barrio.'); return; }
+
+      var btn = document.querySelector('.admin-save-btn');
+      btn.disabled = true;
+      btn.textContent = 'Guardando…';
+
+      var editIdx = this._editIdx;
+      var id = (editIdx !== null) ? propiedades[editIdx].id : Date.now();
+      var fotoCountViejo = (editIdx !== null) ? (propiedades[editIdx].fotoCount || 0) : 0;
+      var thumbUrl = (editIdx !== null) ? propiedades[editIdx].thumb : '';
+      var fotoCount = fotoCountViejo;
+
+      try {
+        if (fotosActuales.length > 0) {
+          btn.textContent = 'Subiendo fotos…';
+          // Borrar fotos viejas si editamos
+          if (editIdx !== null) {
+            for (var j = 0; j < fotoCountViejo; j++) {
+              await sbDeleteFile(id + '/foto_' + j + '.jpg');
+            }
+          }
+          // Subir fotos nuevas a Supabase Storage
+          for (var i = 0; i < fotosActuales.length; i++) {
+            btn.textContent = 'Subiendo foto ' + (i+1) + ' de ' + fotosActuales.length + '…';
+            var blob = dataUrlToBlob(fotosActuales[i].dataUrl);
+            await sbUpload(id + '/foto_' + i + '.jpg', blob);
+          }
+          // Subir thumb
+          var thumbBlob = dataUrlToBlob(fotosActuales[0].thumb);
+          thumbUrl = await sbUpload(id + '/thumb.jpg', thumbBlob);
+          fotoCount = fotosActuales.length;
+        }
+
+        btn.textContent = 'Guardando datos…';
+        var row = {
+          id: id,
+          tipo: document.getElementById('af-tipo').value,
+          precio: document.getElementById('af-precio').value.trim(),
+          titulo: titulo,
+          barrio: barrio,
+          sup: document.getElementById('af-sup').value.trim(),
+          amb: document.getElementById('af-amb').value.trim(),
+          descripcion: document.getElementById('af-desc').value.trim(),
+          wa: document.getElementById('af-wa').value.trim(),
+          thumb: thumbUrl,
+          foto_count: fotoCount
+        };
+
+        if (editIdx !== null) {
+          await sbFetch('/rest/v1/propiedades?id=eq.' + id, {
+            method: 'PATCH',
+            headers: sbHeaders({ 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }),
+            body: JSON.stringify(row)
+          });
+        } else {
+          await sbFetch('/rest/v1/propiedades', {
+            method: 'POST',
+            headers: sbHeaders({ 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }),
+            body: JSON.stringify(row)
+          });
+        }
+
+      } catch(e) {
+        alert('Error al guardar: ' + e.message);
+        btn.disabled = false; btn.textContent = 'Guardar propiedad';
+        return;
+      }
+
+      // Reset form
+      this._editIdx = null;
+      document.getElementById('adminEditBanner').style.display = 'none';
+      document.querySelector('.admin-section-title').textContent = 'Cargar nueva propiedad';
+      ['af-precio','af-titulo','af-barrio','af-sup','af-amb','af-desc','af-wa'].forEach(function(fid) {
+        document.getElementById(fid).value = '';
+      });
+      document.getElementById('af-tipo').selectedIndex = 0;
+      fotosActuales = [];
+      renderPreview();
+      btn.disabled = false;
+      btn.textContent = 'Guardar propiedad';
+      await loadProps();
+      this.renderList();
+      alert(editIdx !== null ? '✅ Propiedad actualizada.' : '✅ Propiedad guardada correctamente.');
+    },
+
+    editar: function(i) {
+      var p = propiedades[i];
+      this._editIdx = i;
+      document.getElementById('af-tipo').value = p.tipo || 'venta';
+      document.getElementById('af-precio').value = p.precio || '';
+      document.getElementById('af-titulo').value = p.titulo || '';
+      document.getElementById('af-barrio').value = p.barrio || '';
+      document.getElementById('af-sup').value = p.sup || '';
+      document.getElementById('af-amb').value = p.amb || '';
+      document.getElementById('af-desc').value = p.desc || '';
+      document.getElementById('af-wa').value = p.wa || '';
+      document.getElementById('adminEditBanner').style.display = 'block';
+      document.querySelector('.admin-section-title').textContent = 'Editando propiedad';
+      document.querySelector('.admin-save-btn').textContent = 'Guardar cambios';
+      fotosActuales = [];
+      renderPreview();
+      document.getElementById('adminEditBanner').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    },
+
+    renderList: function() {
+      var el = document.getElementById('adminList');
+      if (!propiedades.length) {
+        el.innerHTML = '<p style="font-size:13px;color:var(--gris-texto)">Sin propiedades cargadas aún.</p>';
+        return;
+      }
+      el.innerHTML = propiedades.map(function(p, i) {
+        var thumb = p.thumb
+          ? '<img class="admin-prop-thumb" src="' + p.thumb + '" alt="">'
+          : '<div class="admin-prop-thumb" style="background:var(--fondo-alt);display:flex;align-items:center;justify-content:center;font-size:20px">🏠</div>';
+        return '<div class="admin-prop-item">' + thumb
+          + '<div class="admin-prop-info">'
+          + '<div class="admin-prop-name">' + p.titulo + '</div>'
+          + '<div class="admin-prop-meta">' + (p.tipo === 'alquiler' ? 'Alquiler' : 'Venta')
+          + ' · ' + p.barrio + ' · ' + (p.precio || 'sin precio')
+          + (p.fotoCount ? ' · ' + p.fotoCount + ' foto' + (p.fotoCount > 1 ? 's' : '') : '')
+          + '</div></div>'
+          + '<div style="display:flex;gap:6px;align-items:center">'
+          + '<button class="admin-prop-edit" onclick="adminPanel.editar(' + i + ')">✏️ Editar</button>'
+          + '<button class="admin-prop-del" onclick="adminPanel.eliminar(' + i + ')">Eliminar</button>'
+          + '</div></div>';
+      }).join('');
+    },
+
+    eliminar: async function(i) {
+      if (!confirm('¿Eliminás esta propiedad?')) return;
+      var p = propiedades[i];
+      try {
+        // Borrar fotos del storage
+        for (var j = 0; j < (p.fotoCount || 0); j++) {
+          await sbDeleteFile(p.id + '/foto_' + j + '.jpg');
+        }
+        await sbDeleteFile(p.id + '/thumb.jpg');
+        // Borrar fila de la DB
+        await sbFetch('/rest/v1/propiedades?id=eq.' + p.id, {
+          method: 'DELETE',
+          headers: sbHeaders({ 'Prefer': 'return=minimal' })
+        });
+      } catch(e) {
+        alert('Error al eliminar: ' + e.message); return;
+      }
+      await loadProps();
+      this.renderList();
+    }
+  };
+
+  // Quitar bloque de exportar/importar del admin (ya no hace falta con Supabase)
+  var backupBar = document.querySelector('.admin-backup-bar');
+  if (backupBar) backupBar.style.display = 'none';
+
+  loadProps();
+
+  /* ===== CHAT IA ===== */
+  var chatHistory = [];
+  var chatOpen = false;
+  var chatPanel = {
+    closePopup: function() {
+      document.getElementById('chatPopup').classList.remove('visible');
+    },
+    openFromPopup: function() {
+      this.closePopup();
+      this.open();
+    },
+    toggle: function() { chatOpen ? this.close() : this.open(); },
+    open: function() {
+      chatOpen = true;
+      this.closePopup();
+      document.getElementById('chatPanelEl').classList.add('open');
+      document.getElementById('chatBadge').classList.remove('visible');
+      if (!chatHistory.length) {
+        this.addMsg('bot', 'Hola! Soy Terri, el asistente virtual con IA de TerraLex. En que puedo ayudarte?');
+      }
+      setTimeout(function(){ document.getElementById('chatInput').focus(); }, 100);
+    },
+    close: function() {
+      chatOpen = false;
+      document.getElementById('chatPanelEl').classList.remove('open');
+    },
+    addMsg: function(role, text) {
+      var msgs = document.getElementById('chatMessages');
+      var div = document.createElement('div');
+      div.className = 'chat-msg ' + role;
+      div.innerHTML = '<div class="chat-msg-bubble">' + text.replace(/\n/g, '<br>') + '</div>';
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+      chatHistory.push({ role: role === 'user' ? 'user' : 'assistant', content: text });
+    },
+    showTyping: function() {
+      var msgs = document.getElementById('chatMessages');
+      var div = document.createElement('div');
+      div.className = 'chat-msg bot'; div.id = 'chatTyping';
+      div.innerHTML = '<div class="chat-msg-bubble chat-typing"><span></span><span></span><span></span></div>';
+      msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
+    },
+    hideTyping: function() { var t = document.getElementById('chatTyping'); if (t) t.remove(); },
+    send: async function() {
+      var input = document.getElementById('chatInput');
+      var text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      document.getElementById('chatSendBtn').disabled = true;
+      this.addMsg('user', text);
+      this.showTyping();
+      var msgs = chatHistory.slice(-9);
+      try {
+        var res = await fetch('/.netlify/functions/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: msgs })
+        });
+        var data = await res.json();
+        this.hideTyping();
+        var reply = (data.content && data.content[0]) ? data.content[0].text : 'Disculpa, hubo un error. Contactanos por WhatsApp al 351-3422063.';
+        this.addMsg('bot', reply);
+        // Si hay que escalar, mostrar boton de WhatsApp
+        if (data.escalar && data.waText) {
+          var msgs2 = document.getElementById('chatMessages');
+          var waDiv = document.createElement('div');
+          waDiv.className = 'chat-msg bot';
+          waDiv.innerHTML = '<a href="https://wa.me/543513422063?text=' + encodeURIComponent(data.waText) + '" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;background:#25d366;color:white;padding:10px 14px;border-radius:20px;font-size:12px;font-weight:500;letter-spacing:0.05em;text-decoration:none;margin-top:4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.86 11.86 0 0012.07 0C5.51 0 .2 5.31.2 11.87c0 2.09.55 4.14 1.61 5.95L0 24l6.35-1.76c1.74.95 3.7 1.45 5.7 1.45h.01c6.56 0 11.87-5.31 11.87-11.87 0-3.17-1.24-6.16-3.41-8.34z"/></svg>Hablar con el equipo</a>';
+          msgs2.appendChild(waDiv);
+          msgs2.scrollTop = msgs2.scrollHeight;
+        }
+      } catch(e) {
+        this.hideTyping();
+        this.addMsg('bot', 'Disculpa, hubo un problema. Contactanos directamente por WhatsApp al 351-3422063.');
+      }
+      document.getElementById('chatSendBtn').disabled = false;
+      document.getElementById('chatInput').focus();
+    }
+  };
+  setTimeout(function() { if (!chatOpen) document.getElementById('chatBadge').classList.add('visible'); }, 8000);
+  setTimeout(function() { if (!chatOpen) document.getElementById('chatPopup').classList.add('visible'); }, 3000);
+
+
+  </script>
+</html>
