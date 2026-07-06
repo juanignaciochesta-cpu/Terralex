@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://terralex.com.ar/sitemap.xml
