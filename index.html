@@ -178,7 +178,7 @@
     }
     .hero-tagline em { font-style: italic; color: var(--dorado-claro); }
     .hero-sub {
-      font-size: 13px; font-weight: 300; color: rgba(245,240,232,0.3);
+      font-size: 13px; font-weight: 300; color: rgba(24,55,66,0.55);
       max-width: 400px; line-height: 1.85; margin-bottom: 36px;
       opacity: 0; animation: fadeUp 0.9s ease 0.85s forwards;
     }
@@ -332,7 +332,7 @@
     .team-avatar {
       width: 72px; height: 72px; border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--acento);
+      border: 2px solid var(--dorado);
       margin-bottom: 16px;
       display: block;
     }
@@ -370,7 +370,7 @@
     .btn-sm-outline {
       font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500;
       letter-spacing: 0.18em; text-transform: uppercase;
-      background: transparent; color: var(--verde-medio);
+      background: transparent; color: var(--oscuro);
       padding: 11px 20px; border-radius: 2px; border: 1px solid rgba(26,51,40,0.25);
       cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 7px;
     }
@@ -493,7 +493,8 @@
     @media (max-width: 640px) {
       .chat-panel { right: 10px; width: calc(100vw - 20px); bottom: 140px; }
       .chat-bubble { right: 14px; bottom: 148px; }
-      .chat-popup { right: 74px; bottom: 148px; max-width: 200px; }
+      /* En pantalla chica el globo tapa los CTA del hero: queda solo la burbuja */
+      .chat-popup, .chat-popup.visible { display: none !important; }
     }
 
     /* FOOTER */
@@ -619,9 +620,47 @@
 
     .props-empty {
       grid-column: 1/-1; text-align: center; padding: 72px 20px;
-      color: rgba(24,55,66,0.3); font-size: 15px; font-weight: 300;
+      color: rgba(24,55,66,0.45); font-size: 15px; font-weight: 300; line-height: 1.7;
     }
     .props-empty svg { display: block; margin: 0 auto 18px; opacity: 0.2; }
+    .props-retry {
+      font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      background: transparent; color: var(--negro); margin-top: 18px;
+      padding: 11px 24px; border-radius: 2px; border: 1px solid rgba(24,55,66,0.2);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .props-retry:hover { border-color: var(--dorado); color: var(--dorado); }
+
+    /* Foco visible para navegación por teclado */
+    .prop-card:focus-visible, .props-tab:focus-visible, .btn-gold:focus-visible,
+    .btn-ghost:focus-visible, .btn-portal:focus-visible, nav.main-nav a:focus-visible,
+    .props-ver-mas-btn:focus-visible, .login-btn:focus-visible, .admin-save-btn:focus-visible,
+    .chat-bubble:focus-visible, .chat-send:focus-visible, .form-submit:focus-visible {
+      outline: 2px solid var(--dorado); outline-offset: 3px;
+    }
+
+    /* Skeletons de carga */
+    .prop-skeleton { pointer-events: none; }
+    .prop-img-wrap.skel, .skel-line {
+      background: linear-gradient(90deg, var(--fondo-alt) 25%, rgba(184,154,106,0.09) 50%, var(--fondo-alt) 75%);
+      background-size: 200% 100%; animation: skelShimmer 1.4s ease infinite;
+    }
+    .skel-line { height: 12px; border-radius: 2px; margin-bottom: 10px; }
+    .skel-line.w60 { width: 60%; height: 20px; }
+    .skel-line.w85 { width: 85%; }
+    .skel-line.w40 { width: 40%; }
+    @keyframes skelShimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero-eyebrow, .hero-wordmark, .hero-rule, .hero-tagline,
+      .hero-sub, .hero-actions, .hero-cards-strip { opacity: 1 !important; }
+    }
 
     /* Cards ocultas */
     .prop-card.oculta {
@@ -908,8 +947,50 @@
     .btn-import:hover { border-color: var(--dorado); color: var(--dorado); }
     .admin-section-subtitle {
       font-size: 11px; color: var(--dorado); font-weight: 500; letter-spacing: 0.1em;
-      margin-bottom: 16px; padding: 8px 12px; background: rgba(145,120,96,0.08);
+      margin-bottom: 16px; padding: 10px 14px; background: rgba(145,120,96,0.08);
       border-left: 2px solid var(--dorado); border-radius: 0 2px 2px 0;
+      line-height: 1.6;
+    }
+    .admin-cancel-edit {
+      font-family: 'Jost', sans-serif; font-size: 10px; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      background: none; border: 1px solid rgba(145,120,96,0.4); border-radius: 2px;
+      color: var(--dorado); padding: 4px 10px; cursor: pointer; margin-left: 8px;
+      transition: all 0.2s;
+    }
+    .admin-cancel-edit:hover { background: rgba(145,120,96,0.15); }
+
+    .admin-search {
+      width: 100%; background: white; border: 1px solid rgba(184,154,106,0.22);
+      border-radius: 2px; padding: 10px 14px; margin-bottom: 14px;
+      font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 300;
+      color: var(--negro); outline: none; transition: border-color 0.2s;
+    }
+    .admin-search:focus { border-color: var(--dorado); }
+    .admin-list-empty {
+      font-size: 13px; font-weight: 300; color: var(--gris-texto);
+      line-height: 1.7; padding: 24px; text-align: center;
+      background: rgba(24,55,66,0.03); border: 1px dashed var(--borde); border-radius: 2px;
+    }
+    .admin-prop-thumb-vacio {
+      display: flex; align-items: center; justify-content: center;
+      background: var(--fondo-alt); color: var(--gris-texto);
+      font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; text-align: center;
+    }
+    .admin-prop-tag {
+      display: inline-block; font-size: 8px; font-weight: 500;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      background: var(--negro); color: var(--dorado);
+      padding: 3px 7px; border-radius: 2px; margin-right: 8px;
+    }
+    .admin-prop-tag.alq { background: var(--dorado); color: var(--negro); }
+    .admin-prop-acciones { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+
+    /* Campos requeridos + ayudas */
+    .admin-field label .req { color: #c0392b; margin-left: 3px; }
+    .admin-hint {
+      font-size: 11px; font-weight: 300; color: var(--gris-texto);
+      margin-top: 5px; line-height: 1.5;
     }
 
     /* LOGIN MODAL */
@@ -962,6 +1043,87 @@
       margin-top: 12px; display: none;
     }
     .login-error.visible { display: block; }
+    .login-forgot {
+      display: block; text-align: center; margin-top: 16px;
+      font-size: 12px; font-weight: 300; color: var(--gris-texto);
+      background: none; border: none; cursor: pointer; width: 100%;
+      font-family: 'Jost', sans-serif; transition: color 0.2s;
+    }
+    .login-forgot:hover { color: var(--dorado); }
+    .login-hint {
+      font-size: 11px; font-weight: 300; color: var(--gris-texto);
+      line-height: 1.6; margin-bottom: 18px;
+    }
+
+    /* TOASTS */
+    .tlx-toast {
+      position: fixed; bottom: 28px; left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--negro); color: #f8f7f4;
+      padding: 14px 24px; border-radius: 3px;
+      border: 1px solid rgba(184,154,106,0.4);
+      font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 300;
+      letter-spacing: 0.03em; z-index: 900;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 12px 40px rgba(13,35,48,0.4);
+      max-width: min(92vw, 480px); text-align: center;
+    }
+    .tlx-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .tlx-toast.err { border-color: rgba(220,80,80,0.55); }
+
+    /* Admin: barra de usuario + progreso */
+    .admin-user-bar {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      padding: 14px 34px; background: #0d1e28;
+      border-bottom: 1px solid rgba(184,154,106,0.1);
+    }
+    .admin-user-email {
+      font-size: 12px; font-weight: 300; color: rgba(245,240,232,0.55);
+      letter-spacing: 0.03em; display: flex; align-items: center; gap: 8px;
+    }
+    .admin-user-email::before {
+      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      background: #4caf7d; flex-shrink: 0;
+    }
+    .admin-logout-btn {
+      margin-left: auto; font-family: 'Jost', sans-serif;
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      background: none; border: 1px solid rgba(184,154,106,0.25); border-radius: 2px;
+      color: rgba(245,240,232,0.6); padding: 7px 14px; cursor: pointer; transition: all 0.2s;
+    }
+    .admin-logout-btn:hover { border-color: var(--dorado); color: var(--dorado); }
+    .img-preview-item.portada::after {
+      content: 'Portada'; position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(13,35,48,0.82); color: var(--dorado);
+      font-size: 8px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+      text-align: center; padding: 3px 0;
+    }
+    .img-preview-move {
+      position: absolute; bottom: 2px; width: 18px; height: 18px;
+      background: rgba(13,35,48,0.8); color: white; border: none; border-radius: 2px;
+      font-size: 10px; cursor: pointer; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-preview-move.izq { left: 2px; }
+    .img-preview-move.der { right: 2px; }
+    .img-preview-item.portada .img-preview-move { bottom: 18px; }
+
+    @media (max-width: 640px) {
+      .login-modal { padding: 16px; }
+      .admin-inner { margin: 0 auto; padding: 0 0 60px; }
+      .admin-header { padding: 20px 18px; }
+      .admin-user-bar { padding: 12px 18px; }
+      .admin-body { padding: 24px 16px; }
+      .admin-row { grid-template-columns: 1fr; gap: 0; }
+      /* La ficha pasa a 2 filas: datos arriba, acciones abajo a lo ancho */
+      .admin-prop-item { flex-wrap: wrap; row-gap: 10px; }
+      .admin-prop-info { flex-basis: calc(100% - 62px); }
+      .admin-prop-name { white-space: normal; overflow: visible; text-overflow: clip; }
+      .admin-prop-acciones { width: 100%; }
+      .admin-prop-acciones button { flex: 1; padding: 9px 10px; }
+      .admin-prop-edit { margin-right: 0; }
+    }
 
     /* btn admin en nav */
     .btn-admin-trigger {
@@ -1007,13 +1169,27 @@
       .hero { padding: 96px 20px 90px; }
       .hero-actions { flex-direction: column; align-items: stretch; }
       .hero-actions a { text-align: center; justify-content: center; }
+      /* Las 3 cards no entran a lo ancho: se deslizan con el dedo */
+      .hero-cards-strip {
+        justify-content: flex-start; overflow-x: auto; padding: 0 20px 4px;
+        scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .hero-cards-strip::-webkit-scrollbar { display: none; }
+      .hero-cards-strip::before { display: none; }
+      .hero-prop-card { scroll-snap-align: center; width: 210px; }
+      .hero-prop-card:nth-child(1),
+      .hero-prop-card:nth-child(3) { margin-bottom: 0; }
       .services-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
       .contact-btns { flex-direction: column; }
       .contact-form-wrap { padding: 24px 18px; }
       .calendly-block { padding: 22px 14px; }
-      
-      .float-wa { right: 14px; bottom: 76px; }
+      /* Botones flotantes apilados sobre la barra CTA inferior (64px) */
+      .float-wa { right: 14px; bottom: 78px; }
+      .float-wa a { width: 46px; height: 46px; }
+      .chat-bubble { right: 16px; bottom: 136px; width: 46px; height: 46px; }
+      .chat-panel { bottom: 194px; }
       .sticky-cta {
         display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 150;
         background: var(--negro); border-top: 1px solid rgba(184,154,106,0.18);
@@ -1157,12 +1333,12 @@
     <div class="login-box">
       <div class="login-header">
         <span class="login-title">Acceso Administrador</span>
-        <button class="login-close" onclick="loginModal.close()">×</button>
+        <button class="login-close" onclick="loginModal.close()" aria-label="Cerrar">×</button>
       </div>
       <div class="login-body">
         <div class="login-field">
           <label>Usuario</label>
-          <input type="email" id="login-user" autocomplete="username" placeholder="Email">
+          <input type="email" id="login-user" autocomplete="username" placeholder="Email" onkeydown="if(event.key==='Enter')document.getElementById('login-pass').focus()">
         </div>
         <div class="login-field">
           <label>Contraseña</label>
@@ -1170,6 +1346,30 @@
         </div>
         <button class="login-btn" id="loginBtn" onclick="loginModal.submit()">Ingresar</button>
         <p class="login-error" id="loginError"></p>
+        <button class="login-forgot" onclick="loginModal.forgot()">¿Olvidaste tu contraseña?</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL NUEVA CONTRASEÑA (recuperación) -->
+  <div class="login-modal" id="recoveryModal">
+    <div class="login-box">
+      <div class="login-header">
+        <span class="login-title">Nueva contraseña</span>
+        <button class="login-close" onclick="recoveryModal.close()" aria-label="Cerrar">×</button>
+      </div>
+      <div class="login-body">
+        <p class="login-hint">Ingresaste desde el link de recuperación. Elegí tu nueva contraseña (mínimo 8 caracteres).</p>
+        <div class="login-field">
+          <label>Nueva contraseña</label>
+          <input type="password" id="rec-pass" autocomplete="new-password" placeholder="••••••••">
+        </div>
+        <div class="login-field">
+          <label>Confirmar contraseña</label>
+          <input type="password" id="rec-pass2" autocomplete="new-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')recoveryModal.submit()">
+        </div>
+        <button class="login-btn" id="recBtn" onclick="recoveryModal.submit()">Guardar contraseña</button>
+        <p class="login-error" id="recError"></p>
       </div>
     </div>
   </div>
@@ -1179,7 +1379,11 @@
     <div class="admin-inner">
       <div class="admin-header">
         <span class="admin-title">Panel de Propiedades</span>
-        <button class="admin-close-btn" onclick="adminPanel.close()">×</button>
+        <button class="admin-close-btn" onclick="adminPanel.close()" aria-label="Cerrar panel">×</button>
+      </div>
+      <div class="admin-user-bar">
+        <span class="admin-user-email" id="adminUserEmail"></span>
+        <button class="admin-logout-btn" onclick="adminPanel.logout()">Cerrar sesión</button>
       </div>
       <div class="admin-body">
         <p class="admin-section-title">Cargar nueva propiedad</p>
@@ -1200,12 +1404,12 @@
         </div>
 
         <div class="admin-field">
-          <label>Título de la propiedad</label>
+          <label>Título de la propiedad<span class="req">*</span></label>
           <input type="text" id="af-titulo" placeholder="Casa 3 amb. con jardín — Villa Belgrano">
         </div>
 
         <div class="admin-field">
-          <label>Barrio / Ubicación</label>
+          <label>Barrio / Ubicación<span class="req">*</span></label>
           <input type="text" id="af-barrio" placeholder="Villa Belgrano, Córdoba">
         </div>
 
@@ -1226,30 +1430,28 @@
         </div>
 
         <div class="admin-field">
-          <label>Mensaje WhatsApp (se pre-completa automáticamente si lo dejás vacío)</label>
+          <label>Mensaje WhatsApp</label>
           <input type="text" id="af-wa" placeholder="Hola TerraLex, me interesa la propiedad...">
+          <p class="admin-hint">Opcional. Si lo dejás vacío se arma solo con el título y el barrio.</p>
         </div>
 
         <div class="admin-field">
           <label>Fotos</label>
           <div class="img-upload-area" onclick="document.getElementById('af-fotos').click()">
-            <input type="file" id="af-fotos" accept="image/*" multiple onchange="handleFotos(this)">
+            <input type="file" id="af-fotos" accept="image/jpeg,image/png,image/webp" multiple onchange="handleFotos(this)">
             <div class="img-upload-icon">🖼️</div>
             <p class="img-upload-label">Hacé clic para subir fotos<br><strong>o arrastrá las imágenes aquí</strong></p>
           </div>
+          <p class="admin-hint">JPG, PNG o WebP. La primera foto es la portada — podés reordenarlas con las flechas.</p>
           <div class="img-preview-grid" id="af-preview"></div>
         </div>
 
         <button class="admin-save-btn" onclick="adminPanel.guardar()">Guardar propiedad</button>
 
         <div class="admin-list">
-          <p class="admin-list-title">Propiedades cargadas</p>
-          <div class="admin-backup-bar">
-            <p>⚠️ Las propiedades se guardan en <strong>este navegador</strong>. Exportá el backup para verlas desde otro dispositivo o navegador.</p>
-            <button class="btn-backup btn-export" onclick="adminPanel.exportar()">⬇ Exportar backup</button>
-            <button class="btn-backup btn-import" onclick="document.getElementById('importFile').click()">⬆ Importar backup</button>
-            <input type="file" id="importFile" accept=".json" style="display:none" onchange="adminPanel.importar(this)">
-          </div>
+          <p class="admin-list-title" id="adminListTitle">Propiedades cargadas</p>
+          <input type="search" class="admin-search" id="adminSearch" placeholder="Buscar por título, barrio o precio…"
+                 oninput="adminPanel.filtrarLista(this.value)">
           <div id="adminList"></div>
         </div>
       </div>
@@ -1391,6 +1593,8 @@
           <span class="footer-tagline">Estudio Jurídico &amp; Inmobiliario — Córdoba</span>
         </div>
         <div class="footer-links">
+          <a href="#" onclick="loginModal.open();return false;" title="Acceso equipo TerraLex">Acceso equipo</a>
+          <div class="footer-link-sep"></div>
           <a href="https://www.instagram.com/terralex.cba" target="_blank" rel="noopener">Instagram</a>
           <div class="footer-link-sep"></div>
           <a href="https://wa.me/543513422063" target="_blank" rel="noopener">WhatsApp</a>
@@ -1542,6 +1746,16 @@
   }
   function clearStoredSession() { sessionStorage.removeItem(SESSION_KEY); }
 
+  // Email del usuario logueado (leido del JWT, solo informativo)
+  function sessionEmail() {
+    var s = getStoredSession();
+    if (!s || !s.access_token) return '';
+    try {
+      var payload = s.access_token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
+      return JSON.parse(atob(payload)).email || '';
+    } catch(e) { return ''; }
+  }
+
   // Devuelve un access token valido (refresca si expiro), o null si no hay sesion
   async function sbAuthToken() {
     var s = getStoredSession();
@@ -1604,7 +1818,9 @@
     },
     close: function() {
       document.getElementById('loginModal').classList.remove('open');
-      document.body.style.overflow = '';
+      if (!document.getElementById('adminPanelEl').classList.contains('open')) {
+        document.body.style.overflow = '';
+      }
     },
     submit: async function() {
       var u = document.getElementById('login-user').value.trim();
@@ -1636,8 +1852,99 @@
         setLoginBusy(false);
         showLoginError('Error de conexión. Probá de nuevo.');
       }
+    },
+    forgot: async function() {
+      var email = document.getElementById('login-user').value.trim();
+      if (!email) {
+        showLoginError('Escribí tu email arriba y volvé a tocar "¿Olvidaste tu contraseña?".');
+        document.getElementById('login-user').focus();
+        return;
+      }
+      clearLoginError();
+      try {
+        await fetch(SB_URL + '/auth/v1/recover?redirect_to=' + encodeURIComponent(location.origin + location.pathname), {
+          method: 'POST',
+          headers: { 'apikey': SB_KEY, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email })
+        });
+      } catch(e) {}
+      this.close();
+      toast('Si el email existe, te va a llegar un correo con el link de recuperación.');
     }
   };
+
+  /* ===== RECUPERACIÓN DE CONTRASEÑA =====
+     Supabase redirige aca con #access_token=...&type=recovery.
+     Guardamos la sesion temporal y abrimos el modal para elegir clave nueva. */
+  var recoveryModal = {
+    open: function() {
+      document.getElementById('rec-pass').value = '';
+      document.getElementById('rec-pass2').value = '';
+      document.getElementById('recError').classList.remove('visible');
+      document.getElementById('recoveryModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(function(){ document.getElementById('rec-pass').focus(); }, 100);
+    },
+    close: function() {
+      document.getElementById('recoveryModal').classList.remove('open');
+      document.body.style.overflow = '';
+    },
+    showError: function(msg) {
+      var el = document.getElementById('recError');
+      el.textContent = msg;
+      el.classList.add('visible');
+    },
+    submit: async function() {
+      var p1 = document.getElementById('rec-pass').value;
+      var p2 = document.getElementById('rec-pass2').value;
+      if (p1.length < 8) { this.showError('La contraseña debe tener al menos 8 caracteres.'); return; }
+      if (p1 !== p2) { this.showError('Las contraseñas no coinciden.'); return; }
+      var btn = document.getElementById('recBtn');
+      btn.disabled = true;
+      btn.textContent = 'Guardando…';
+      try {
+        var token = await sbAuthToken();
+        if (!token) throw new Error('El link de recuperación expiró. Pedí uno nuevo desde el login.');
+        var r = await fetch(SB_URL + '/auth/v1/user', {
+          method: 'PUT',
+          headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: p1 })
+        });
+        if (!r.ok) {
+          var data = await r.json().catch(function(){ return {}; });
+          throw new Error(data.msg || data.error_description || 'No se pudo actualizar la contraseña.');
+        }
+        btn.disabled = false;
+        btn.textContent = 'Guardar contraseña';
+        this.close();
+        toast('Contraseña actualizada. Ya estás dentro del panel.');
+        adminPanel.open();
+      } catch(e) {
+        btn.disabled = false;
+        btn.textContent = 'Guardar contraseña';
+        this.showError(e.message);
+      }
+    }
+  };
+
+  // Procesar el hash que deja Supabase al volver del email de recuperación
+  (function handleAuthHash() {
+    if (!location.hash || location.hash.indexOf('access_token=') === -1) return;
+    var params = new URLSearchParams(location.hash.slice(1));
+    var at = params.get('access_token');
+    var type = params.get('type');
+    if (!at) return;
+    storeSession({
+      access_token: at,
+      refresh_token: params.get('refresh_token') || '',
+      expires_in: parseInt(params.get('expires_in') || '3600', 10)
+    });
+    history.replaceState(null, '', location.pathname + location.search);
+    if (type === 'recovery' || type === 'magiclink') {
+      document.addEventListener('DOMContentLoaded', function() { recoveryModal.open(); });
+      if (document.readyState !== 'loading') recoveryModal.open();
+    }
+  })();
 
   /* ===== SUPABASE CONFIG ===== */
   var SB_URL  = 'https://smzwkilrkeyitaixvrhl.supabase.co';
@@ -1675,6 +1982,50 @@
     await fetch(SB_URL + '/storage/v1/object/' + SB_BUCKET + '/' + path, {
       method: 'DELETE', headers: await sbAuthHeaders()
     });
+  }
+
+  // Listar los archivos reales de una carpeta del bucket
+  async function sbListFolder(prefix) {
+    try {
+      var r = await fetch(SB_URL + '/storage/v1/object/list/' + SB_BUCKET, {
+        method: 'POST',
+        headers: await sbAuthHeaders({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({ prefix: String(prefix), limit: 100 })
+      });
+      if (!r.ok) return [];
+      return await r.json();
+    } catch(e) { return []; }
+  }
+
+  // Borrar toda la carpeta de una propiedad en un solo request (en vez de
+  // borrar "a ciegas" foto por foto)
+  async function sbDeleteFolder(prefix) {
+    var files = await sbListFolder(prefix);
+    if (!files.length) return;
+    var paths = files.map(function(f) { return String(prefix) + '/' + f.name; });
+    await fetch(SB_URL + '/storage/v1/object/' + SB_BUCKET, {
+      method: 'DELETE',
+      headers: await sbAuthHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ prefixes: paths })
+    });
+  }
+
+  /* ── Toasts (reemplazan a los alert()) ── */
+  var _toastTimer = null;
+  function toast(msg, isErr) {
+    var el = document.getElementById('tlxToast');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'tlxToast';
+      el.className = 'tlx-toast';
+      el.setAttribute('role', 'status');
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    el.classList.toggle('err', !!isErr);
+    el.classList.add('show');
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(function() { el.classList.remove('show'); }, isErr ? 5000 : 3500);
   }
 
   // dataUrl → Blob JPEG
@@ -1722,6 +2073,17 @@
   }
 
   /* ── Cargar propiedades desde Supabase ── */
+  function renderPropsSkeleton() {
+    var grid = document.getElementById('propsGrid');
+    if (!grid) return;
+    var card = '<div class="prop-card prop-skeleton">'
+      + '<div class="prop-img-wrap skel"></div>'
+      + '<div class="prop-body">'
+      + '<div class="skel-line w60"></div><div class="skel-line w85"></div><div class="skel-line w40"></div>'
+      + '</div></div>';
+    grid.innerHTML = card + card + card;
+  }
+
   async function loadProps() {
     try {
       var data = await sbFetch('/rest/v1/propiedades?select=*&order=creado_en.desc', {
@@ -1736,13 +2098,16 @@
           _fotosBase: r.id
         };
       });
+      _loadError = false;
     } catch(e) {
       console.error('Error cargando propiedades:', e);
       propiedades = [];
+      _loadError = true;
     }
     renderProps();
     renderHeroCards();
   }
+  var _loadError = false;
 
   function renderHeroCards() {
     var strip = document.getElementById('heroCardsStrip');
@@ -1787,11 +2152,15 @@
       : propiedades.filter(function(p) { return p.tipo === filtroActivo; });
 
     if (!lista.length) {
+      var msg = _loadError
+        ? 'No pudimos cargar las propiedades en este momento. Probá recargar la página o escribinos por WhatsApp.'
+        : 'No hay propiedades ' + (filtroActivo === 'todas' ? 'disponibles' : 'en ' + filtroActivo) + ' por el momento.';
       grid.innerHTML = '<div class="props-empty">'
         + '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">'
         + '<path d="M3 11l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>'
         + '<polyline points="9 22 9 12 15 12 15 22"/></svg>'
-        + 'No hay propiedades ' + (filtroActivo === 'todas' ? 'disponibles' : 'en ' + filtroActivo) + ' por el momento.'
+        + msg
+        + (_loadError ? '<br><button class="props-retry" onclick="loadProps()">Reintentar</button>' : '')
         + '</div>';
       document.getElementById('propsVerMasWrap').style.display = 'none';
       return;
@@ -1805,7 +2174,10 @@
         : '<div style="width:100%;height:100%;background:var(--fondo-alt);display:flex;align-items:center;justify-content:center;font-size:32px">&#127968;</div>';
       var fotoCount = p.fotoCount > 1 ? '<span class="prop-img-count">&#128247; ' + p.fotoCount + '</span>' : '';
       var waMsg = p.wa || ('Hola TerraLex, me interesa la propiedad: ' + p.titulo + ' (' + p.barrio + ')');
-      return '<div class="prop-card' + oculta + '" onclick="openGallery(' + realIdx + ')">'
+      return '<div class="prop-card' + oculta + '" role="button" tabindex="0"'
+        + ' aria-label="Ver detalle de ' + esc(p.titulo) + '"'
+        + ' onclick="openGallery(' + realIdx + ')"'
+        + ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();openGallery(' + realIdx + ')}">'
         + '<div class="prop-img-wrap">' + imgHTML
         + '<span class="prop-badge ' + (p.tipo === 'alquiler' ? 'alquiler' : '') + '">'
         + (p.tipo === 'alquiler' ? 'Alquiler' : 'Venta') + '</span>'
@@ -1896,6 +2268,7 @@
     if (!p.fotoCount) {
       document.getElementById('galleryFotoWrap').style.display = 'none';
       document.getElementById('galleryModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
       return;
     }
     document.getElementById('galleryFotoWrap').style.display = '';
@@ -1908,6 +2281,7 @@
     galCurrentIdx = 0;
     setGalleryImg();
     document.getElementById('galleryModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
 
   function setGalleryImg() {
@@ -1933,7 +2307,10 @@
     setGalleryImg();
   }
   var galleryModal = {
-    close: function() { document.getElementById('galleryModal').classList.remove('open'); }
+    close: function() {
+      document.getElementById('galleryModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
   };
   document.addEventListener('keydown', function(e) {
     // Atajo secreto admin: Ctrl + Shift + A
@@ -1947,7 +2324,20 @@
       if (e.key === 'ArrowRight') galleryNav(1);
       if (e.key === 'Escape') galleryModal.close();
     }
-    if (document.getElementById('adminPanelEl').classList.contains('open') && e.key === 'Escape') adminPanel.close();
+    if (e.key === 'Escape') {
+      if (document.getElementById('adminPanelEl').classList.contains('open')) adminPanel.close();
+      else if (document.getElementById('loginModal').classList.contains('open')) loginModal.close();
+      else if (document.getElementById('recoveryModal').classList.contains('open')) recoveryModal.close();
+      else {
+        ['modalPrivacidad','modalTerminos'].forEach(function(id) {
+          document.getElementById(id).classList.remove('open');
+        });
+      }
+    }
+  });
+  // Cerrar el modal de login tocando fuera de la caja
+  document.getElementById('loginModal').addEventListener('click', function(e) {
+    if (e.target === this) loginModal.close();
   });
   document.getElementById('galleryModal').addEventListener('click', function(e) {
     if (e.target === this) galleryModal.close();
@@ -1998,9 +2388,18 @@
       return true;
     });
     if (rechazados.length) {
-      alert('Formato no soportado: ' + rechazados.join(', ') + '. Usa JPG, PNG o WebP. Para iPhone: Ajustes - Camara - Formatos - Mas compatible.');
+      toast('No se pudieron agregar ' + rechazados.length + ' archivo(s): formato no soportado. Usá JPG, PNG o WebP. En iPhone: Ajustes › Cámara › Formatos › Más compatible.', true);
     }
     if (!validos.length) return;
+
+    var MAX_FOTOS = 15;
+    var espacio = MAX_FOTOS - fotosActuales.length;
+    if (espacio <= 0) { toast('Llegaste al máximo de ' + MAX_FOTOS + ' fotos por propiedad.', true); return; }
+    if (validos.length > espacio) {
+      toast('Se agregan solo ' + espacio + ' fotos (máximo ' + MAX_FOTOS + ' por propiedad).', true);
+      validos = validos.slice(0, espacio);
+    }
+
     _uploadCancelled = false;
     var total = validos.length, procesados = 0;
     setUploadStatus('⏳ Procesando 1 de ' + total + '…', false);
@@ -2038,12 +2437,25 @@
 
   function renderPreview() {
     var el = document.getElementById('af-preview');
+    var total = fotosActuales.length;
     el.innerHTML = fotosActuales.map(function(f, i) {
-      return '<div class="img-preview-item"><img src="' + f.thumb + '" alt="">'
-        + '<button class="img-preview-remove" onclick="removeFoto(' + i + ')">×</button></div>';
+      return '<div class="img-preview-item' + (i === 0 ? ' portada' : '') + '">'
+        + '<img src="' + f.thumb + '" alt="Foto ' + (i+1) + '">'
+        + '<button class="img-preview-remove" onclick="removeFoto(' + i + ')" title="Quitar foto" aria-label="Quitar foto ' + (i+1) + '">×</button>'
+        + (i > 0 ? '<button class="img-preview-move izq" onclick="moverFoto(' + i + ',-1)" title="Mover a la izquierda" aria-label="Mover foto ' + (i+1) + ' a la izquierda">‹</button>' : '')
+        + (i < total - 1 ? '<button class="img-preview-move der" onclick="moverFoto(' + i + ',1)" title="Mover a la derecha" aria-label="Mover foto ' + (i+1) + ' a la derecha">›</button>' : '')
+        + '</div>';
     }).join('');
   }
   function removeFoto(i) { fotosActuales.splice(i, 1); renderPreview(); }
+  function moverFoto(i, dir) {
+    var j = i + dir;
+    if (j < 0 || j >= fotosActuales.length) return;
+    var tmp = fotosActuales[i];
+    fotosActuales[i] = fotosActuales[j];
+    fotosActuales[j] = tmp;
+    renderPreview();
+  }
 
   /* ── Panel Admin ── */
   var adminPanel = {
@@ -2052,6 +2464,8 @@
     open: function() {
       document.getElementById('adminPanelEl').classList.add('open');
       document.body.style.overflow = 'hidden';
+      var em = document.getElementById('adminUserEmail');
+      if (em) em.textContent = sessionEmail() || 'Sesión activa';
       this.renderList();
     },
     close: function() {
@@ -2066,7 +2480,11 @@
     guardar: async function() {
       var titulo = document.getElementById('af-titulo').value.trim();
       var barrio = document.getElementById('af-barrio').value.trim();
-      if (!titulo || !barrio) { alert('Completá al menos el título y el barrio.'); return; }
+      if (!titulo || !barrio) {
+        toast('Completá al menos el título y el barrio.', true);
+        document.getElementById(titulo ? 'af-barrio' : 'af-titulo').focus();
+        return;
+      }
 
       var btn = document.querySelector('.admin-save-btn');
       btn.disabled = true;
@@ -2080,22 +2498,17 @@
 
       try {
         if (fotosActuales.length > 0) {
-          btn.textContent = 'Subiendo fotos…';
-          // Borrar fotos viejas si editamos. Usamos un margen defensivo (fotoCountViejo + 20)
-          // para limpiar tambien posibles huerfanas de ediciones anteriores con mas fotos.
+          // En edicion, borramos la carpeta entera listando lo que hay
+          // (antes se borraba a ciegas foto_0..foto_N+20, ~20 requests de mas)
           if (editIdx !== null) {
-            var aBorrar = Math.max(fotoCountViejo, 0) + 20;
-            for (var j = 0; j < aBorrar; j++) {
-              await sbDeleteFile(id + '/foto_' + j + '.jpg');
-            }
+            btn.textContent = 'Limpiando fotos anteriores…';
+            await sbDeleteFolder(id);
           }
-          // Subir fotos nuevas a Supabase Storage
           for (var i = 0; i < fotosActuales.length; i++) {
             btn.textContent = 'Subiendo foto ' + (i+1) + ' de ' + fotosActuales.length + '…';
             var blob = dataUrlToBlob(fotosActuales[i].dataUrl);
             await sbUpload(id + '/foto_' + i + '.jpg', blob);
           }
-          // Subir thumb
           var thumbBlob = dataUrlToBlob(fotosActuales[0].thumb);
           thumbUrl = await sbUpload(id + '/thumb.jpg', thumbBlob);
           fotoCount = fotosActuales.length;
@@ -2131,12 +2544,20 @@
         }
 
       } catch(e) {
-        alert('Error al guardar: ' + e.message);
+        toast('Error al guardar: ' + e.message, true);
         btn.disabled = false; btn.textContent = 'Guardar propiedad';
         return;
       }
 
-      // Reset form
+      this.resetForm();
+      btn.disabled = false;
+      await loadProps();
+      this.renderList();
+      toast(editIdx !== null ? 'Propiedad actualizada.' : 'Propiedad publicada correctamente.');
+      document.getElementById('adminPanelEl').scrollTop = 0;
+    },
+
+    resetForm: function() {
       this._editIdx = null;
       document.getElementById('adminEditBanner').style.display = 'none';
       document.querySelector('.admin-section-title').textContent = 'Cargar nueva propiedad';
@@ -2144,17 +2565,25 @@
         document.getElementById(fid).value = '';
       });
       document.getElementById('af-tipo').selectedIndex = 0;
+      document.querySelector('.admin-save-btn').textContent = 'Guardar propiedad';
       fotosActuales = [];
       renderPreview();
-      btn.disabled = false;
-      btn.textContent = 'Guardar propiedad';
-      await loadProps();
-      this.renderList();
-      alert(editIdx !== null ? '✅ Propiedad actualizada.' : '✅ Propiedad guardada correctamente.');
+    },
+
+    cancelarEdicion: function() {
+      this.resetForm();
+      toast('Edición cancelada.');
+    },
+
+    logout: function() {
+      clearStoredSession();
+      this.close();
+      toast('Sesión cerrada.');
     },
 
     editar: function(i) {
       var p = propiedades[i];
+      if (!p) return;
       this._editIdx = i;
       document.getElementById('af-tipo').value = p.tipo || 'venta';
       document.getElementById('af-precio').value = p.precio || '';
@@ -2164,57 +2593,88 @@
       document.getElementById('af-amb').value = p.amb || '';
       document.getElementById('af-desc').value = p.desc || '';
       document.getElementById('af-wa').value = p.wa || '';
-      document.getElementById('adminEditBanner').style.display = 'block';
+      var banner = document.getElementById('adminEditBanner');
+      banner.innerHTML = 'Editando: <strong>' + esc(p.titulo) + '</strong>'
+        + (p.fotoCount ? ' — tiene ' + p.fotoCount + ' foto' + (p.fotoCount > 1 ? 's' : '')
+            + '. Si no subís fotos nuevas se mantienen las actuales.' : '')
+        + ' <button class="admin-cancel-edit" onclick="adminPanel.cancelarEdicion()">Cancelar</button>';
+      banner.style.display = 'block';
       document.querySelector('.admin-section-title').textContent = 'Editando propiedad';
       document.querySelector('.admin-save-btn').textContent = 'Guardar cambios';
       fotosActuales = [];
       renderPreview();
-      document.getElementById('adminEditBanner').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('adminPanelEl').scrollTop = 0;
+    },
+
+    filtrarLista: function(q) {
+      this._filtro = (q || '').toLowerCase().trim();
+      this.renderList();
     },
 
     renderList: function() {
       var el = document.getElementById('adminList');
+      var titulo = document.getElementById('adminListTitle');
+      var filtro = this._filtro || '';
+      var lista = propiedades.map(function(p, i) { return { p: p, i: i }; });
+      if (filtro) {
+        lista = lista.filter(function(o) {
+          return (o.p.titulo + ' ' + o.p.barrio + ' ' + (o.p.precio || '')).toLowerCase().indexOf(filtro) > -1;
+        });
+      }
+
+      if (titulo) {
+        var venta = propiedades.filter(function(p) { return p.tipo !== 'alquiler'; }).length;
+        var alq = propiedades.length - venta;
+        titulo.textContent = 'Propiedades cargadas — ' + propiedades.length
+          + ' (' + venta + ' en venta · ' + alq + ' en alquiler)';
+      }
+
       if (!propiedades.length) {
-        el.innerHTML = '<p style="font-size:13px;color:var(--gris-texto)">Sin propiedades cargadas aún.</p>';
+        el.innerHTML = '<p class="admin-list-empty">Todavía no cargaste ninguna propiedad. Completá el formulario de arriba para publicar la primera.</p>';
         return;
       }
-      el.innerHTML = propiedades.map(function(p, i) {
+      if (!lista.length) {
+        el.innerHTML = '<p class="admin-list-empty">Ninguna propiedad coincide con «' + esc(filtro) + '».</p>';
+        return;
+      }
+
+      el.innerHTML = lista.map(function(o) {
+        var p = o.p, i = o.i;
         var thumb = p.thumb
-          ? '<img class="admin-prop-thumb" src="' + esc(p.thumb) + '" alt="">'
-          : '<div class="admin-prop-thumb" style="background:var(--fondo-alt);display:flex;align-items:center;justify-content:center;font-size:20px">🏠</div>';
+          ? '<img class="admin-prop-thumb" src="' + esc(p.thumb) + '" alt="" loading="lazy">'
+          : '<div class="admin-prop-thumb admin-prop-thumb-vacio">Sin foto</div>';
         return '<div class="admin-prop-item">' + thumb
           + '<div class="admin-prop-info">'
           + '<div class="admin-prop-name">' + esc(p.titulo) + '</div>'
-          + '<div class="admin-prop-meta">' + (p.tipo === 'alquiler' ? 'Alquiler' : 'Venta')
-          + ' · ' + esc(p.barrio) + ' · ' + esc(p.precio || 'sin precio')
-          + (p.fotoCount ? ' · ' + p.fotoCount + ' foto' + (p.fotoCount > 1 ? 's' : '') : '')
+          + '<div class="admin-prop-meta">'
+          + '<span class="admin-prop-tag ' + (p.tipo === 'alquiler' ? 'alq' : '') + '">'
+          + (p.tipo === 'alquiler' ? 'Alquiler' : 'Venta') + '</span>'
+          + esc(p.barrio) + ' · ' + esc(p.precio || 'sin precio')
+          + (p.fotoCount ? ' · ' + p.fotoCount + ' foto' + (p.fotoCount > 1 ? 's' : '') : ' · sin fotos')
           + '</div></div>'
-          + '<div style="display:flex;gap:6px;align-items:center">'
-          + '<button class="admin-prop-edit" onclick="adminPanel.editar(' + i + ')">✏️ Editar</button>'
+          + '<div class="admin-prop-acciones">'
+          + '<button class="admin-prop-edit" onclick="adminPanel.editar(' + i + ')">Editar</button>'
           + '<button class="admin-prop-del" onclick="adminPanel.eliminar(' + i + ')">Eliminar</button>'
           + '</div></div>';
       }).join('');
     },
 
     eliminar: async function(i) {
-      if (!confirm('¿Eliminás esta propiedad?')) return;
       var p = propiedades[i];
+      if (!p) return;
+      if (!confirm('¿Eliminar "' + p.titulo + '"?\n\nSe borran también sus fotos. Esta acción no se puede deshacer.')) return;
       try {
-        // Borrar fotos del storage
-        for (var j = 0; j < (p.fotoCount || 0); j++) {
-          await sbDeleteFile(p.id + '/foto_' + j + '.jpg');
-        }
-        await sbDeleteFile(p.id + '/thumb.jpg');
-        // Borrar fila de la DB
+        await sbDeleteFolder(p.id);
         await sbFetch('/rest/v1/propiedades?id=eq.' + p.id, {
           method: 'DELETE',
           headers: await sbAuthHeaders({ 'Prefer': 'return=minimal' })
         });
       } catch(e) {
-        alert('Error al eliminar: ' + e.message); return;
+        toast('Error al eliminar: ' + e.message, true); return;
       }
       await loadProps();
       this.renderList();
+      toast('Propiedad eliminada.');
     }
   };
 
@@ -2248,6 +2708,7 @@
   var backupBar = document.querySelector('.admin-backup-bar');
   if (backupBar) backupBar.style.display = 'none';
 
+  renderPropsSkeleton();
   loadProps();
 
   /* ===== CHAT IA ===== */

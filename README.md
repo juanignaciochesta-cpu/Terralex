@@ -26,4 +26,31 @@ Sitio web del estudio jurídico e inmobiliario TerraLex (Córdoba, Argentina).
 
 ## Acceso al panel admin
 
-Atajo en el sitio: `Ctrl + Shift + A` → iniciar sesión con email y contraseña de Supabase.
+Dos formas de abrir el login:
+
+- Link **"Acceso equipo"** en el pie de página (funciona también en celular).
+- Atajo de teclado `Ctrl + Shift + A`.
+
+Se ingresa con el email y contraseña creados en Supabase → Authentication → Users.
+
+### Si olvidás la contraseña
+
+1. Abrí el login, escribí tu email y tocá **"¿Olvidaste tu contraseña?"**.
+2. Te llega un correo con un link; al abrirlo el sitio muestra el formulario
+   para elegir la contraseña nueva y te deja adentro del panel.
+
+Para que ese link funcione, en Supabase → Authentication → URL Configuration
+el **Site URL** tiene que ser `https://terralex.com.ar` y en **Redirect URLs**
+debe figurar `https://terralex.com.ar/**`. Si quedó en `localhost:3000`, el
+mail lleva a una página inexistente.
+
+## Desarrollo local
+
+No hay build. Para levantarlo:
+
+```bash
+python3 -m http.server 4321
+```
+
+Y abrir `http://localhost:4321`. Las propiedades se leen de Supabase en vivo,
+así que se ven igual que en producción.

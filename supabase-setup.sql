@@ -41,18 +41,13 @@ create policy "borrar solo autenticados"
   using (true);
 
 -- 4) Políticas del Storage (bucket fotos-propiedades)
---    Primero borramos las políticas existentes de storage.objects
---    que afecten a este bucket (las genéricas creadas antes)
-do $$
-declare pol record;
-begin
-  for pol in
-    select policyname from pg_policies
-    where schemaname = 'storage' and tablename = 'objects'
-  loop
-    execute format('drop policy %I on storage.objects', pol.policyname);
-  end loop;
-end $$;
+--    OJO: solo borramos las politicas que creamos nosotros, por nombre.
+--    Borrar TODAS las de storage.objects rompe cualquier otro bucket del
+--    proyecto (por eso ya no se hace con un loop sobre pg_policies).
+drop policy if exists "fotos lectura publica" on storage.objects;
+drop policy if exists "fotos subir solo autenticados" on storage.objects;
+drop policy if exists "fotos actualizar solo autenticados" on storage.objects;
+drop policy if exists "fotos borrar solo autenticados" on storage.objects;
 
 create policy "fotos lectura publica"
   on storage.objects for select
@@ -78,4 +73,10 @@ create policy "fotos borrar solo autenticados"
 -- 1. Andá a Authentication > Users > Add user y creá los usuarios
 --    del equipo (email + contraseña fuerte). Marcá "Auto Confirm User".
 -- 2. El panel admin del sitio ahora pide ese email y contraseña.
+--
+-- IMPORTANTE — configuración de URLs (Authentication > URL Configuration):
+--    Site URL debe ser https://terralex.com.ar (NO localhost:3000).
+--    En Redirect URLs agregá https://terralex.com.ar/**
+--    Si queda apuntando a localhost, los links de "recuperar contraseña"
+--    que reciben por email llevan a una pagina que no existe.
 -- ============================================================

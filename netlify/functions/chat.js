@@ -15,6 +15,7 @@ if (process.env.EXTRA_ORIGIN) ALLOWED_ORIGINS.push(process.env.EXTRA_ORIGIN);
 
 const MAX_MESSAGES = 10;        // maximo de mensajes de historial por request
 const MAX_MSG_LENGTH = 1000;    // largo maximo de cada mensaje
+const MAX_BODY_BYTES = 24 * 1024; // corta payloads enormes antes de parsear
 const RATE_LIMIT_MAX = 20;      // requests permitidos...
 const RATE_LIMIT_WINDOW = 10 * 60 * 1000; // ...cada 10 minutos, por IP
 
@@ -61,9 +62,22 @@ exports.handler = async function(event) {
     return reply(405, headers, { error: 'Method Not Allowed' });
   }
 
-  // Rechazar origenes desconocidos (los navegadores mandan Origin en POST cross-site y same-site)
-  if (origin && !ALLOWED_ORIGINS.includes(origin)) {
-    return reply(403, headers, { error: 'Origen no permitido' });
+  // Rechazar origenes desconocidos. Si no viene Origin (curl, scripts), exigimos
+  // que el Referer sea de un dominio permitido: el rate limit por IP solo no
+  // alcanza porque la funcion consume creditos de la API de Anthropic.
+  if (origin) {
+    if (!ALLOWED_ORIGINS.includes(origin)) {
+      return reply(403, headers, { error: 'Origen no permitido' });
+    }
+  } else {
+    const referer = (event.headers && (event.headers.referer || event.headers.Referer)) || '';
+    const refOk = ALLOWED_ORIGINS.some(function(o) { return referer.indexOf(o) === 0; });
+    if (!refOk) return reply(403, headers, { error: 'Origen no permitido' });
+  }
+
+  // Cortar payloads desproporcionados antes de hacer JSON.parse
+  if (event.body && Buffer.byteLength(event.body) > MAX_BODY_BYTES) {
+    return reply(413, headers, { error: 'Payload demasiado grande' });
   }
 
   // Rate limit por IP
@@ -203,6 +217,7 @@ REGLAS CRITICAS — legalidad y prudencia:
         res.on('data', function(chunk) { data += chunk; });
         res.on('end', function() { resolve({ status: res.statusCode, body: data }); });
       });
+      req.setTimeout(20000, function() { req.destroy(new Error('timeout')); });
       req.on('error', reject);
       req.write(payload);
       req.end();
