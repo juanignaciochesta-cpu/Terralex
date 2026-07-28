@@ -26,12 +26,19 @@ Sitio web del estudio jurídico e inmobiliario TerraLex (Córdoba, Argentina).
 
 ## Acceso al panel admin
 
-Dos formas de abrir el login:
+El sitio **no publica ningún link al panel**: anunciar dónde está el formulario
+de login solo sirve para que lo encuentren bots y curiosos. Hay dos entradas
+discretas:
 
-- Link **"Acceso equipo"** en el pie de página (funciona también en celular).
-- Atajo de teclado `Ctrl + Shift + A`.
+- **Desde el celular:** entrar a `https://terralex.com.ar/#acceso`
+  (conviene guardarlo en favoritos).
+- **Desde la computadora:** atajo `Ctrl + Shift + A`.
 
 Se ingresa con el email y contraseña creados en Supabase → Authentication → Users.
+
+Esto es solo para no exponer la puerta. La seguridad real está en Supabase: sin
+sesión válida, las políticas RLS rechazan cualquier escritura con un 401, así
+que aunque alguien llegue al formulario no puede tocar nada sin credenciales.
 
 ### Si olvidás la contraseña
 

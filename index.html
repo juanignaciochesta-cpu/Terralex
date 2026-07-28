@@ -1593,8 +1593,6 @@
           <span class="footer-tagline">Estudio Jurídico &amp; Inmobiliario — Córdoba</span>
         </div>
         <div class="footer-links">
-          <a href="#" onclick="loginModal.open();return false;" title="Acceso equipo TerraLex">Acceso equipo</a>
-          <div class="footer-link-sep"></div>
           <a href="https://www.instagram.com/terralex.cba" target="_blank" rel="noopener">Instagram</a>
           <div class="footer-link-sep"></div>
           <a href="https://wa.me/543513422063" target="_blank" rel="noopener">WhatsApp</a>
@@ -1926,6 +1924,18 @@
       }
     }
   };
+
+  /* Entrada discreta para el equipo desde el celular (no hay Ctrl+Shift+A en
+     un telefono). Se llega con terralex.com.ar/#acceso — guardalo en favoritos.
+     No se publica ningun link en el sitio: no tiene sentido anunciarle a los
+     bots donde esta el formulario de login. */
+  (function handleAccesoHash() {
+    if (location.hash !== '#acceso') return;
+    history.replaceState(null, '', location.pathname + location.search);
+    function abrir() { loginModal.open(); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', abrir);
+    else abrir();
+  })();
 
   // Procesar el hash que deja Supabase al volver del email de recuperación
   (function handleAuthHash() {
@@ -2461,7 +2471,11 @@
   var adminPanel = {
     _editIdx: null,
 
-    open: function() {
+    open: async function() {
+      // Nunca mostrar el panel sin sesion validada. Las escrituras ya fallan
+      // por RLS del lado de Supabase, pero tampoco queremos que la ventana se
+      // pueda abrir "vacia" desde la consola.
+      if (!(await checkSession())) { loginModal.open(); return; }
       document.getElementById('adminPanelEl').classList.add('open');
       document.body.style.overflow = 'hidden';
       var em = document.getElementById('adminUserEmail');
