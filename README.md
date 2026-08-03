@@ -51,6 +51,27 @@ el **Site URL** tiene que ser `https://terralex.com.ar` y en **Redirect URLs**
 debe figurar `https://terralex.com.ar/**`. Si quedó en `localhost:3000`, el
 mail lleva a una página inexistente.
 
+## Cambiar el nombre de la marca
+
+El equipo, los datos de contacto y las matrículas no dependen del nombre: para
+un rebrand alcanza con correr el script, que se encarga de las ~80 menciones
+repartidas entre el HTML, el prompt del chat, el sitemap y los metadatos de SEO.
+
+Primero en seco, para ver qué tocaría:
+
+```bash
+./rebrand.sh --nombre "NuevaMarca" --dominio "nuevamarca.com.ar"
+```
+
+Y cuando estés conforme, con `--aplicar`. Instagram, Calendly y el dominio se
+dejan intactos salvo que pases `--instagram`, `--calendly` o `--dominio`; el
+script los blinda para que el renombrado no rompa esos links, que apuntan a
+cuentas externas que no cambian solas.
+
+Después quedan tres cosas a mano: reemplazar el contenido de las imágenes de
+logo (el script las renombra pero no las dibuja), agregar el dominio nuevo en
+Netlify, y actualizar el Site URL en Supabase.
+
 ## Desarrollo local
 
 No hay build. Para levantarlo:
