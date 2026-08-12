@@ -52,6 +52,33 @@ el **Site URL** tiene que ser `https://cmmestudio.com.ar` y en **Redirect URLs**
 debe figurar `https://cmmestudio.com.ar/**`. Si quedó en `localhost:3000`, el
 mail lleva a una página inexistente.
 
+## Logo
+
+El original vectorial está en `logo-fuente.pdf` (3 propuestas del diseñador; la
+que se usa es la **tercera**). De ahí salen todos los recursos del sitio, así
+que se pueden regenerar en cualquier tamaño sin perder nitidez:
+
+```bash
+swift herramientas/generar.swift logo-fuente.pdf . && swift herramientas/extras.swift .
+```
+
+| Archivo | Dónde se usa | Qué es |
+|---|---|---|
+| `cmm-wordmark.png` | Hero | Lockup completo, con apellidos y bajada |
+| `logo-cmm.png` | Header y footer | Compacto: monograma + C.M.M. |
+| `logo-mark-acento.png` | Suelto | Solo el monograma |
+| `favicon.png` | Pestaña | Monograma en cuadrado |
+| `og.jpg` | Redes | Tarjeta 1200×630 |
+
+El compacto **no es un recorte** del completo: se compone dibujando el
+monograma a altura total y, al lado, solo las letras grandes. Un recorte
+horizontal cortaría el monograma por la mitad, y uno que conservara los
+apellidos los dejaría ilegibles a los 34px de alto del header.
+
+Los PNG van con fondo transparente, que es lo que necesita el footer, donde el
+logo se pasa a blanco por CSS. No se usa WebP porque macOS no lo puede generar
+sin instalar nada extra, y para un logo de colores planos el PNG pesa parecido.
+
 ## Cambiar el nombre de la marca
 
 El equipo, los datos de contacto y las matrículas no dependen del nombre: para

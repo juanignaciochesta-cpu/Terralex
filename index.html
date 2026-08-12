@@ -65,7 +65,7 @@
 
   <meta name="theme-color" content="#0d2330" />
   <link rel="icon" type="image/png" href="favicon.png" />
-  <link rel="preload" as="image" href="cmm-wordmark.webp" />
+  <link rel="preload" as="image" href="cmm-wordmark.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -98,7 +98,9 @@
       backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(184,154,106,0.2);
     }
-    .brand-logo { height: 30px; width: auto; display: block; margin-top: 8px; }
+    /* El logo compacto (monograma + C.M.M.) es 3.64:1, mas alto que el anterior:
+       no lleva bajada debajo, asi que tampoco el margin-top que lo compensaba. */
+    .brand-logo { height: 34px; width: auto; display: block; }
     nav.main-nav { display: flex; align-items: center; gap: 4px; }
     nav.main-nav a {
       font-size: 12px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
@@ -153,7 +155,9 @@
       opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
     }
     .hero-wordmark {
-      max-width: 640px; width: 88%; height: auto; margin-bottom: 0;
+      /* 2.90:1 — bastante mas alto que el logo anterior (4.58:1). A 640px de
+         ancho ocupaba 221px de alto y se comia el hero; 560 lo equilibra. */
+      max-width: 560px; width: 86%; height: auto; margin-bottom: 0;
       opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards;
     }
     .hero-rule {
@@ -508,7 +512,7 @@
       border-bottom: 1px solid rgba(184,154,106,0.08);
     }
     .footer-brand { display: flex; flex-direction: column; gap: 8px; }
-    .footer-logo { height: auto; max-height: 30px; width: auto; opacity: 0.82; filter: brightness(0) invert(1); display: block; }
+    .footer-logo { height: auto; max-height: 34px; width: auto; opacity: 0.82; filter: brightness(0) invert(1); display: block; }
     .footer-tagline {
       font-size: 11px; font-weight: 300; letter-spacing: 0.08em;
       color: rgba(245,240,232,0.25);
@@ -1204,7 +1208,7 @@
 <body>
   <header>
     <a href="#inicio" aria-label="CMM — Inicio">
-      <img src="logo-cmm.webp" alt="CMM — Estudio Jurídico e Inmobiliario" class="brand-logo" width="1324" height="289">
+      <img src="logo-cmm.png" alt="CMM — Estudio Jurídico e Inmobiliario" class="brand-logo" width="874" height="240">
     </a>
     <nav class="main-nav">
       <a href="#ofrecemos">Servicios</a>
@@ -1232,7 +1236,7 @@
     <!-- El logo nuevo ya trae "Estudio Jurídico & Inmobiliario" y los apellidos,
          asi que el eyebrow solo aporta la ciudad y no repite lo de la imagen. -->
     <p class="hero-eyebrow">Córdoba, Argentina</p>
-    <img src="cmm-wordmark.webp" alt="CMM — Chesta | Maurino | Medah · Estudio Jurídico e Inmobiliario" class="hero-wordmark" width="1324" height="289" fetchpriority="high">
+    <img src="cmm-wordmark.png" alt="CMM — Chesta | Maurino | Medah · Estudio Jurídico e Inmobiliario" class="hero-wordmark" width="1600" height="551" fetchpriority="high">
     <div class="hero-rule">
       <div class="hero-rule-line"></div>
       <div class="hero-rule-dot"></div>
@@ -1573,7 +1577,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="logo-cmm.webp" alt="CMM — Estudio Jurídico e Inmobiliario" class="footer-logo" width="1324" height="289" loading="lazy">
+          <img src="logo-cmm.png" alt="CMM — Estudio Jurídico e Inmobiliario" class="footer-logo" width="874" height="240" loading="lazy">
           <span class="footer-tagline">Estudio Jurídico &amp; Inmobiliario — Córdoba</span>
         </div>
         <div class="footer-links">
