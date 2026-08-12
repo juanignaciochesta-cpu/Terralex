@@ -1546,8 +1546,8 @@
   <!-- CHAT IA -->
   <div class="chat-popup" id="chatPopup" onclick="chatPanel.openFromPopup()">
     <button class="chat-popup-close" onclick="event.stopPropagation();chatPanel.closePopup()">×</button>
-    <strong>Cami — Asistente CMM</strong>
-    Hola! Soy Cami, el asistente virtual con IA de CMM. En que puedo ayudarte?
+    <strong>Yani — Asistente CMM</strong>
+    Hola! Soy Yani, el asistente virtual con IA de CMM. En que puedo ayudarte?
   </div>
   <div class="chat-bubble" id="chatBubble" onclick="chatPanel.toggle()">
     <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -1559,7 +1559,7 @@
         <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </div>
       <div>
-        <div class="chat-header-name">Cami — Asistente CMM</div>
+        <div class="chat-header-name">Yani — Asistente CMM</div>
         <div class="chat-header-status">Responde al instante</div>
       </div>
       <button class="chat-close" onclick="chatPanel.close()">×</button>
@@ -2694,7 +2694,7 @@
       document.getElementById('chatPanelEl').classList.add('open');
       document.getElementById('chatBadge').classList.remove('visible');
       if (!chatHistory.length) {
-        this.addMsg('bot', 'Hola! Soy Cami, el asistente virtual con IA de CMM. En que puedo ayudarte?');
+        this.addMsg('bot', 'Hola! Soy Yani, el asistente virtual con IA de CMM. En que puedo ayudarte?');
       }
       setTimeout(function(){ document.getElementById('chatInput').focus(); }, 100);
     },

@@ -7,7 +7,7 @@ Sitio web del estudio jurídico e inmobiliario CMM (Córdoba, Argentina).
 - **Frontend**: HTML/CSS/JS vanilla en un solo `index.html` (sin build).
 - **Hosting**: Netlify (deploy automático desde este repo, rama `main`).
 - **Base de datos y fotos**: Supabase (tabla `propiedades` + bucket `fotos-propiedades`).
-- **Chat "Cami"**: Netlify Function (`netlify/functions/chat.js`) que llama a la API de Anthropic (Claude Haiku).
+- **Chat "Yani"**: Netlify Function (`netlify/functions/chat.js`) que llama a la API de Anthropic (Claude Haiku).
 - **Turnos**: se coordinan por WhatsApp (antes había un Calendly embebido; se
   quitó en agosto de 2026 junto con el rebrand).
 
@@ -22,7 +22,7 @@ Sitio web del estudio jurídico e inmobiliario CMM (Córdoba, Argentina).
 
 | Variable | Descripción |
 |---|---|
-| `ANTHROPIC_API_KEY` | API key de Anthropic para el chat Cami |
+| `ANTHROPIC_API_KEY` | API key de Anthropic para el chat Yani |
 | `EXTRA_ORIGIN` | (Opcional) origen adicional permitido para el chat, ej. `https://tu-sitio.netlify.app` |
 
 ## Acceso al panel admin
