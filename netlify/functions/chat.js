@@ -125,7 +125,7 @@ DATOS DE CONTACTO:
 - Direccion: Tucuman 335, Planta Alta, Cordoba Capital
 - WhatsApp: 351-3422063
 - Horarios: Lunes a Viernes, 9 a 17hs
-- Instagram: @terralex.cba
+- Instagram: @estudiocmm
 
 SERVICIOS PRINCIPALES:
 - Alquileres (contratos, renovaciones, conflictos entre partes)

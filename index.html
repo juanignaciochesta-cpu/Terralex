@@ -58,7 +58,7 @@
       "closes": "17:00"
     },
     "sameAs": [
-      "https://www.instagram.com/terralex.cba"
+      "https://www.instagram.com/estudiocmm/"
     ]
   }
   </script>
@@ -69,10 +69,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="dns-prefetch" href="https://assets.calendly.com">
-  <link rel="preconnect" href="https://assets.calendly.com" crossorigin>
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
   <style>
     :root {
       --negro: #0d2330;
@@ -400,9 +396,6 @@
     .form-submit:hover { background: var(--dorado-claro); }
     .form-note { font-size: 11px; color: rgba(24,55,66,0.25); margin-top: 10px; text-align: center; }
 
-    .calendly-block { background: white; border: 1px solid var(--borde); border-radius: 2px; padding: 34px; }
-    .calendly-block-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--negro); margin-bottom: 5px; }
-    .calendly-block-sub { font-size: 13px; font-weight: 300; color: var(--gris-texto); margin-bottom: 22px; }
 
     /* CHAT IA */
     .chat-bubble {
@@ -1186,7 +1179,6 @@
       .team-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
       .contact-btns { flex-direction: column; }
       .contact-form-wrap { padding: 24px 18px; }
-      .calendly-block { padding: 22px 14px; }
       /* Botones flotantes apilados sobre la barra CTA inferior (64px) */
       .float-wa { right: 14px; bottom: 78px; }
       .float-wa a { width: 46px; height: 46px; }
@@ -1207,15 +1199,9 @@
       .scta-cal { background: transparent; border: 1px solid rgba(184,154,106,0.3); color: var(--dorado); }
       body { padding-bottom: 60px; }
     }
-
-    @media (max-width: 820px) {
-      .calendly-inline-widget { min-height: 680px !important; height: 680px !important; }
-    }
   </style>
 </head>
 <body>
-  <script data-cfasync="false">window.TLX_CALENDLY_URL = 'https://calendly.com/terralexcba/30min?primary_color=0f1f18&hide_gdpr_banner=1';</script>
-
   <header>
     <a href="#inicio" aria-label="CMM — Inicio">
       <img src="logo-cmm.webp" alt="CMM — Estudio Jurídico e Inmobiliario" class="brand-logo" width="1324" height="289">
@@ -1226,7 +1212,7 @@
       <a href="#equipo">Equipo</a>
       <a href="#contacto">Contacto</a>
       <a href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener" class="nav-portal">Portal</a>
-      <a href="#" class="nav-cta" onclick="return TLX_CAL();">Agendá un turno</a>
+      <a href="https://wa.me/543513422063?text=Hola%20CMM%2C%20quiero%20coordinar%20una%20consulta" target="_blank" rel="noopener" class="nav-cta">Pedí tu turno</a>
     </nav>
     <button class="hamb" id="hambBtn" aria-label="Menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -1239,12 +1225,14 @@
     <a href="#equipo">Equipo</a>
     <a href="#contacto">Contacto</a>
     <a href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener">Portal propietarios e inquilinos</a>
-    <a href="#" class="mobile-cta" onclick="return TLX_CAL();">Agendá un turno</a>
+    <a href="https://wa.me/543513422063?text=Hola%20CMM%2C%20quiero%20coordinar%20una%20consulta" target="_blank" rel="noopener" class="mobile-cta">Pedí tu turno</a>
   </div>
 
   <section id="inicio" class="hero">
-    <p class="hero-eyebrow">Estudio Jurídico &amp; Inmobiliario — Córdoba</p>
-    <img src="cmm-wordmark.webp" alt="CMM — Chesta | Maurino | Medah" class="hero-wordmark" width="1324" height="289" fetchpriority="high">
+    <!-- El logo nuevo ya trae "Estudio Jurídico & Inmobiliario" y los apellidos,
+         asi que el eyebrow solo aporta la ciudad y no repite lo de la imagen. -->
+    <p class="hero-eyebrow">Córdoba, Argentina</p>
+    <img src="cmm-wordmark.webp" alt="CMM — Chesta | Maurino | Medah · Estudio Jurídico e Inmobiliario" class="hero-wordmark" width="1324" height="289" fetchpriority="high">
     <div class="hero-rule">
       <div class="hero-rule-line"></div>
       <div class="hero-rule-dot"></div>
@@ -1520,9 +1508,9 @@
             </div>
           </div>
           <div class="contact-btns">
-            <a class="btn-sm-gold" href="#turno">Agendar turno online</a>
+            <a class="btn-sm-gold" href="https://wa.me/543513422063?text=Hola%20CMM%2C%20quiero%20coordinar%20una%20consulta" target="_blank" rel="noopener">Pedí tu turno</a>
             <a class="btn-sm-outline" href="https://maps.app.goo.gl/hK5s9xgXxxQ91uzA6" target="_blank" rel="noopener">Cómo llegar</a>
-            <a class="btn-sm-outline" href="https://www.instagram.com/terralex.cba" target="_blank" rel="noopener">Instagram</a>
+            <a class="btn-sm-outline" href="https://www.instagram.com/estudiocmm/" target="_blank" rel="noopener">Instagram</a>
           </div>
         </div>
         <div class="contact-form-wrap">
@@ -1545,12 +1533,6 @@
             <p class="form-note">Al enviar aceptás nuestra política de privacidad.</p>
           </form>
         </div>
-      </div>
-      <div class="calendly-block">
-        <h3 class="calendly-block-title">Reservá tu consulta online</h3>
-        <p class="calendly-block-sub">Elegí el día y horario que mejor te quede.</p>
-        <div id="turno" style="height:1px"></div>
-        <div id="calendly-container" class="calendly-inline-widget" style="min-width:320px;height:740px;"></div>
       </div>
     </div>
   </section>
@@ -1595,7 +1577,7 @@
           <span class="footer-tagline">Estudio Jurídico &amp; Inmobiliario — Córdoba</span>
         </div>
         <div class="footer-links">
-          <a href="https://www.instagram.com/terralex.cba" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.instagram.com/estudiocmm/" target="_blank" rel="noopener">Instagram</a>
           <div class="footer-link-sep"></div>
           <a href="https://wa.me/543513422063" target="_blank" rel="noopener">WhatsApp</a>
           <div class="footer-link-sep"></div>
@@ -1666,7 +1648,7 @@
 
   <div class="sticky-cta">
     <a class="scta-wa" href="https://wa.me/543513422063?text=Hola%20CMM%2C%20necesito%20asesoramiento" target="_blank" rel="noopener">WhatsApp</a>
-    <a class="scta-cal" href="#" onclick="return TLX_CAL();">Agendar turno</a>
+    <a class="scta-cal" href="tel:+543513422063">Llamar</a>
   </div>
 
   <script data-cfasync="false">
@@ -1684,43 +1666,6 @@
           hambBtn.setAttribute('aria-expanded', false);
         });
       });
-    }
-    function initCalendlyInline() {
-      var el = document.getElementById('calendly-container');
-      if (!el) return false;
-      if (window.Calendly && window.Calendly.initInlineWidget) {
-        window.Calendly.initInlineWidget({ url: window.TLX_CALENDLY_URL, parentElement: el });
-        return true;
-      }
-      return false;
-    }
-    function TLX_CalendlyFallback() {
-      try {
-        var el = document.getElementById('calendly-container');
-        if (!el) return false;
-        var url = (window.TLX_CALENDLY_URL || '').toString();
-        if (!url) return false;
-        var sep = url.indexOf('?') > -1 ? '&' : '?';
-        var src = url + sep + 'embed_domain=' + location.hostname + '&embed_type=Inline';
-        el.innerHTML = '<iframe src="' + src + '" width="100%" height="740" frameborder="0" title="Agendá tu turno"></iframe>';
-        return true;
-      } catch(e) { return false; }
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-      var tries = 0;
-      var t = setInterval(function() {
-        if (initCalendlyInline()) { clearInterval(t); return; }
-        if (++tries > 25) { clearInterval(t); TLX_CalendlyFallback(); }
-      }, 300);
-    });
-    function TLX_CAL() {
-      try {
-        if (window.Calendly && window.TLX_CALENDLY_URL) {
-          window.Calendly.initPopupWidget({ url: window.TLX_CALENDLY_URL, utm: {} });
-          document.getElementById('turno').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      } catch(e) {}
-      return false;
     }
   </script>
 

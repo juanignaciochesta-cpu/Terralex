@@ -8,7 +8,8 @@ Sitio web del estudio jurídico e inmobiliario CMM (Córdoba, Argentina).
 - **Hosting**: Netlify (deploy automático desde este repo, rama `main`).
 - **Base de datos y fotos**: Supabase (tabla `propiedades` + bucket `fotos-propiedades`).
 - **Chat "Cami"**: Netlify Function (`netlify/functions/chat.js`) que llama a la API de Anthropic (Claude Haiku).
-- **Turnos**: Calendly embebido.
+- **Turnos**: se coordinan por WhatsApp (antes había un Calendly embebido; se
+  quitó en agosto de 2026 junto con el rebrand).
 
 ## Seguridad
 
@@ -63,10 +64,10 @@ Primero en seco, para ver qué tocaría:
 ./rebrand.sh --nombre "NuevaMarca" --dominio "nuevamarca.com.ar"
 ```
 
-Y cuando estés conforme, con `--aplicar`. Instagram, Calendly y el dominio se
-dejan intactos salvo que pases `--instagram`, `--calendly` o `--dominio`; el
-script los blinda para que el renombrado no rompa esos links, que apuntan a
-cuentas externas que no cambian solas.
+Y cuando estés conforme, con `--aplicar`. Instagram y el dominio se dejan
+intactos salvo que pases `--instagram` o `--dominio`; el script los blinda para
+que el renombrado no rompa esos links, que apuntan a cuentas externas que no
+cambian solas.
 
 Después quedan tres cosas a mano: reemplazar el contenido de las imágenes de
 logo (el script las renombra pero no las dibuja), agregar el dominio nuevo en
