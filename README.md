@@ -1,27 +1,27 @@
-# TerraLex — terralex.com.ar
+# CMM — cmmestudio.com.ar
 
-Sitio web del estudio jurídico e inmobiliario TerraLex (Córdoba, Argentina).
+Sitio web del estudio jurídico e inmobiliario CMM (Córdoba, Argentina).
 
 ## Stack
 
 - **Frontend**: HTML/CSS/JS vanilla en un solo `index.html` (sin build).
 - **Hosting**: Netlify (deploy automático desde este repo, rama `main`).
 - **Base de datos y fotos**: Supabase (tabla `propiedades` + bucket `fotos-propiedades`).
-- **Chat "Terri"**: Netlify Function (`netlify/functions/chat.js`) que llama a la API de Anthropic (Claude Haiku).
+- **Chat "Cami"**: Netlify Function (`netlify/functions/chat.js`) que llama a la API de Anthropic (Claude Haiku).
 - **Turnos**: Calendly embebido.
 
 ## Seguridad
 
 - El panel admin usa **Supabase Auth** (email + contraseña creados en Supabase → Authentication → Users). No hay credenciales en el código.
 - Las políticas RLS de Supabase permiten **lectura pública** y **escritura solo a usuarios autenticados**. Ver `supabase-setup.sql`.
-- La función del chat tiene CORS restringido a terralex.com.ar, validación de entrada y rate limiting por IP.
+- La función del chat tiene CORS restringido a cmmestudio.com.ar, validación de entrada y rate limiting por IP.
 - Todo el contenido dinámico se renderiza escapando HTML (helper `esc()`), para prevenir XSS.
 
 ## Variables de entorno (Netlify → Site settings → Environment variables)
 
 | Variable | Descripción |
 |---|---|
-| `ANTHROPIC_API_KEY` | API key de Anthropic para el chat Terri |
+| `ANTHROPIC_API_KEY` | API key de Anthropic para el chat Cami |
 | `EXTRA_ORIGIN` | (Opcional) origen adicional permitido para el chat, ej. `https://tu-sitio.netlify.app` |
 
 ## Acceso al panel admin
@@ -30,7 +30,7 @@ El sitio **no publica ningún link al panel**: anunciar dónde está el formular
 de login solo sirve para que lo encuentren bots y curiosos. Hay dos entradas
 discretas:
 
-- **Desde el celular:** entrar a `https://terralex.com.ar/#acceso`
+- **Desde el celular:** entrar a `https://cmmestudio.com.ar/#acceso`
   (conviene guardarlo en favoritos).
 - **Desde la computadora:** atajo `Ctrl + Shift + A`.
 
@@ -47,8 +47,8 @@ que aunque alguien llegue al formulario no puede tocar nada sin credenciales.
    para elegir la contraseña nueva y te deja adentro del panel.
 
 Para que ese link funcione, en Supabase → Authentication → URL Configuration
-el **Site URL** tiene que ser `https://terralex.com.ar` y en **Redirect URLs**
-debe figurar `https://terralex.com.ar/**`. Si quedó en `localhost:3000`, el
+el **Site URL** tiene que ser `https://cmmestudio.com.ar` y en **Redirect URLs**
+debe figurar `https://cmmestudio.com.ar/**`. Si quedó en `localhost:3000`, el
 mail lleva a una página inexistente.
 
 ## Cambiar el nombre de la marca

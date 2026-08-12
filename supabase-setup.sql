@@ -1,5 +1,5 @@
 -- ============================================================
--- TERRALEX — Configuración de seguridad de Supabase
+-- CMM — Configuración de seguridad de Supabase
 -- Pegar TODO este archivo en: Supabase > SQL Editor > New query > Run
 -- Objetivo: lectura pública, escritura SOLO para usuarios logueados
 -- ============================================================
@@ -75,8 +75,8 @@ create policy "fotos borrar solo autenticados"
 -- 2. El panel admin del sitio ahora pide ese email y contraseña.
 --
 -- IMPORTANTE — configuración de URLs (Authentication > URL Configuration):
---    Site URL debe ser https://terralex.com.ar (NO localhost:3000).
---    En Redirect URLs agregá https://terralex.com.ar/**
+--    Site URL debe ser https://cmmestudio.com.ar (NO localhost:3000).
+--    En Redirect URLs agregá https://cmmestudio.com.ar/**
 --    Si queda apuntando a localhost, los links de "recuperar contraseña"
 --    que reciben por email llevan a una pagina que no existe.
 -- ============================================================

@@ -41,8 +41,18 @@ while [ $# -gt 0 ]; do
   esac
 done
 
+# El informe de progreso va a STDERR, no a stdout, y no es un capricho:
+# si sale por stdout y el lector se va antes de tiempo (por ejemplo
+# 'rebrand.sh --aplicar | head'), lo que quedo pendiente en el buffer se cuela
+# dentro del siguiente $(...) y corrompe el contador de reemplazos. El sintoma
+# es feo y silencioso: el script aborta a mitad del renombrado y deja la mitad
+# de los archivos migrados. Con stderr el problema no existe, y ademas es lo
+# convencional en Unix: por stdout van los datos, por stderr el diagnostico.
+say()  { echo "$@" >&2; }
+sayf() { printf "$@" >&2; }
+
 if [ -z "$NOMBRE" ]; then
-  echo "Falta --nombre. Corré '$0 --help' para ver el uso."
+  say "Falta --nombre. Corré '$0 --help' para ver el uso."
   exit 1
 fi
 
@@ -56,11 +66,11 @@ NOMBRE_LOWER="$(printf '%s' "$NOMBRE" | tr '[:upper:]' '[:lower:]')"
 NOMBRE_UPPER="$(printf '%s' "$NOMBRE" | tr '[:lower:]' '[:upper:]')"
 
 if [ "$APLICAR" -eq 0 ]; then
-  echo "=== SIMULACION (agregá --aplicar para escribir los cambios) ==="
+  say "=== SIMULACION (agregá --aplicar para escribir los cambios) ==="
 else
-  echo "=== APLICANDO CAMBIOS ==="
+  say "=== APLICANDO CAMBIOS ==="
 fi
-echo
+say
 
 reemplazar() {
   # $1 = descripcion, $2 = patron viejo, $3 = texto nuevo
@@ -77,7 +87,7 @@ reemplazar() {
       sed -i '' "s|$viejo|$nuevo|g" "$f"
     fi
   done
-  printf '  %-38s %3s reemplazo(s)\n' "$desc" "$total"
+  sayf '  %-38s %3s reemplazo(s)\n' "$desc" "$total"
 }
 
 # ORDEN IMPORTANTE: primero lo mas especifico (Instagram, Calendly, archivos de
@@ -104,6 +114,7 @@ proteger() {
 
 restaurar() {
   [ "$APLICAR" -eq 1 ] || return 0
+  # printf real, no sayf: esto alimenta el while de abajo, no es salida al usuario
   printf '%s' "$PROTEGIDOS" | while IFS='|' read -r orig centinela; do
     [ -n "$centinela" ] || continue
     for f in $ARCHIVOS; do
@@ -113,43 +124,43 @@ restaurar() {
   return 0
 }
 
-echo "Cuentas externas y URLs:"
+say "Cuentas externas y URLs:"
 if [ -n "$INSTAGRAM" ]; then
   reemplazar "Instagram (terralex.cba)" "terralex\.cba" "$INSTAGRAM"
 else
   proteger "terralex\.cba" "@@IG@@"
-  echo "  Instagram                              intacto (--instagram para cambiarlo)"
+  say "  Instagram                              intacto (--instagram para cambiarlo)"
 fi
 
 if [ -n "$CALENDLY" ]; then
   reemplazar "Calendly (terralexcba)" "terralexcba" "$CALENDLY"
 else
   proteger "terralexcba" "@@CAL@@"
-  echo "  Calendly                               intacto (--calendly para cambiarlo)"
+  say "  Calendly                               intacto (--calendly para cambiarlo)"
 fi
 
 if [ -n "$DOMINIO" ]; then
   reemplazar "Dominio (terralex.com.ar)" "terralex\.com\.ar" "$DOMINIO"
 else
   proteger "terralex\.com\.ar" "@@DOM@@"
-  echo "  Dominio                                intacto (--dominio para cambiarlo)"
+  say "  Dominio                                intacto (--dominio para cambiarlo)"
 fi
 
-echo
-echo "Archivos de logo referenciados en el HTML:"
+say
+say "Archivos de logo referenciados en el HTML:"
 reemplazar "logo-terralex.*"      "logo-terralex"      "logo-$NOMBRE_LOWER"
 reemplazar "terralex-wordmark.*"  "terralex-wordmark"  "$NOMBRE_LOWER-wordmark"
 reemplazar "equipo-terralex.jpg"  "equipo-terralex"    "equipo-$NOMBRE_LOWER"
 
-echo
-echo "Nombre de marca:"
+say
+say "Nombre de marca:"
 reemplazar "TerraLex"  "TerraLex"  "$NOMBRE"
 reemplazar "TERRALEX"  "TERRALEX"  "$NOMBRE_UPPER"
 reemplazar "terralex"  "terralex"  "$NOMBRE_LOWER"
 
 if [ -n "$ASISTENTE" ]; then
-  echo
-  echo "Asistente del chat:"
+  say
+  say "Asistente del chat:"
   reemplazar "Terri -> $ASISTENTE" "Terri" "$ASISTENTE"
 fi
 
@@ -157,8 +168,8 @@ fi
 restaurar
 
 # Renombrar los archivos de imagen para que coincidan con las referencias
-echo
-echo "Archivos de imagen:"
+say
+say "Archivos de imagen:"
 for par in \
   "logo-terralex.png:logo-$NOMBRE_LOWER.png" \
   "logo-terralex.webp:logo-$NOMBRE_LOWER.webp" \
@@ -169,32 +180,32 @@ for par in \
   [ -f "$viejo" ] || continue
   if [ "$APLICAR" -eq 1 ]; then
     git mv "$viejo" "$nuevo" 2>/dev/null || mv "$viejo" "$nuevo"
-    echo "  renombrado: $viejo -> $nuevo"
+    say "  renombrado: $viejo -> $nuevo"
   else
-    echo "  se renombraria: $viejo -> $nuevo"
+    say "  se renombraria: $viejo -> $nuevo"
   fi
 done
 
-echo
+say
 if [ "$APLICAR" -eq 0 ]; then
-  echo "Nada se modificó. Volvé a correrlo con --aplicar cuando estes conforme."
+  say "Nada se modificó. Volvé a correrlo con --aplicar cuando estes conforme."
 else
-  echo "Listo. Ahora, a mano:"
-  echo
-  echo "  1. Reemplazá el contenido de estas imagenes con el diseño nuevo"
-  echo "     (respetando los nombres, que ya quedaron actualizados):"
-  echo "       logo-$NOMBRE_LOWER.png / .webp    logo principal"
-  echo "       $NOMBRE_LOWER-wordmark.png / .webp  wordmark del hero"
-  echo "       favicon.png                        icono de la pestaña"
-  echo "       og.jpg                             imagen al compartir en redes"
-  echo "       logo-mark-acento.png               isotipo suelto"
-  echo
+  say "Listo. Ahora, a mano:"
+  say
+  say "  1. Reemplazá el contenido de estas imagenes con el diseño nuevo"
+  say "     (respetando los nombres, que ya quedaron actualizados):"
+  say "       logo-$NOMBRE_LOWER.png / .webp    logo principal"
+  say "       $NOMBRE_LOWER-wordmark.png / .webp  wordmark del hero"
+  say "       favicon.png                        icono de la pestaña"
+  say "       og.jpg                             imagen al compartir en redes"
+  say "       logo-mark-acento.png               isotipo suelto"
+  say
   if [ -n "$DOMINIO" ]; then
-    echo "  2. Netlify: agregá el dominio $DOMINIO en Domain management."
-    echo "  3. Supabase: Authentication > URL Configuration, poné"
-    echo "     Site URL = https://$DOMINIO y Redirect URLs = https://$DOMINIO/**"
-    echo "     Si no, los mails de recuperar contraseña no funcionan."
+    say "  2. Netlify: agregá el dominio $DOMINIO en Domain management."
+    say "  3. Supabase: Authentication > URL Configuration, poné"
+    say "     Site URL = https://$DOMINIO y Redirect URLs = https://$DOMINIO/**"
+    say "     Si no, los mails de recuperar contraseña no funcionan."
   fi
-  echo
-  echo "  Revisá el resultado con 'git diff' antes de commitear."
+  say
+  say "  Revisá el resultado con 'git diff' antes de commitear."
 fi

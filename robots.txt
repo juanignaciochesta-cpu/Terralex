@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://terralex.com.ar/sitemap.xml
+Sitemap: https://cmmestudio.com.ar/sitemap.xml
