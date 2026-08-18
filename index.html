@@ -189,65 +189,6 @@
       opacity: 0; animation: fadeUp 0.9s ease 1s forwards;
       margin-bottom: 52px;
     }
-    /* Strip de cards que emerge desde abajo */
-    .hero-cards-strip {
-      width: 100%; max-width: 1080px;
-      display: flex; gap: 16px; justify-content: center; align-items: flex-end;
-      padding: 0 24px;
-      opacity: 0; animation: fadeUp 0.9s ease 1.2s forwards;
-      position: relative;
-    }
-    .hero-cards-strip::before {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 60%; background: linear-gradient(to top, var(--fondo) 0%, transparent 100%);
-      pointer-events: none; z-index: 1;
-    }
-    .hero-prop-card {
-      background: var(--fondo); border-radius: 3px 3px 0 0;
-      width: 240px; flex-shrink: 0; overflow: hidden;
-      border: 1px solid rgba(184,154,106,0.15); border-bottom: none;
-      transition: transform 0.3s ease;
-    }
-    .hero-prop-card:hover { transform: translateY(-6px); }
-    .hero-prop-card:nth-child(2) { margin-bottom: 0; }
-    .hero-prop-card:nth-child(1),
-    .hero-prop-card:nth-child(3) { margin-bottom: -12px; }
-    .hero-prop-img { height: 130px; overflow: hidden; background: var(--fondo-alt); position: relative; }
-    .hero-prop-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-prop-badge {
-      position: absolute; top: 10px; left: 10px;
-      font-size: 8px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
-      background: var(--negro); color: var(--dorado); padding: 4px 8px; border-radius: 1px;
-    }
-    .hero-prop-badge.alq { background: var(--dorado); color: var(--negro); }
-    .hero-prop-body { padding: 14px 16px 16px; }
-    .hero-prop-price {
-      font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500;
-      color: var(--negro); margin-bottom: 3px;
-    }
-    .hero-prop-title { font-size: 12px; font-weight: 400; color: var(--negro); margin-bottom: 3px; line-height: 1.4; }
-    .hero-prop-loc {
-      font-size: 11px; font-weight: 300; color: var(--gris-texto);
-      display: flex; align-items: center; gap: 4px; margin-bottom: 12px;
-    }
-    .hero-prop-loc svg { width: 10px; height: 10px; stroke: var(--dorado); fill: none; stroke-width: 2; flex-shrink: 0; }
-    .hero-prop-wa {
-      display: flex; align-items: center; gap: 7px; justify-content: center;
-      width: 100%; font-family: 'Jost', sans-serif; font-size: 9px; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      background: #25d366; color: white; padding: 9px; border-radius: 2px;
-      text-decoration: none; transition: background 0.2s;
-    }
-    .hero-prop-wa:hover { background: #1ebe5b; }
-    .hero-ver-mas {
-      position: relative; z-index: 2;
-      font-size: 10px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(145,120,96,0.6); text-align: center; margin-top: -8px; padding-bottom: 0;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      cursor: pointer; transition: color 0.2s; text-decoration: none;
-    }
-    .hero-ver-mas:hover { color: var(--dorado); }
-    .hero-ver-mas svg { stroke: currentColor; }
 
     .btn-gold {
       font-family: 'Jost', sans-serif; font-size: 11px; font-weight: 500;
@@ -658,7 +599,7 @@
         transition-duration: 0.01ms !important;
       }
       .hero-eyebrow, .hero-wordmark, .hero-rule, .hero-tagline,
-      .hero-sub, .hero-actions, .hero-cards-strip { opacity: 1 !important; }
+      .hero-sub, .hero-actions { opacity: 1 !important; }
     }
 
     /* Cards ocultas */
@@ -1168,17 +1109,6 @@
       .hero { padding: 96px 20px 90px; }
       .hero-actions { flex-direction: column; align-items: stretch; }
       .hero-actions a { text-align: center; justify-content: center; }
-      /* Las 3 cards no entran a lo ancho: se deslizan con el dedo */
-      .hero-cards-strip {
-        justify-content: flex-start; overflow-x: auto; padding: 0 20px 4px;
-        scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-      .hero-cards-strip::-webkit-scrollbar { display: none; }
-      .hero-cards-strip::before { display: none; }
-      .hero-prop-card { scroll-snap-align: center; width: 210px; }
-      .hero-prop-card:nth-child(1),
-      .hero-prop-card:nth-child(3) { margin-bottom: 0; }
       .services-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
       .contact-btns { flex-direction: column; }
@@ -1215,7 +1145,7 @@
       <a href="#propiedades">Propiedades</a>
       <a href="#equipo">Equipo</a>
       <a href="#contacto">Contacto</a>
-      <a href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener" class="nav-portal">Portal</a>
+      <a href="https://cmmgestion.com.ar/" target="_blank" rel="noopener" class="nav-portal">Portal</a>
       <a href="https://wa.me/543513422063?text=Hola%20CMM%2C%20quiero%20coordinar%20una%20consulta" target="_blank" rel="noopener" class="nav-cta">Pedí tu turno</a>
     </nav>
     <button class="hamb" id="hambBtn" aria-label="Menú" aria-expanded="false">
@@ -1228,7 +1158,7 @@
     <a href="#propiedades">Propiedades</a>
     <a href="#equipo">Equipo</a>
     <a href="#contacto">Contacto</a>
-    <a href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener">Portal propietarios e inquilinos</a>
+    <a href="https://cmmgestion.com.ar/" target="_blank" rel="noopener">Portal propietarios e inquilinos</a>
     <a href="https://wa.me/543513422063?text=Hola%20CMM%2C%20quiero%20coordinar%20una%20consulta" target="_blank" rel="noopener" class="mobile-cta">Pedí tu turno</a>
   </div>
 
@@ -1253,12 +1183,11 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-7 9 7v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Ver propiedades
       </a>
-      <a class="btn-portal" href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener">
+      <a class="btn-portal" href="https://cmmgestion.com.ar/" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-7 9 7v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         Portal propietarios e inquilinos
       </a>
     </div>
-    <div class="hero-cards-strip" id="heroCardsStrip"></div>
   </section>
 
   <section id="ofrecemos" class="services-section">
@@ -1585,7 +1514,7 @@
           <div class="footer-link-sep"></div>
           <a href="https://wa.me/543513422063" target="_blank" rel="noopener">WhatsApp</a>
           <div class="footer-link-sep"></div>
-          <a href="https://gestorprop2-production.up.railway.app/" target="_blank" rel="noopener">Portal</a>
+          <a href="https://cmmgestion.com.ar/" target="_blank" rel="noopener">Portal</a>
           <div class="footer-link-sep"></div>
           <a href="#" onclick="document.getElementById('modalPrivacidad').classList.add('open');return false;">Política de Privacidad</a>
           <div class="footer-link-sep"></div>
@@ -2066,34 +1995,9 @@
       _loadError = true;
     }
     renderProps();
-    renderHeroCards();
   }
   var _loadError = false;
 
-  function renderHeroCards() {
-    var strip = document.getElementById('heroCardsStrip');
-    if (!strip) return;
-    var lista = propiedades.slice(0, 3);
-    if (!lista.length) { strip.style.display = 'none'; return; }
-    strip.innerHTML = lista.map(function(p) {
-      var waMsg = p.wa || ('Hola CMM, me interesa: ' + p.titulo);
-      var imgHTML = p.thumb
-        ? '<img src="' + esc(p.thumb) + '" alt="' + esc(p.titulo) + '" loading="lazy">'
-        : '<div style="width:100%;height:100%;background:#1a3d4f;display:flex;align-items:center;justify-content:center;opacity:.4"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#917860" stroke-width="1"><path d="M3 11l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>';
-      return '<div class="hero-prop-card">'
-        + '<div class="hero-prop-img">' + imgHTML
-        + '<span class="hero-prop-badge' + (p.tipo === 'alquiler' ? ' alq' : '') + '">'
-        + (p.tipo === 'alquiler' ? 'Alquiler' : 'Venta') + '</span></div>'
-        + '<div class="hero-prop-body">'
-        + '<div class="hero-prop-price">' + esc(p.precio || '-') + '</div>'
-        + '<div class="hero-prop-title">' + esc(p.titulo) + '</div>'
-        + '<div class="hero-prop-loc"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>' + esc(p.barrio) + '</div>'
-        + '<a class="hero-prop-wa" href="https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(waMsg) + '" target="_blank" rel="noopener">'
-        + '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.86 11.86 0 0012.07 0C5.51 0 .2 5.31.2 11.87c0 2.09.55 4.14 1.61 5.95L0 24l6.35-1.76c1.74.95 3.7 1.45 5.7 1.45h.01c6.56 0 11.87-5.31 11.87-11.87 0-3.17-1.24-6.16-3.41-8.34z"/></svg>'
-        + 'Consultar</a>'
-        + '</div></div>';
-    }).join('');
-  }
 
   /* ── Filtros y render ── */
   function filtrarProps(tab) {
