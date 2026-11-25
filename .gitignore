@@ -1,1 +1,18 @@
 .claude/
+
+# Documentos de trabajo del estudio (contratos, propuestas, escritos).
+# No son parte del sitio y suelen tener datos de clientes; este repo es
+# PUBLICO, asi que se ignoran para que no terminen publicados por error.
+# Guardalos en ../Terralex-documentos
+*.doc
+*.docx
+*.pdf
+*.xls
+*.xlsx
+*.odt
+~$*
+.~lock.*
+
+# ...menos el vectorial del logo, que si pertenece al proyecto:
+# de ahi se generan todos los recursos graficos.
+!logo-fuente.pdf
