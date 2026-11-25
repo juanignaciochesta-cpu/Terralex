@@ -13,6 +13,19 @@
     X-DNS-Prefetch-Control = "on"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://smzwkilrkeyitaixvrhl.supabase.co https://www.googletagmanager.com https://www.google.com https://www.google.com.ar https://googleads.g.doubleclick.net https://www.googleadservices.com https://ad.doubleclick.net https://stats.g.doubleclick.net; connect-src 'self' https://smzwkilrkeyitaixvrhl.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://td.doubleclick.net https://ad.doubleclick.net https://stats.g.doubleclick.net https://www.google.com https://www.google.com.ar; frame-src https://td.doubleclick.net https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
+# El CSS y el JS son compartidos por la home y las paginas de servicio:
+# conviene que el navegador los reutilice al navegar entre ellas. Cache corto
+# porque, a diferencia de las imagenes, cambian cuando se edita el sitio.
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
 [[headers]]
   for = "/*.webp"
   [headers.values]
