@@ -11,7 +11,7 @@
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Cross-Origin-Opener-Policy = "same-origin"
     X-DNS-Prefetch-Control = "on"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://smzwkilrkeyitaixvrhl.supabase.co; connect-src 'self' https://smzwkilrkeyitaixvrhl.supabase.co; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://smzwkilrkeyitaixvrhl.supabase.co https://www.googletagmanager.com https://www.google.com https://www.google.com.ar https://googleads.g.doubleclick.net https://www.googleadservices.com https://ad.doubleclick.net https://stats.g.doubleclick.net; connect-src 'self' https://smzwkilrkeyitaixvrhl.supabase.co https://www.googletagmanager.com https://www.google-analytics.com https://googleads.g.doubleclick.net https://td.doubleclick.net https://ad.doubleclick.net https://stats.g.doubleclick.net https://www.google.com https://www.google.com.ar; frame-src https://td.doubleclick.net https://www.googletagmanager.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
 
 [[headers]]
   for = "/*.webp"
