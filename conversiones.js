@@ -48,14 +48,18 @@ document.addEventListener('click', function(e) {
    descarga la pagina, y si no esperamos el beacon se corta a mitad de camino.
    form.submit() no vuelve a disparar este evento, asi que no hay recursion. */
 (function() {
-  var form = document.querySelector('form[name="contact"]');
-  if (!form) return;
-  form.addEventListener('submit', function(e) {
-    if (form.dataset.conversionEnviada === '1') return;  // ya paso por aca
-    e.preventDefault();
-    registrarConversion('formulario', function() {
-      form.dataset.conversionEnviada = '1';
-      form.submit();
+  // Todos los formularios de Netlify, no uno solo por nombre: el de la home se
+  // llama "contact" y el de las paginas de servicio "consulta-servicio".
+  // Buscar un unico nombre dejaria sin medir justo donde cae el trafico pago.
+  var forms = document.querySelectorAll('form[data-netlify]');
+  Array.prototype.forEach.call(forms, function(form) {
+    form.addEventListener('submit', function(e) {
+      if (form.dataset.conversionEnviada === '1') return;  // ya paso por aca
+      e.preventDefault();
+      registrarConversion('formulario', function() {
+        form.dataset.conversionEnviada = '1';
+        form.submit();
+      });
     });
   });
 })();
