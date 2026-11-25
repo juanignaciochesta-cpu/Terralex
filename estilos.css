@@ -1139,6 +1139,10 @@ footer {
 /* Preguntas frecuentes */
 .svc-faq { background: #183742; padding: 80px 40px; }
 .svc-faq .section-title { color: #f8f7f4; }
+/* El em de .section-title es gris oscuro, pensado para fondo claro: sobre el
+   azul de esta seccion quedaba casi invisible. Va en dorado, igual que la
+   volanta "Preguntas frecuentes". */
+.svc-faq .section-title em { color: var(--dorado); }
 .svc-faq-item {
   border-bottom: 1px solid rgba(184,154,106,0.18); padding: 20px 0;
 }
