@@ -1280,3 +1280,7 @@ a.service-item .service-name { flex: 1; }
 a.service-item:hover .service-flecha { opacity: 0.85; transform: translateX(0); }
 a.service-item:hover .service-name { color: #f8f7f4; }
 a.service-item:focus-visible { outline: 2px solid var(--dorado); outline-offset: -2px; }
+
+/* Cuando la pagina muestra dos profesionales, las fichas se apilan con poca
+   separacion para que se lean como un equipo y no como dos bloques sueltos. */
+.svc-profesional + .svc-profesional { margin-top: 10px; }
