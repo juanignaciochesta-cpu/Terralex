@@ -10,8 +10,11 @@
    etiqueta no los atribuye a ninguna accion y solo ensucia los informes. */
 
 var CONVERSIONES = {
-  whatsapp:   '',   // clic en cualquier boton de WhatsApp
-  formulario: ''    // envio del formulario de contacto
+  // Etiquetas de las acciones de conversion de Google Ads (cuenta 612-156-7035).
+  // Se obtienen en: Objetivos > Conversiones > (la accion) > Administrar >
+  // "Ver fragmento de evento". Si alguna vez se recrea la accion, cambia.
+  whatsapp:   'AW-18553859405/CL_ZCJe50r8dEM3alY9F',   // accion "Clic en WhatsApp"   (categoria Contacto)
+  formulario: 'AW-18553859405/nxHLCJS50r8dEM3alY9F'    // accion "Envio de formulario" (categoria Cliente potencial)
 };
 
 /* Dispara la conversion y despues ejecuta 'seguir'. Si Google no contesta en
