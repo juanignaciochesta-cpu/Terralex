@@ -30,9 +30,10 @@ header {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(184,154,106,0.2);
 }
-/* El logo compacto (monograma + C.M.M.) es 3.64:1, mas alto que el anterior:
-   no lleva bajada debajo, asi que tampoco el margin-top que lo compensaba. */
-.brand-logo { height: 34px; width: auto; display: block; }
+/* Logo compacto: monograma + C.M.M. + apellidos (3.71:1). Los apellidos no se
+   leen a este tamaño, pero llenan el hueco que queda bajo la sigla y evitan
+   que el conjunto se vea achatado, que es como quedaba sin ellos. */
+.brand-logo { height: 38px; width: auto; display: block; }
 nav.main-nav { display: flex; align-items: center; gap: 4px; }
 nav.main-nav a {
   font-size: 12px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
@@ -385,7 +386,12 @@ footer {
   border-bottom: 1px solid rgba(184,154,106,0.08);
 }
 .footer-brand { display: flex; flex-direction: column; gap: 8px; }
-.footer-logo { height: auto; max-height: 34px; width: auto; opacity: 0.82; filter: brightness(0) invert(1); display: block; }
+/* align-self es imprescindible: .footer-brand es flex en columna y, por
+   defecto, estira a los hijos a todo el ancho del contenedor. Eso deformaba
+   el logo (se renderizaba en proporcion 6.07 cuando el archivo es 3.71).
+   width:auto no alcanza, porque el stretch del flex gana. */
+.footer-logo { height: auto; max-height: 38px; width: auto; align-self: flex-start;
+  opacity: 0.82; filter: brightness(0) invert(1); display: block; }
 .footer-tagline {
   font-size: 11px; font-weight: 300; letter-spacing: 0.08em;
   color: rgba(245,240,232,0.25);
