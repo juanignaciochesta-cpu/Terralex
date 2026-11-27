@@ -1646,46 +1646,85 @@
     },
 
     _html: function(p) {
-      var esAlq = p.tipo === 'alquiler';
-      var fotos = this._fotosDe(p);
+      var esAlq   = p.tipo === 'alquiler';
+      var fotos   = this._fotosDe(p);
+      var portada = fotos[0] || null;
 
-      var specs = '';
-      if (p.sup) specs += '<span class="ficha-spec">Superficie <b>' + esc(p.sup) + '</b></span>';
-      if (p.amb) specs += '<span class="ficha-spec">Ambientes <b>' + esc(p.amb) + '</b></span>';
-      specs += '<span class="ficha-spec">Operación <b>' + (esAlq ? 'Alquiler' : 'Venta') + '</b></span>';
+      var dato = function(label, valor) {
+        return '<div class="ficha-dato">'
+          + '<div class="ficha-dato-label">' + label + '</div>'
+          + '<div class="ficha-dato-valor">' + esc(valor || '—') + '</div>'
+          + '</div>';
+      };
 
-      var bloqueFotos = fotos.length
-        ? '<p class="ficha-bloque-titulo">Fotos (' + fotos.length + ')</p>'
-          + '<div class="ficha-fotos">'
+      /* La galeria incluye tambien la portada: arriba va recortada a lo ancho
+         de la hoja, y varias portadas del estudio traen un cartel disenado
+         que el recorte se come. Aca se ve entera. */
+      var galeria = fotos.length
+        ? '<div class="ficha-seccion">'
+          + '<p class="ficha-seccion-titulo">Galería · ' + fotos.length + ' foto' + (fotos.length > 1 ? 's' : '') + '</p>'
+          + '<div class="ficha-galeria">'
           + fotos.map(function(u) {
               return '<div class="ficha-foto"><img src="' + esc(u) + '" alt=""></div>';
             }).join('')
-          + '</div>'
-        : '<p class="ficha-sinfotos">Esta propiedad todavía no tiene fotos cargadas.</p>';
+          + '</div></div>'
+        : '<div class="ficha-seccion">'
+          + '<p class="ficha-sinfotos">Esta propiedad todavía no tiene fotos cargadas.</p>'
+          + '</div>';
 
       return '<article class="ficha">'
-        + '<div class="ficha-head">'
-        +   '<img class="ficha-logo" src="logo-cmm.png" alt="CMM">'
-        +   '<div class="ficha-head-meta">Ficha de propiedad<br>' + this._fecha() + '</div>'
+
+        /* ── Membrete ── */
+        + '<div class="ficha-membrete">'
+        +   '<img class="ficha-marca" src="logo-cmm.png" alt="CMM">'
+        +   '<div class="ficha-meta">Ficha de propiedad<br>' + this._fecha() + '</div>'
         + '</div>'
-        + '<div class="ficha-top">'
-        +   '<span class="ficha-badge' + (esAlq ? ' alq' : '') + '">' + (esAlq ? 'Alquiler' : 'Venta') + '</span>'
-        +   '<span class="ficha-precio">' + esc(p.precio || 'Consultar') + '</span>'
+
+        /* ── Portada: foto limpia, sin texto encima ── */
+        + '<div class="ficha-hero">'
+        +   (portada
+              ? '<img class="ficha-hero-img" src="' + esc(portada) + '" alt="">'
+              : '<div class="ficha-hero-vacio">Sin fotograf\u00edas</div>')
         + '</div>'
-        + '<h1 class="ficha-titulo">' + esc(p.titulo) + '</h1>'
-        + '<p class="ficha-barrio">' + esc(p.barrio) + '</p>'
-        + '<div class="ficha-specs">' + specs + '</div>'
-        + (p.desc
-            ? '<p class="ficha-bloque-titulo">Descripción</p>'
-              + '<div class="ficha-desc">' + esc(p.desc) + '</div>'
-            : '')
-        + bloqueFotos
+
+        /* ── Titulo ── */
+        + '<div class="ficha-titulo-bloque">'
+        +   '<span class="ficha-badge' + (esAlq ? ' alq' : '') + '">'
+        +     (esAlq ? 'En alquiler' : 'En venta') + '</span>'
+        +   '<h1 class="ficha-h1">' + esc(p.titulo) + '</h1>'
+        +   '<div class="ficha-titulo-base">'
+        +     '<span class="ficha-barrio">' + esc(p.barrio) + '</span>'
+        +     '<span class="ficha-precio">' + esc(p.precio || 'Consultar') + '</span>'
+        +   '</div>'
+        + '</div>'
+
+        /* ── Cuerpo ── */
+        + '<div class="ficha-cuerpo">'
+        +   '<div class="ficha-datos">'
+        +     dato('Superficie', p.sup)
+        +     dato('Ambientes', p.amb)
+        +     dato('Operaci\u00f3n', esAlq ? 'Alquiler' : 'Venta')
+        +   '</div>'
+        +   (p.desc
+              ? '<div class="ficha-seccion">'
+                + '<p class="ficha-seccion-titulo">Descripci\u00f3n</p>'
+                + '<div class="ficha-desc">' + esc(p.desc) + '</div>'
+                + '</div>'
+              : '')
+        +   galeria
+        + '</div>'
+
+        /* ── Cierre ── */
         + '<div class="ficha-pie">'
-        +   '<div><b>CMM — Estudio Jurídico e Inmobiliario</b><br>'
-        +     'Tucumán 335, Planta Alta — Córdoba<br>cmmestudio.com.ar</div>'
-        +   '<div style="text-align:right"><b>WhatsApp 351-3422063</b><br>'
-        +     'Lunes a viernes de 9 a 17<br>Hernán D. Medah — CPI 8098</div>'
+        +   '<img class="ficha-pie-logo" src="logo-cmm.png" alt="CMM">'
+        +   '<div><b>Estudio Jur\u00eddico e Inmobiliario</b><br>'
+        +     'Tucum\u00e1n 335, Planta Alta \u2014 C\u00f3rdoba<br>'
+        +     '<span class="ficha-pie-dorado">cmmestudio.com.ar</span></div>'
+        +   '<div class="ficha-pie-col"><b>WhatsApp 351-3422063</b><br>'
+        +     'Lunes a viernes de 9 a 17<br>'
+        +     'Hern\u00e1n D. Medah \u2014 Corredor inmobiliario CPI 8098</div>'
         + '</div>'
+
         + '</article>';
     },
 

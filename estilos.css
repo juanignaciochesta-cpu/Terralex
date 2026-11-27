@@ -1292,11 +1292,14 @@ a.service-item:focus-visible { outline: 2px solid var(--dorado); outline-offset:
 .svc-profesional + .svc-profesional { margin-top: 10px; }
 
 /* ==========================================================================
-   FICHA DE PROPIEDAD IMPRIMIBLE (panel admin → "Ficha PDF")
-   Se arma en #fichaPrint, que vive oculto, y solo se vuelve visible mientras
-   se imprime. Usamos el dialogo de impresion del navegador en vez de una
-   libreria de PDF: no suma dependencias, no toca la CSP, el texto sale
-   vectorial (se puede buscar y copiar) y funciona igual en celular.
+   FICHA DE PROPIEDAD IMPRIMIBLE  (panel admin → "Ficha PDF")
+   Un folleto A4 pensado para mandarle a un colega: foto de portada a
+   sangre, banda de datos, descripcion y galeria, cierre oscuro con los
+   datos del estudio. Se arma en #fichaPrint, que solo se ve al imprimir.
+
+   Usamos el dialogo de impresion del navegador en vez de una libreria de
+   PDF: no suma dependencias, no obliga a abrir la CSP a un CDN, el texto
+   sale vectorial (se busca y se copia) y pesa mucho menos.
    ========================================================================== */
 #fichaPrint { display: none; }
 
@@ -1318,71 +1321,133 @@ a.service-item:focus-visible { outline: 2px solid var(--dorado); outline-offset:
 }
 .admin-ficha-todas:hover { background: rgba(145,120,96,0.14); border-color: var(--dorado); }
 
-.ficha { color: #1a1a1a; font-family: 'Jost', sans-serif; font-weight: 300; }
-.ficha + .ficha { margin-top: 24px; }
-
-/* Son <div> y no <header>/<footer> a proposito: los selectores globales
-   header{position:fixed} y footer{background:#0d1e28} del sitio se
-   filtraban dentro de la ficha y la rompian. */
-.ficha-head {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 16px; padding-bottom: 12px; border-bottom: 1.5px solid #917860;
+/* ── La hoja ──────────────────────────────────────────────────────────── */
+.ficha {
+  width: 210mm; min-height: 290mm; background: #fff; color: #1a1a1a;
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  display: flex; flex-direction: column; position: relative;
 }
-.ficha-logo { height: 34px; width: auto; }
-.ficha-head-meta { text-align: right; font-size: 9.5px; letter-spacing: .08em;
-  text-transform: uppercase; color: #6b6b6b; line-height: 1.7; }
 
+/* ── Membrete + portada ───────────────────────────────────────────────────
+   El texto identificatorio NO va encima de la foto: las portadas que carga
+   el estudio suelen traer carteles quemados ("VENTA", superficie) y los dos
+   textos se peleaban. Membrete arriba, foto limpia, titulo abajo. */
+.ficha-membrete {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9mm 15mm 7mm; gap: 20px;
+}
+.ficha-marca { height: 30px; width: auto; display: block; }
+.ficha-meta {
+  text-align: right; font-size: 8px; letter-spacing: .18em;
+  text-transform: uppercase; color: #9a9289; line-height: 1.9;
+}
+
+.ficha-hero {
+  position: relative; height: 92mm; overflow: hidden;
+  background: linear-gradient(140deg, #16323d 0%, #0d1e28 100%);
+}
+.ficha-hero-img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; display: block;
+}
+/* Sombra leve abajo, solo para dar profundidad contra el bloque de titulo. */
+.ficha-hero::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(13,30,40,.10) 0%,
+    rgba(13,30,40,0) 26%, rgba(13,30,40,0) 74%, rgba(13,30,40,.22) 100%);
+}
+.ficha-hero-vacio {
+  position: absolute; inset: 0; display: flex; align-items: center;
+  justify-content: center; color: rgba(255,255,255,.4);
+  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+}
+
+/* ── Titulo ───────────────────────────────────────────────────────────── */
+.ficha-titulo-bloque { padding: 8mm 15mm 0; }
 .ficha-badge {
-  display: inline-block; padding: 3px 11px; border-radius: 2px;
-  background: #917860; color: #fff; font-size: 9.5px; font-weight: 500;
-  letter-spacing: .12em; text-transform: uppercase;
+  display: inline-block; padding: 4px 13px; margin-bottom: 9px;
+  background: var(--dorado); color: #fff; border-radius: 2px;
+  font-size: 8.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
 }
-.ficha-badge.alq { background: #2f5d62; }
+.ficha-badge.alq { background: #3c7a80; }
+.ficha-h1 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 500;
+  font-size: 29px; line-height: 1.16; margin: 0 0 9px; color: #14181b;
+}
+.ficha-titulo-base {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 18px; border-top: 1px solid rgba(145,120,96,.26); padding-top: 9px;
+}
+.ficha-barrio { font-size: 11.5px; letter-spacing: .05em; color: #6d6459; }
+.ficha-precio {
+  font-family: 'Cormorant Garamond', serif; font-size: 27px; font-weight: 500;
+  color: var(--dorado); white-space: nowrap; line-height: 1;
+}
 
-.ficha-top { margin: 16px 0 4px; display: flex; align-items: baseline;
-  justify-content: space-between; gap: 16px; }
-.ficha-precio { font-family: 'Cormorant Garamond', serif; font-size: 27px;
-  font-weight: 500; color: #917860; white-space: nowrap; }
-.ficha-titulo { font-family: 'Cormorant Garamond', serif; font-size: 23px;
-  font-weight: 500; line-height: 1.25; margin: 2px 0 6px; }
-.ficha-barrio { font-size: 12px; color: #555; margin-bottom: 14px; }
+/* ── Cuerpo ───────────────────────────────────────────────────────────── */
+.ficha-cuerpo { padding: 0 15mm; flex: 1; }
 
-.ficha-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
-.ficha-spec { border: 1px solid rgba(145,120,96,.35); border-radius: 2px;
-  padding: 5px 12px; font-size: 11px; color: #3a3a3a; }
-.ficha-spec b { font-weight: 500; }
+.ficha-datos {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid rgba(145,120,96,.22); padding: 7mm 0;
+}
+.ficha-dato { padding-left: 14px; border-left: 1px solid rgba(145,120,96,.22); }
+.ficha-dato:first-child { padding-left: 0; border-left: 0; }
+.ficha-dato-label {
+  font-size: 8px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--dorado); margin-bottom: 4px;
+}
+.ficha-dato-valor {
+  font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500;
+  color: #1a1a1a; line-height: 1.2;
+}
 
-.ficha-bloque-titulo { font-size: 9.5px; letter-spacing: .14em;
-  text-transform: uppercase; color: #917860; margin: 0 0 7px; font-weight: 500; }
-.ficha-desc { font-size: 11.5px; line-height: 1.65; color: #2c2c2c;
-  margin-bottom: 16px; white-space: pre-line; }
+.ficha-seccion { padding: 7mm 0 0; }
+.ficha-seccion-titulo {
+  display: flex; align-items: center; gap: 10px; margin: 0 0 9px;
+  font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--dorado); font-weight: 500;
+}
+.ficha-seccion-titulo::after {
+  content: ''; flex: 1; height: 1px; background: rgba(145,120,96,.22);
+}
+.ficha-desc {
+  font-size: 11px; line-height: 1.75; color: #33383b; white-space: pre-line;
+}
+.ficha-sinfotos { font-size: 10.5px; color: #8a8a8a; font-style: italic; }
 
-.ficha-fotos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
-.ficha-foto { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 2px;
-  background: #f0ede6; }
+.ficha-galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+.ficha-foto {
+  aspect-ratio: 4 / 3; overflow: hidden; border-radius: 2px; background: #efece6;
+}
 .ficha-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ficha-sinfotos { font-size: 11px; color: #888; font-style: italic; }
 
-.ficha-pie { margin-top: 18px; padding-top: 10px; border-top: 1px solid rgba(145,120,96,.3);
-  display: flex; justify-content: space-between; gap: 16px;
-  font-size: 9.5px; color: #6b6b6b; line-height: 1.7; }
-.ficha-pie b { color: #1a1a1a; font-weight: 500; }
+/* ── Cierre ───────────────────────────────────────────────────────────── */
+.ficha-pie {
+  margin-top: 8mm; background: #0d1e28; color: rgba(255,255,255,.72);
+  padding: 7mm 15mm; display: flex; align-items: center;
+  justify-content: space-between; gap: 20px; font-size: 9px; line-height: 1.85;
+}
+.ficha-pie-logo { height: 26px; width: auto; filter: brightness(0) invert(1); opacity: .8; }
+.ficha-pie b { color: #fff; font-weight: 500; }
+.ficha-pie-col { text-align: right; }
+.ficha-pie-dorado { color: var(--dorado-claro); }
 
 /* ── Modo impresion ───────────────────────────────────────────────────── */
 @media print {
-  @page { size: A4; margin: 13mm; }
+  /* Sin margen de pagina: la foto de portada va a sangre. El texto tiene su
+     propio padding, asi que nada queda pegado al borde. */
+  @page { size: A4; margin: 0; }
 
-  /* Mientras se imprime la ficha, el resto del sitio desaparece. */
   body.imprimiendo-ficha > *:not(#fichaPrint) { display: none !important; }
-  body.imprimiendo-ficha { overflow: visible !important; background: #fff !important; }
+  body.imprimiendo-ficha { overflow: visible !important; background: #fff !important; margin: 0 !important; }
   body.imprimiendo-ficha #fichaPrint { display: block !important; }
 
-  /* Los fondos y el dorado tienen que salir impresos, no en blanco. */
+  /* Los fondos oscuros y el dorado tienen que imprimirse, no salir en blanco. */
   .ficha, .ficha * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-  /* Una ficha por hoja, y que no se parta una foto entre dos paginas. */
-  .ficha { break-inside: avoid; page-break-inside: avoid; }
-  .ficha + .ficha { break-before: page; page-break-before: always; margin-top: 0; }
-  .ficha-foto, .ficha-pie { break-inside: avoid; page-break-inside: avoid; }
-  .ficha-fotos { break-inside: avoid; page-break-inside: avoid; }
+  .ficha + .ficha { break-before: page; page-break-before: always; }
+  .ficha-membrete, .ficha-hero, .ficha-titulo-bloque, .ficha-datos, .ficha-foto, .ficha-pie {
+    break-inside: avoid; page-break-inside: avoid;
+  }
 }
