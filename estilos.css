@@ -1290,3 +1290,99 @@ a.service-item:focus-visible { outline: 2px solid var(--dorado); outline-offset:
 /* Cuando la pagina muestra dos profesionales, las fichas se apilan con poca
    separacion para que se lean como un equipo y no como dos bloques sueltos. */
 .svc-profesional + .svc-profesional { margin-top: 10px; }
+
+/* ==========================================================================
+   FICHA DE PROPIEDAD IMPRIMIBLE (panel admin → "Ficha PDF")
+   Se arma en #fichaPrint, que vive oculto, y solo se vuelve visible mientras
+   se imprime. Usamos el dialogo de impresion del navegador en vez de una
+   libreria de PDF: no suma dependencias, no toca la CSP, el texto sale
+   vectorial (se puede buscar y copiar) y funciona igual en celular.
+   ========================================================================== */
+#fichaPrint { display: none; }
+
+/* Botones que disparan la ficha, dentro del panel admin. */
+.admin-prop-ficha {
+  background: none; border: 1px solid rgba(145,120,96,0.3); border-radius: 2px;
+  color: var(--dorado); font-size: 11px; padding: 5px 10px; cursor: pointer;
+  transition: all 0.2s; white-space: nowrap; margin-right: 6px;
+  font-family: 'Jost', sans-serif; font-weight: 400;
+}
+.admin-prop-ficha:hover { border-color: var(--dorado); background: rgba(145,120,96,0.08); }
+
+.admin-ficha-todas {
+  width: 100%; margin-bottom: 14px; padding: 10px 14px; cursor: pointer;
+  background: rgba(145,120,96,0.07); border: 1px solid rgba(184,154,106,0.3);
+  border-radius: 2px; color: var(--dorado);
+  font-family: 'Jost', sans-serif; font-size: 12px; font-weight: 400;
+  letter-spacing: .04em; transition: all 0.2s;
+}
+.admin-ficha-todas:hover { background: rgba(145,120,96,0.14); border-color: var(--dorado); }
+
+.ficha { color: #1a1a1a; font-family: 'Jost', sans-serif; font-weight: 300; }
+.ficha + .ficha { margin-top: 24px; }
+
+/* Son <div> y no <header>/<footer> a proposito: los selectores globales
+   header{position:fixed} y footer{background:#0d1e28} del sitio se
+   filtraban dentro de la ficha y la rompian. */
+.ficha-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 16px; padding-bottom: 12px; border-bottom: 1.5px solid #917860;
+}
+.ficha-logo { height: 34px; width: auto; }
+.ficha-head-meta { text-align: right; font-size: 9.5px; letter-spacing: .08em;
+  text-transform: uppercase; color: #6b6b6b; line-height: 1.7; }
+
+.ficha-badge {
+  display: inline-block; padding: 3px 11px; border-radius: 2px;
+  background: #917860; color: #fff; font-size: 9.5px; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+}
+.ficha-badge.alq { background: #2f5d62; }
+
+.ficha-top { margin: 16px 0 4px; display: flex; align-items: baseline;
+  justify-content: space-between; gap: 16px; }
+.ficha-precio { font-family: 'Cormorant Garamond', serif; font-size: 27px;
+  font-weight: 500; color: #917860; white-space: nowrap; }
+.ficha-titulo { font-family: 'Cormorant Garamond', serif; font-size: 23px;
+  font-weight: 500; line-height: 1.25; margin: 2px 0 6px; }
+.ficha-barrio { font-size: 12px; color: #555; margin-bottom: 14px; }
+
+.ficha-specs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.ficha-spec { border: 1px solid rgba(145,120,96,.35); border-radius: 2px;
+  padding: 5px 12px; font-size: 11px; color: #3a3a3a; }
+.ficha-spec b { font-weight: 500; }
+
+.ficha-bloque-titulo { font-size: 9.5px; letter-spacing: .14em;
+  text-transform: uppercase; color: #917860; margin: 0 0 7px; font-weight: 500; }
+.ficha-desc { font-size: 11.5px; line-height: 1.65; color: #2c2c2c;
+  margin-bottom: 16px; white-space: pre-line; }
+
+.ficha-fotos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
+.ficha-foto { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 2px;
+  background: #f0ede6; }
+.ficha-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ficha-sinfotos { font-size: 11px; color: #888; font-style: italic; }
+
+.ficha-pie { margin-top: 18px; padding-top: 10px; border-top: 1px solid rgba(145,120,96,.3);
+  display: flex; justify-content: space-between; gap: 16px;
+  font-size: 9.5px; color: #6b6b6b; line-height: 1.7; }
+.ficha-pie b { color: #1a1a1a; font-weight: 500; }
+
+/* ── Modo impresion ───────────────────────────────────────────────────── */
+@media print {
+  @page { size: A4; margin: 13mm; }
+
+  /* Mientras se imprime la ficha, el resto del sitio desaparece. */
+  body.imprimiendo-ficha > *:not(#fichaPrint) { display: none !important; }
+  body.imprimiendo-ficha { overflow: visible !important; background: #fff !important; }
+  body.imprimiendo-ficha #fichaPrint { display: block !important; }
+
+  /* Los fondos y el dorado tienen que salir impresos, no en blanco. */
+  .ficha, .ficha * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* Una ficha por hoja, y que no se parta una foto entre dos paginas. */
+  .ficha { break-inside: avoid; page-break-inside: avoid; }
+  .ficha + .ficha { break-before: page; page-break-before: always; margin-top: 0; }
+  .ficha-foto, .ficha-pie { break-inside: avoid; page-break-inside: avoid; }
+  .ficha-fotos { break-inside: avoid; page-break-inside: avoid; }
+}
