@@ -1328,55 +1328,35 @@ a.service-item:focus-visible { outline: 2px solid var(--dorado); outline-offset:
   display: flex; flex-direction: column; position: relative;
 }
 
-/* ── Membrete + portada ───────────────────────────────────────────────────
-   El texto identificatorio NO va encima de la foto: las portadas que carga
-   el estudio suelen traer carteles quemados ("VENTA", superficie) y los dos
-   textos se peleaban. Membrete arriba, foto limpia, titulo abajo. */
-.ficha-membrete {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 9mm 15mm 7mm; gap: 20px;
+/* ── Encabezado ───────────────────────────────────────────────────────── */
+.ficha-encabezado {
+  background: #0d1e28; padding: 8mm 18mm; display: flex;
+  align-items: center; justify-content: space-between; gap: 20px;
+  border-bottom: 2px solid var(--dorado);
 }
-.ficha-marca { height: 30px; width: auto; display: block; }
+.ficha-marca { height: 30px; width: auto; display: block;
+  filter: brightness(0) invert(1); opacity: .9; }
 .ficha-meta {
-  text-align: right; font-size: 8px; letter-spacing: .18em;
-  text-transform: uppercase; color: #9a9289; line-height: 1.9;
+  text-align: right; font-size: 8px; letter-spacing: .22em;
+  text-transform: uppercase; color: rgba(255,255,255,.6); line-height: 2;
 }
+.ficha-meta b { display: block; color: var(--dorado-claro); font-weight: 500; }
 
-.ficha-hero {
-  position: relative; height: 92mm; overflow: hidden;
-  background: linear-gradient(140deg, #16323d 0%, #0d1e28 100%);
-}
-.ficha-hero-img {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; display: block;
-}
-/* Sombra leve abajo, solo para dar profundidad contra el bloque de titulo. */
-.ficha-hero::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(13,30,40,.10) 0%,
-    rgba(13,30,40,0) 26%, rgba(13,30,40,0) 74%, rgba(13,30,40,.22) 100%);
-}
-.ficha-hero-vacio {
-  position: absolute; inset: 0; display: flex; align-items: center;
-  justify-content: center; color: rgba(255,255,255,.4);
-  font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
-}
-
-/* ── Titulo ───────────────────────────────────────────────────────────── */
-.ficha-titulo-bloque { padding: 8mm 15mm 0; }
+/* ── Identidad de la propiedad ────────────────────────────────────────── */
+.ficha-identidad { padding: 13mm 18mm 0; }
 .ficha-badge {
-  display: inline-block; padding: 4px 13px; margin-bottom: 9px;
+  display: inline-block; padding: 4px 13px; margin-bottom: 10px;
   background: var(--dorado); color: #fff; border-radius: 2px;
   font-size: 8.5px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase;
 }
 .ficha-badge.alq { background: #3c7a80; }
 .ficha-h1 {
   font-family: 'Cormorant Garamond', serif; font-weight: 500;
-  font-size: 29px; line-height: 1.16; margin: 0 0 9px; color: #14181b;
+  font-size: 28px; line-height: 1.2; margin: 0 0 11px; color: #14181b;
 }
-.ficha-titulo-base {
+.ficha-identidad-base {
   display: flex; align-items: flex-end; justify-content: space-between;
-  gap: 18px; border-top: 1px solid rgba(145,120,96,.26); padding-top: 9px;
+  gap: 18px; border-top: 1px solid rgba(145,120,96,.3); padding-top: 10px;
 }
 .ficha-barrio { font-size: 11.5px; letter-spacing: .05em; color: #6d6459; }
 .ficha-precio {
@@ -1385,26 +1365,29 @@ a.service-item:focus-visible { outline: 2px solid var(--dorado); outline-offset:
 }
 
 /* ── Cuerpo ───────────────────────────────────────────────────────────── */
-.ficha-cuerpo { padding: 0 15mm; flex: 1; }
+.ficha-cuerpo { padding: 0 18mm; flex: 1; }
 
 .ficha-datos {
   display: grid; grid-template-columns: repeat(3, 1fr);
-  border-bottom: 1px solid rgba(145,120,96,.22); padding: 7mm 0;
+  margin-top: 9mm; padding: 7mm 0;
+  border-top: 1px solid rgba(145,120,96,.18);
+  border-bottom: 1px solid rgba(145,120,96,.18);
+  background: #fbfaf7;
 }
-.ficha-dato { padding-left: 14px; border-left: 1px solid rgba(145,120,96,.22); }
-.ficha-dato:first-child { padding-left: 0; border-left: 0; }
+.ficha-dato { padding: 0 16px; border-left: 1px solid rgba(145,120,96,.18); }
+.ficha-dato:first-child { border-left: 0; padding-left: 0; }
 .ficha-dato-label {
   font-size: 8px; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--dorado); margin-bottom: 4px;
+  color: var(--dorado); margin-bottom: 5px;
 }
 .ficha-dato-valor {
-  font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 500;
+  font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 500;
   color: #1a1a1a; line-height: 1.2;
 }
 
-.ficha-seccion { padding: 7mm 0 0; }
+.ficha-seccion { padding-top: 9mm; }
 .ficha-seccion-titulo {
-  display: flex; align-items: center; gap: 10px; margin: 0 0 9px;
+  display: flex; align-items: center; gap: 11px; margin: 0 0 10px;
   font-size: 8.5px; letter-spacing: .2em; text-transform: uppercase;
   color: var(--dorado); font-weight: 500;
 }
@@ -1412,11 +1395,12 @@ a.service-item:focus-visible { outline: 2px solid var(--dorado); outline-offset:
   content: ''; flex: 1; height: 1px; background: rgba(145,120,96,.22);
 }
 .ficha-desc {
-  font-size: 11px; line-height: 1.75; color: #33383b; white-space: pre-line;
+  font-size: 11px; line-height: 1.78; color: #33383b; white-space: pre-line;
 }
 .ficha-sinfotos { font-size: 10.5px; color: #8a8a8a; font-style: italic; }
 
-.ficha-galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm; }
+/* Las fotos van al final, en grilla pareja: tres por fila. */
+.ficha-galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; }
 .ficha-foto {
   aspect-ratio: 4 / 3; overflow: hidden; border-radius: 2px; background: #efece6;
 }
@@ -1424,19 +1408,19 @@ a.service-item:focus-visible { outline: 2px solid var(--dorado); outline-offset:
 
 /* ── Cierre ───────────────────────────────────────────────────────────── */
 .ficha-pie {
-  margin-top: 8mm; background: #0d1e28; color: rgba(255,255,255,.72);
-  padding: 7mm 15mm; display: flex; align-items: center;
-  justify-content: space-between; gap: 20px; font-size: 9px; line-height: 1.85;
+  margin-top: 10mm; background: #0d1e28; color: rgba(255,255,255,.7);
+  border-top: 2px solid var(--dorado);
+  padding: 7mm 18mm; display: flex; align-items: center;
+  justify-content: space-between; gap: 20px; font-size: 9px; line-height: 1.9;
 }
-.ficha-pie-logo { height: 26px; width: auto; filter: brightness(0) invert(1); opacity: .8; }
 .ficha-pie b { color: #fff; font-weight: 500; }
 .ficha-pie-col { text-align: right; }
 .ficha-pie-dorado { color: var(--dorado-claro); }
 
 /* ── Modo impresion ───────────────────────────────────────────────────── */
 @media print {
-  /* Sin margen de pagina: la foto de portada va a sangre. El texto tiene su
-     propio padding, asi que nada queda pegado al borde. */
+  /* Sin margen de pagina: las bandas oscuras del encabezado y del cierre
+     llegan al borde de la hoja. El texto tiene su propio padding. */
   @page { size: A4; margin: 0; }
 
   body.imprimiendo-ficha > *:not(#fichaPrint) { display: none !important; }
@@ -1447,7 +1431,7 @@ a.service-item:focus-visible { outline: 2px solid var(--dorado); outline-offset:
   .ficha, .ficha * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
   .ficha + .ficha { break-before: page; page-break-before: always; }
-  .ficha-membrete, .ficha-hero, .ficha-titulo-bloque, .ficha-datos, .ficha-foto, .ficha-pie {
+  .ficha-encabezado, .ficha-identidad, .ficha-datos, .ficha-foto, .ficha-pie {
     break-inside: avoid; page-break-inside: avoid;
   }
 }

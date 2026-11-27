@@ -1648,7 +1648,6 @@
     _html: function(p) {
       var esAlq   = p.tipo === 'alquiler';
       var fotos   = this._fotosDe(p);
-      var portada = fotos[0] || null;
 
       var dato = function(label, valor) {
         return '<div class="ficha-dato">'
@@ -1657,12 +1656,10 @@
           + '</div>';
       };
 
-      /* La galeria incluye tambien la portada: arriba va recortada a lo ancho
-         de la hoja, y varias portadas del estudio traen un cartel disenado
-         que el recorte se come. Aca se ve entera. */
+      /* Las fotos van al final, despues de todo el detalle. */
       var galeria = fotos.length
         ? '<div class="ficha-seccion">'
-          + '<p class="ficha-seccion-titulo">Galería · ' + fotos.length + ' foto' + (fotos.length > 1 ? 's' : '') + '</p>'
+          + '<p class="ficha-seccion-titulo">Fotografías · ' + fotos.length + '</p>'
           + '<div class="ficha-galeria">'
           + fotos.map(function(u) {
               return '<div class="ficha-foto"><img src="' + esc(u) + '" alt=""></div>';
@@ -1674,31 +1671,24 @@
 
       return '<article class="ficha">'
 
-        /* ── Membrete ── */
-        + '<div class="ficha-membrete">'
+        /* ── Encabezado ── */
+        + '<div class="ficha-encabezado">'
         +   '<img class="ficha-marca" src="logo-cmm.png" alt="CMM">'
-        +   '<div class="ficha-meta">Ficha de propiedad<br>' + this._fecha() + '</div>'
+        +   '<div class="ficha-meta"><b>Ficha de propiedad</b>' + this._fecha() + '</div>'
         + '</div>'
 
-        /* ── Portada: foto limpia, sin texto encima ── */
-        + '<div class="ficha-hero">'
-        +   (portada
-              ? '<img class="ficha-hero-img" src="' + esc(portada) + '" alt="">'
-              : '<div class="ficha-hero-vacio">Sin fotograf\u00edas</div>')
-        + '</div>'
-
-        /* ── Titulo ── */
-        + '<div class="ficha-titulo-bloque">'
+        /* ── Identidad ── */
+        + '<div class="ficha-identidad">'
         +   '<span class="ficha-badge' + (esAlq ? ' alq' : '') + '">'
         +     (esAlq ? 'En alquiler' : 'En venta') + '</span>'
         +   '<h1 class="ficha-h1">' + esc(p.titulo) + '</h1>'
-        +   '<div class="ficha-titulo-base">'
+        +   '<div class="ficha-identidad-base">'
         +     '<span class="ficha-barrio">' + esc(p.barrio) + '</span>'
         +     '<span class="ficha-precio">' + esc(p.precio || 'Consultar') + '</span>'
         +   '</div>'
         + '</div>'
 
-        /* ── Cuerpo ── */
+        /* ── Detalle ── */
         + '<div class="ficha-cuerpo">'
         +   '<div class="ficha-datos">'
         +     dato('Superficie', p.sup)
@@ -1716,8 +1706,7 @@
 
         /* ── Cierre ── */
         + '<div class="ficha-pie">'
-        +   '<img class="ficha-pie-logo" src="logo-cmm.png" alt="CMM">'
-        +   '<div><b>Estudio Jur\u00eddico e Inmobiliario</b><br>'
+        +   '<div><b>CMM \u2014 Estudio Jur\u00eddico e Inmobiliario</b><br>'
         +     'Tucum\u00e1n 335, Planta Alta \u2014 C\u00f3rdoba<br>'
         +     '<span class="ficha-pie-dorado">cmmestudio.com.ar</span></div>'
         +   '<div class="ficha-pie-col"><b>WhatsApp 351-3422063</b><br>'
